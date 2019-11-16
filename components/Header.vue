@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white border-b">
+  <header class="bg-white border-b mb-auto">
     <div class="flex items-center mx-auto container">
       <div v-if="!isMenuActive" class="mr-auto">
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
