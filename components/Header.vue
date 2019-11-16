@@ -1,7 +1,20 @@
 <template>
   <header class="bg-white border-b">
     <div class="flex items-center mx-auto container">
-      <h1 class="mr-auto">Bos Eriko</h1>
+      <div v-if="!isMenuActive" class="mr-auto">
+        <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
+      </div>
+      <ul class="mr-auto flex" v-if="isMenuActive">
+        <li class="mr-5">
+          <a class="hover:underline" href="/Github">GitHub</a>
+        </li>
+        <li class="mr-5">
+          <a class="hover:underline" href="/Twitch">Twitch</a>
+        </li>
+        <li>
+          <a class="hover:underline" href="/Twitter">Twitter</a>
+        </li>
+      </ul>
       <button
         @click="toggleMenu"
         :class="
