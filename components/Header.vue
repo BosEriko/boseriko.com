@@ -1,15 +1,18 @@
 <template>
   <header class="bg-white border-b mb-auto">
     <div class="flex items-center mx-auto container">
-      <div v-if="!isMenuActive" class="mr-auto">
+      <div class="mr-auto">
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
       </div>
-      <ul v-if="isMenuActive" class="mr-auto flex">
+      <ul v-if="isMenuActive" class="flex">
         <li class="mr-10">
           <a class="hover:underline" href="/github">GitHub</a>
         </li>
         <li class="mr-10">
           <a class="hover:underline" href="/dev">DEV</a>
+        </li>
+        <li class="mr-10">
+          <a class="hover:underline" href="/anime">Anime</a>
         </li>
         <li class="mr-10">
           <a class="hover:underline" href="/twitch">Twitch</a>
