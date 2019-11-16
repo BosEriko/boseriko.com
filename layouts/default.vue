@@ -2,7 +2,7 @@
   <div class="tracking-wider min-h-screen text-xl subpixel-antialiased">
     <div class="flex flex-col min-h-screen">
       <Header />
-      <div class="flex-1"><nuxt /></div>
+      <nuxt />
       <Footer />
     </div>
   </div>
