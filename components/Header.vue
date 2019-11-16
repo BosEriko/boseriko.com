@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white">
+  <header class="bg-white border-b">
     <div class="flex items-center mx-auto container">
       <h1 class="mr-auto">Bos Eriko</h1>
       <button

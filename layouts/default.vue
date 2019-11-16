@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-200 text-xl subpixel-antialiased">
+  <div class="min-h-screen text-xl subpixel-antialiased">
     <nuxt />
   </div>
 </template>
