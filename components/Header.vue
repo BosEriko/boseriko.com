@@ -1,9 +1,20 @@
 <template>
   <header class="bg-white p-5">
-    <div class="mx-auto container"></div>
+    <div class="mx-auto container">
+      Heyoooo!
+    </div>
     <button
       @click="toggleMenu"
-      :class="`hamburger hamburger--slider ${isMenuActive ? 'is-active' : ''}`"
+      :class="
+        `
+        fixed
+        top-0
+        right-0
+        hamburger
+        hamburger--slider
+        ${isMenuActive ? 'is-active' : ''}
+        `
+      "
       type="button"
     >
       <span class="hamburger-box">
@@ -34,6 +45,6 @@ button:focus {
   outline: none;
 }
 .hamburger {
-  transform: scale(0.5, 0.5);
+  transform: scale(0.75, 0.75);
 }
 </style>
