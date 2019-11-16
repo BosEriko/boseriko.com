@@ -3,6 +3,7 @@
     <a
       class="smooth text-gray-300 hover:text-gray-400"
       href="http://twitter.boseriko.com/"
+      target="_blank"
     >
       — @BosEriko
     </a>
