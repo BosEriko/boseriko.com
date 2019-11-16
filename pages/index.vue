@@ -9,7 +9,7 @@
         JavaScript and Ruby on Rails. I like to make stuff every now and then.
       </p>
       <p class="mb-5 leading-loose">
-        Besides making stupid things here and there I also to like play games
+        Besides making stupid things here and there I also like to play games
         and watch Anime. I can also speak Nihongo at a Shiba Inu level. It's a
         good thing to note that I'm a weeb so I decided to add a Ninja on the
         right side. Just for shitty reasons.
