@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white border-b mb-auto">
+  <header class="border-b mb-auto py-3 lg:p-0">
     <div class="flex items-center mx-auto container">
       <div class="mr-auto">
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
@@ -21,21 +21,23 @@
           <a class="hover:underline" href="/twitter">Twitter</a>
         </li>
       </ul>
-      <button
-        @click="toggleMenu"
-        :class="
-          `
-            hamburger
-            hamburger--slider
-            ${isMenuActive ? 'is-active' : ''}
-          `
-        "
-        type="button"
-      >
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>
+      <div class="hidden lg:block">
+        <button
+          @click="toggleMenu"
+          :class="
+            `
+              hamburger
+              hamburger--slider
+              ${isMenuActive ? 'is-active' : ''}
+            `
+          "
+          type="button"
+        >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
     </div>
   </header>
 </template>
