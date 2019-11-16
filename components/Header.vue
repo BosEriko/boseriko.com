@@ -6,19 +6,49 @@
       </div>
       <ul v-if="isMenuActive" class="flex">
         <li class="mr-10">
-          <a class="hover:underline" href="/github">GitHub</a>
+          <a
+            class="hover:underline"
+            href="http://github.boseriko.com/"
+            target="_blank"
+          >
+            GitHub
+          </a>
         </li>
         <li class="mr-10">
-          <a class="hover:underline" href="/dev">DEV</a>
+          <a
+            class="hover:underline"
+            href="https://dev.to/boseriko"
+            target="_blank"
+          >
+            DEV
+          </a>
         </li>
         <li class="mr-10">
-          <a class="hover:underline" href="/anime">Anime</a>
+          <a
+            class="hover:underline"
+            href="http://kitsu.boseriko.com/"
+            target="_blank"
+          >
+            Anime
+          </a>
         </li>
         <li class="mr-10">
-          <a class="hover:underline" href="/twitch">Twitch</a>
+          <a
+            class="hover:underline"
+            href="http://twitch.boseriko.com/"
+            target="_blank"
+          >
+            Twitch
+          </a>
         </li>
         <li>
-          <a class="hover:underline" href="/twitter">Twitter</a>
+          <a
+            class="hover:underline"
+            href="http://twitter.boseriko.com/"
+            target="_blank"
+          >
+            Twitter
+          </a>
         </li>
       </ul>
       <div class="hidden lg:block">
