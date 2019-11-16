@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white border-b mb-auto py-3 lg:p-0">
+  <header class="border-b mb-auto py-3 lg:p-0">
     <div class="flex items-center mx-auto container">
       <div class="mr-auto">
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
