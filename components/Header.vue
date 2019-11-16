@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('../assets/css/hamburgers.css');
+
 button:focus {
   outline: none;
 }
