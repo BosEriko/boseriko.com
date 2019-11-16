@@ -17,7 +17,7 @@
       <p class="leading-loose">
         You should really follow me on
         <!-- eslint-disable-next-line -->
-        <a class="hover:no-underline underline" href="http://twitter.boseriko.com/" target="_blank">Twitter</a>
+        <a class="hover:no-underline hover:bg-black hover:text-white smooth underline" href="http://twitter.boseriko.com/" target="_blank">Twitter</a>
         so you can get your feed spammed with #100DaysOfX posts.
       </p>
     </div>
