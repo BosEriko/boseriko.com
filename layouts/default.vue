@@ -1,5 +1,9 @@
 <template>
   <div class="tracking-wider min-h-screen text-xl subpixel-antialiased">
+    <link
+      href="https://fonts.googleapis.com/css?family=Lekton&display=swap"
+      rel="stylesheet"
+    />
     <div class="flex flex-col min-h-screen">
       <Header />
       <nuxt />
@@ -9,8 +13,6 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Lekton&display=swap');
-
 body {
   font-family: 'Lekton', sans-serif;
 }
