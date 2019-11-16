@@ -5,14 +5,17 @@
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
       </div>
       <ul v-if="isMenuActive" class="mr-auto flex">
-        <li class="mr-5">
-          <a class="hover:underline" href="/Github">GitHub</a>
+        <li class="mr-10">
+          <a class="hover:underline" href="/github">GitHub</a>
         </li>
-        <li class="mr-5">
-          <a class="hover:underline" href="/Twitch">Twitch</a>
+        <li class="mr-10">
+          <a class="hover:underline" href="/dev">DEV</a>
+        </li>
+        <li class="mr-10">
+          <a class="hover:underline" href="/twitch">Twitch</a>
         </li>
         <li>
-          <a class="hover:underline" href="/Twitter">Twitter</a>
+          <a class="hover:underline" href="/twitter">Twitter</a>
         </li>
       </ul>
       <button
