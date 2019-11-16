@@ -1,26 +1,23 @@
 <template>
-  <header class="bg-white p-5">
-    <div class="mx-auto container">
-      Heyoooo!
+  <header class="bg-white">
+    <div class="flex items-center mx-auto container">
+      <h1 class="mr-auto">Bos Eriko</h1>
+      <button
+        @click="toggleMenu"
+        :class="
+          `
+            hamburger
+            hamburger--slider
+            ${isMenuActive ? 'is-active' : ''}
+          `
+        "
+        type="button"
+      >
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
     </div>
-    <button
-      @click="toggleMenu"
-      :class="
-        `
-        fixed
-        top-0
-        right-0
-        hamburger
-        hamburger--slider
-        ${isMenuActive ? 'is-active' : ''}
-        `
-      "
-      type="button"
-    >
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
-    </button>
   </header>
 </template>
 
@@ -45,6 +42,6 @@ button:focus {
   outline: none;
 }
 .hamburger {
-  transform: scale(0.75, 0.75);
+  transform: scale(0.5, 0.5);
 }
 </style>
