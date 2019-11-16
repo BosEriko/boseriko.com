@@ -4,7 +4,7 @@
       <div v-if="!isMenuActive" class="mr-auto">
         <img class="h-10" src="/img/logo.png" alt="Bos Eriko" />
       </div>
-      <ul class="mr-auto flex" v-if="isMenuActive">
+      <ul v-if="isMenuActive" class="mr-auto flex">
         <li class="mr-5">
           <a class="hover:underline" href="/Github">GitHub</a>
         </li>
