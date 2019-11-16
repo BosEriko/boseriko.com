@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="flex flex-col">
     <Header />
-    Under Maintenance
+    <div class="mx-auto container">
+      Under Maintenance
+    </div>
   </div>
 </template>
 
