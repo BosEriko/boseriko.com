@@ -9,10 +9,10 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lekton&display=swap');
 
 body {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Lekton', sans-serif;
 }
 
 .smooth {
