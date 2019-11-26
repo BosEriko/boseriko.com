@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header/component"
 import Footer from "./Footer/component"
+import "./Icons/css/all.min.css"
 import "./layout.css"
 import "./tailwind.css"
 
