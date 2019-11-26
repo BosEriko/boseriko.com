@@ -19,11 +19,11 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <div class="flex flex-col min-h-screen">
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main>{children}</main>
+      <main class="my-auto">{children}</main>
       <Footer siteTitle={data.site.siteMetadata.title} />
-    </>
+    </div>
   )
 }
 
