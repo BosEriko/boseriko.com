@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import ReactTooltip from 'react-tooltip'
 
 import Header from "./Header/component"
 import Footer from "./Footer/component"
@@ -21,6 +22,7 @@ const Layout = ({ children }) => {
 
   return (
     <div class="flex flex-col min-h-screen bg-gray-100 text-gray-700">
+      <ReactTooltip />
       <Header siteTitle={data.site.siteMetadata.title} />
       <main class="my-auto">{children}</main>
       <Footer siteTitle={data.site.siteMetadata.title} />
