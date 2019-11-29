@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 const Header = ({ siteTitle }) => (
   <header className="bg-white">
     <ReactTooltip />
-    <div className="container mx-auto flex">
+    <div className="container mx-auto flex px-5">
       <h1 className="font-bebas m-0 p-0 text-5xl">BE</h1>
       <ul className="flex ml-auto items-center text-2xl">
         <li className="mr-5">
