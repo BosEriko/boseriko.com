@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <div className="container mx-auto">
+    <div className="container mx-auto px-5">
       <div>Under Maintenance</div>
       <Link to="/page-2/">Go to page 2</Link>
     </div>
