@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
   return (
     <div class="flex flex-col min-h-screen bg-gray-100 text-gray-700">
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main class="my-auto px-5">{children}</main>
+      <main class="my-auto">{children}</main>
       <Footer siteTitle={data.site.siteMetadata.title} />
     </div>
   )
