@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div class="flex flex-col min-h-screen bg-gray-100 text-gray-700">
+    <div class="flex flex-col min-h-screen bg-gray-100 text-gray-700 bg-cover" style={{ backgroundImage: "url('https://i.imgur.com/Y67tg2p.png')" }}>
       <ReactTooltip />
       <Header siteTitle={data.site.siteMetadata.title} />
       <main class="my-auto">{children}</main>
