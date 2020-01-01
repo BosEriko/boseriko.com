@@ -22,6 +22,11 @@ const Header = ({ siteTitle }) => (
           </a>
         </li>
         <li className="mr-8">
+          <a href="http://youtube.boseriko.com/" className="hover:opacity-50 smooth" data-tip="YouTube" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-youtube"></i>
+          </a>
+        </li>
+        <li className="mr-8">
           <a href="http://stream.boseriko.com/" className="hover:opacity-50 smooth" data-tip="Twitch" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-twitch"></i>
           </a>
