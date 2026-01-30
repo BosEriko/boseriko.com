@@ -7,9 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "export": "next export",
-    "predeploy": "yarn build && yarn export",
-    "deploy": "gh-pages -d out"
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d .next"
   },
   "dependencies": {
     "gh-pages": "^6.3.0",
