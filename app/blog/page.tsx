@@ -24,7 +24,12 @@ export default function Blog() {
           "https://api.github.com/repos/BosEriko/blog/contents",
         );
         const data = await res.json();
-        setPosts(data || []);
+
+        const sortedPosts = (data || []).sort((a: Post, b: Post) =>
+          b.name.localeCompare(a.name),
+        );
+
+        setPosts(sortedPosts);
       } catch (err) {
         console.error(err);
       } finally {
