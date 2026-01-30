@@ -6,7 +6,6 @@
     "develop": "next dev",
     "build": "next build",
     "start": "next start",
-    "release": "vercel --prod",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,8 +16,7 @@
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.1",
-    "vercel": "^50.9.5"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
