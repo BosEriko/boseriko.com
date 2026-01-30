@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///Users/boseriko/Documents/Codes/Work/boseriko/com/app/page.tsx"],"sourcesContent":["import { useRouter } from \"next/navigation\";\n\nexport default function Home() {\n  const router = useRouter();\n  return (\n    <div>\n      <button onClick={() => router.push(`/project`)}>View Projects</button>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;AAAA;;;AAEe,SAAS;IACtB,MAAM,SAAS,IAAA,kMAAS;IACxB,qBACE,8OAAC;kBACC,cAAA,8OAAC;YAAO,SAAS,IAAM,OAAO,IAAI,CAAC,CAAC,QAAQ,CAAC;sBAAG;;;;;;;;;;;AAGtD"}}]
-}
