@@ -9,7 +9,7 @@ type Post = {
   html_url: string;
 };
 
-export default function BlogList() {
+export default function Blog() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();

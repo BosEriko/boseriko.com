@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
 export default function BlogPost() {
@@ -48,7 +49,17 @@ export default function BlogPost() {
             borderRadius: "8px",
           }}
         >
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]} // ← add this line
+            components={{
+              img: ({ ...props }) => (
+                <img {...props} style={{ maxWidth: "100%" }} /> // optional styling
+              ),
+            }}
+          >
+            {content}
+          </ReactMarkdown>
         </div>
       ) : (
         <p>No content found.</p>
