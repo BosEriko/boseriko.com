@@ -1,0 +1,2 @@
+:HL["/boseriko.com/_next/static/chunks/3c22d275fc1f373b.css","style"]
+0:{"buildId":"PcgAP6iT4jKpNut2OZIRX","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
