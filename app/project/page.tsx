@@ -10,7 +10,7 @@ type Repo = {
   updated_at: string;
 };
 
-export default function Portfolio() {
+export default function Project() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -38,7 +38,7 @@ export default function Portfolio() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>My Portfolio Projects</h1>
+      <h1>My Projects</h1>
 
       {loading ? (
         <p>Loading...</p>
@@ -76,7 +76,7 @@ export default function Portfolio() {
                 >
                   Check on GitHub
                 </button>
-                <button onClick={() => router.push(`/portfolio/${repo.name}`)}>
+                <button onClick={() => router.push(`/project/${repo.name}`)}>
                   Read More
                 </button>
               </div>
