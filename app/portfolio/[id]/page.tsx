@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export default function PortfolioPage() {
+export default function PortfolioEntry() {
   const params = useParams();
   const { id } = params;
   const [content, setContent] = useState<string | null>(null);
