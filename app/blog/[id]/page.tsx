@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 export default function BlogPost() {
   const params = useParams();
@@ -51,10 +51,10 @@ export default function BlogPost() {
         >
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]} // ← add this line
+            rehypePlugins={[rehypeRaw]}
             components={{
               img: ({ ...props }) => (
-                <img {...props} style={{ maxWidth: "100%" }} /> // optional styling
+                <img {...props} style={{ maxWidth: "100%" }} />
               ),
             }}
           >
