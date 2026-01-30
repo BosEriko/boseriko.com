@@ -42,7 +42,7 @@ self.__SERVER_FILES_MANIFEST={
         256,
         384
       ],
-      "path": "/boseriko.com/_next/image",
+      "path": "/boseriko.com/_next/image/",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
@@ -78,12 +78,12 @@ self.__SERVER_FILES_MANIFEST={
     },
     "basePath": "/boseriko.com",
     "sassOptions": {},
-    "trailingSlash": false,
+    "trailingSlash": true,
     "i18n": null,
     "productionBrowserSourceMaps": false,
     "excludeDefaultMomentLocales": true,
     "reactProductionProfiling": false,
-    "reactStrictMode": null,
+    "reactStrictMode": false,
     "reactMaxHeadersLength": 6000,
     "httpAgentOptions": {
       "keepAlive": true

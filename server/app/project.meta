@@ -2,7 +2,7 @@
   "headers": {
     "x-nextjs-stale-time": "300",
     "x-nextjs-prerender": "1",
-    "x-next-cache-tags": "_N_T_/layout,_N_T_/project/layout,_N_T_/project/page,_N_T_/project"
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/project/layout,_N_T_/project/page,_N_T_/project/"
   },
   "segmentPaths": [
     "/_tree",
