@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Repo = {
   id: number;
@@ -14,6 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const router = useRouter();
 
   const perPage = 10;
 
@@ -52,7 +54,7 @@ export default function Home() {
           }}
         >
           {repos.map((repo) => (
-            <div key={repo.id}>
+            <div key={repo.id} style={{ marginBottom: "1.5rem" }}>
               <h2>
                 <a
                   href={repo.html_url}
@@ -66,6 +68,18 @@ export default function Home() {
               <p style={{ fontSize: "0.8rem", color: "#666" }}>
                 Updated at: {new Date(repo.updated_at).toLocaleString()}
               </p>
+
+              <div style={{ marginTop: "0.5rem" }}>
+                <button
+                  onClick={() => window.open(repo.html_url, "_blank")}
+                  style={{ marginRight: "0.5rem" }}
+                >
+                  Check on GitHub
+                </button>
+                <button onClick={() => router.push(`/portfolio/${repo.name}`)}>
+                  Read More
+                </button>
+              </div>
             </div>
           ))}
         </div>
