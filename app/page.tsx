@@ -5,7 +5,12 @@ export default function Home() {
   const router = useRouter();
   return (
     <div>
-      <button onClick={() => router.push(`/project`)}>View Projects</button>
+      <div>
+        <button onClick={() => router.push(`/project`)}>View Projects</button>
+      </div>
+      <div>
+        <button onClick={() => router.push(`/blog`)}>View Blogs</button>
+      </div>
     </div>
   );
 }
