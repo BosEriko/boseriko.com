@@ -32,7 +32,7 @@ export default function Home() {
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("page.pdf");
+    pdf.save("Bos Eriko's Resume.pdf");
   };
 
   return (
