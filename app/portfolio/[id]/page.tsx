@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function PortfolioPage() {
   const params = useParams();
@@ -17,7 +19,6 @@ export default function PortfolioPage() {
         );
         const data = await res.json();
 
-        // GitHub API returns content as base64
         if (data.content) {
           const decoded = atob(data.content.replace(/\n/g, ""));
           setContent(decoded);
@@ -39,17 +40,18 @@ export default function PortfolioPage() {
       <h1>Portfolio: {id}</h1>
       {loading ? (
         <p>Loading...</p>
-      ) : (
-        <pre
+      ) : content ? (
+        <div
           style={{
-            whiteSpace: "pre-wrap",
             background: "#f0f0f0",
             padding: "1rem",
             borderRadius: "8px",
           }}
         >
-          {content}
-        </pre>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+        </div>
+      ) : (
+        <p>No content found.</p>
       )}
     </div>
   );
