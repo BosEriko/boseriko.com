@@ -2,9 +2,9 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } },
+  context: { params: Promise<{ id: string }> },
 ) {
-  const { id } = params;
+  const { id } = await context.params;
 
   const res = await fetch(
     `https://api.github.com/repos/BosEriko/blog/contents/${id}`,
