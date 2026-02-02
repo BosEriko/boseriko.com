@@ -54,7 +54,9 @@ export default function Home() {
             </h2>
             <p>
               {new Date(job.date.start).toLocaleDateString()} -{" "}
-              {new Date(job.date.end).toLocaleDateString()}
+              {job.active
+                ? "Present"
+                : new Date(job.date.end).toLocaleDateString()}
             </p>
             <ul>
               {job.responsibilities.map((task, i) => (
