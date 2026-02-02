@@ -15,9 +15,7 @@ export default function BlogPost() {
     const fetchPost = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/BosEriko/blog/contents/${id}`,
-        );
+        const res = await fetch(`/api/blogs/${id}`);
         const data = await res.json();
 
         if (data.content) {

@@ -15,9 +15,7 @@ export default function ProjectEntry() {
     const fetchMarkdown = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/BosEriko/${id}/contents/PORTFOLIO.md`,
-        );
+        const res = await fetch(`/api/projects/${id}`);
         const data = await res.json();
 
         if (data.content) {
