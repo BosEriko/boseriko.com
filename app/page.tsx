@@ -54,6 +54,7 @@ export default function Home() {
         <button onClick={() => router.push(`/product`)}>View Products</button>
         <button onClick={() => router.push(`/project`)}>View Projects</button>
         <button onClick={() => router.push(`/blog`)}>View Blogs</button>
+        <button onClick={() => router.push(`/touch`)}>Get in Touch</button>
         <button onClick={handleDownloadPDF}>Download as PDF</button>
       </div>
     </div>
