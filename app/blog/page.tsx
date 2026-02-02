@@ -19,9 +19,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(
-          "https://api.github.com/repos/BosEriko/blog/contents",
-        );
+        const res = await fetch("/api/blogs");
         const data = await res.json();
 
         const sortedPosts = (data || []).sort((a: Post, b: Post) =>

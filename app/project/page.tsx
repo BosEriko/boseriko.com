@@ -22,9 +22,7 @@ export default function Project() {
   useEffect(() => {
     const fetchRepos = async () => {
       setLoading(true);
-      const res = await fetch(
-        `https://api.github.com/search/repositories?q=user:boseriko+topic:project&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
-      );
+      const res = await fetch(`/api/projects?page=${page}`);
       const data = await res.json();
       setRepos(data.items || []);
       setTotalCount(data.total_count || 0);
