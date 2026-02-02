@@ -47,7 +47,11 @@ export default function Home() {
       <div className="hidden-from-pdf">not visible from pdf</div>
 
       {/* Buttons we want to exclude from PDF */}
-      <div style={{ marginTop: "20px" }} className="hidden-from-pdf">
+      <div
+        style={{ marginTop: "20px" }}
+        className="hidden-from-pdf flex flex-col gap-1"
+      >
+        <button onClick={() => router.push(`/product`)}>View Products</button>
         <button onClick={() => router.push(`/project`)}>View Projects</button>
         <button onClick={() => router.push(`/blog`)}>View Blogs</button>
         <button onClick={handleDownloadPDF}>Download as PDF</button>

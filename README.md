@@ -1,9 +1,10 @@
 # boseriko.com
 My personal website.
 
-## Install
+## Run Project
 ```sh
 yarn install
+yarn develop
 ```
 
 ## Deploy to Production

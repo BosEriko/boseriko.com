@@ -10,7 +10,7 @@ type Repo = {
   updated_at: string;
 };
 
-export default function Project() {
+export default function Product() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -23,7 +23,7 @@ export default function Project() {
     const fetchRepos = async () => {
       setLoading(true);
       const res = await fetch(
-        `https://api.github.com/search/repositories?q=user:boseriko+topic:project&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
+        `https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
       );
       const data = await res.json();
       setRepos(data.items || []);
@@ -38,12 +38,12 @@ export default function Project() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>My Projects</h1>
+      <h1>My Products</h1>
 
       {loading ? (
         <p>Loading...</p>
       ) : repos.length === 0 ? (
-        <p>No projects found.</p>
+        <p>No Products found.</p>
       ) : (
         <div
           style={{
@@ -76,7 +76,7 @@ export default function Project() {
                 >
                   Check on GitHub
                 </button>
-                <button onClick={() => router.push(`/project/${repo.name}`)}>
+                <button onClick={() => router.push(`/product/${repo.name}`)}>
                   Read More
                 </button>
               </div>
