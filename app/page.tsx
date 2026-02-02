@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 
 import experience from "../data/experience.json";
@@ -10,25 +10,19 @@ export default function Home() {
   const router = useRouter();
 
   const handleDownloadPDF = async () => {
-    // Elements we want to hide
     const elementsToHide = document.querySelectorAll(".hidden-from-pdf");
-
-    // Hide them temporarily
     elementsToHide.forEach((el) => {
       (el as HTMLElement).style.display = "none";
     });
 
-    // Capture the whole body or a specific container
-    const element = document.body; // or any container div
+    const element = document.body;
     const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
-    // Restore hidden elements
     elementsToHide.forEach((el) => {
       (el as HTMLElement).style.display = "";
     });
 
-    // Create PDF
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
@@ -39,47 +33,97 @@ export default function Home() {
 
   return (
     <div>
-      {/* The content to include in the PDF */}
-      <div>
-        <h1>Welcome to my homepage</h1>
-        <p>This is some sample content to include in the PDF.</p>
-      </div>
+      {/* Top Navbar */}
+      <nav className="hidden-from-pdf bg-gray-800 text-white px-6 py-4 flex justify-between items-center">
+        <h1
+          className="text-xl font-bold cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          Bos Eriko Reyes
+        </h1>
+        <div className="flex space-x-4">
+          <button
+            className="px-3 py-1 hover:bg-gray-700 rounded"
+            onClick={() => router.push("/product")}
+          >
+            Products
+          </button>
+          <button
+            className="px-3 py-1 hover:bg-gray-700 rounded"
+            onClick={() => router.push("/project")}
+          >
+            Projects
+          </button>
+          <button
+            className="px-3 py-1 hover:bg-gray-700 rounded"
+            onClick={() => router.push("/blog")}
+          >
+            Blogs
+          </button>
+          <button
+            className="px-3 py-1 hover:bg-gray-700 rounded"
+            onClick={() => router.push("/touch")}
+          >
+            Contact
+          </button>
+          <button
+            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded"
+            onClick={handleDownloadPDF}
+          >
+            Download PDF
+          </button>
+        </div>
+      </nav>
 
-      <h1>My Work Experience</h1>
-      <ul>
-        {experience.map((job, index) => (
-          <li key={index}>
-            <h2>
-              {job.position} at {job.company}
-            </h2>
-            <p>
-              {new Date(job.date.start).toLocaleDateString()} -{" "}
-              {job.active
-                ? "Present"
-                : new Date(job.date.end).toLocaleDateString()}
-            </p>
-            <ul>
-              {job.responsibilities.map((task, i) => (
-                <li key={i}>{task}</li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+      {/* Page Content */}
+      <div className="p-6 max-w-4xl mx-auto space-y-8 mt-6">
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
+          <p className="text-gray-600">
+            Full Stack Developer & Software Engineer
+          </p>
+        </div>
 
-      <div>visible from pdf</div>
-      <div className="hidden-from-pdf">not visible from pdf</div>
+        {/* Work Experience */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
+            Work Experience
+          </h2>
 
-      {/* Buttons we want to exclude from PDF */}
-      <div
-        style={{ marginTop: "20px" }}
-        className="hidden-from-pdf flex flex-col gap-1"
-      >
-        <button onClick={() => router.push(`/product`)}>View Products</button>
-        <button onClick={() => router.push(`/project`)}>View Projects</button>
-        <button onClick={() => router.push(`/blog`)}>View Blogs</button>
-        <button onClick={() => router.push(`/touch`)}>Get in Touch</button>
-        <button onClick={handleDownloadPDF}>Download as PDF</button>
+          <ul className="space-y-6">
+            {experience.map((job, index) => (
+              <li
+                key={index}
+                className={`p-4 rounded-lg shadow ${
+                  job.active
+                    ? "bg-blue-50 border-l-4 border-blue-500"
+                    : "bg-white border border-gray-200"
+                }`}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-xl font-semibold">
+                    {job.position} at {job.company}
+                  </h3>
+                  <span className="text-sm text-gray-500">
+                    {new Date(job.date.start).toLocaleDateString()} -{" "}
+                    {job.active
+                      ? "Present"
+                      : new Date(job.date.end).toLocaleDateString()}
+                  </span>
+                </div>
+                <p className="text-gray-600 mb-2">{job.location}</p>
+                <ul className="list-disc list-inside space-y-1">
+                  {job.responsibilities.map((task, i) => (
+                    <li key={i} className="text-gray-700">
+                      {task}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </div>
   );
