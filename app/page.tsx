@@ -64,7 +64,13 @@ export default function Home() {
             className="px-3 py-1 hover:bg-gray-700 rounded"
             onClick={() => router.push("/touch")}
           >
-            Contact
+            Get in Touch
+          </button>
+          <button
+            className="px-3 py-1 hover:bg-gray-700 rounded"
+            onClick={() => router.push("/resume")}
+          >
+            Resume
           </button>
           <button
             className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded"
