@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+import experience from "../data/experience.json";
+
 export default function Home() {
   const router = useRouter();
 
@@ -42,6 +44,26 @@ export default function Home() {
         <h1>Welcome to my homepage</h1>
         <p>This is some sample content to include in the PDF.</p>
       </div>
+
+      <h1>My Work Experience</h1>
+      <ul>
+        {experience.map((job, index) => (
+          <li key={index}>
+            <h2>
+              {job.position} at {job.company}
+            </h2>
+            <p>
+              {new Date(job.date.start).toLocaleDateString()} -{" "}
+              {new Date(job.date.end).toLocaleDateString()}
+            </p>
+            <ul>
+              {job.responsibilities.map((task, i) => (
+                <li key={i}>{task}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
 
       <div>visible from pdf</div>
       <div className="hidden-from-pdf">not visible from pdf</div>
