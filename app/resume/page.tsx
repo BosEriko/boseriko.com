@@ -1,11 +1,13 @@
 import Template from "@template";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import experience from "../../data/experience.json";
 import projects from "../../data/projects.json";
 import awards from "../../data/awards.json";
+import gems from "../../data/gems.json";
+import contributions from "../../data/contributions.json";
 
 interface EntryProps {
   data: typeof experience;
@@ -72,8 +74,8 @@ export default function Resume() {
         </p>
         <div className="flex items-center text-sm text-gray-700">
           <div className="flex items-center gap-2 flex-1">
-            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
-            <span>www.boseriko.com</span>
+            <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
+            <span>bos@eriko.ph</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
@@ -90,7 +92,7 @@ export default function Resume() {
 
       {/* Objective */}
       <div className="my-10">
-        <h4 className="text-2xl font-bold mb-2">🏁 Objective</h4>
+        <h4 className="text-2xl font-bold mb-5">🏁 Objective</h4>
         <p className="text-justify">
           I am seeking employment with a company where I can use my skills and
           also grow as a person. I want to work in an environment where I can
@@ -108,6 +110,57 @@ export default function Resume() {
       <ResumeSection data={projects} title="🧠 Personal Projects" />
       <hr />
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
+
+      <hr />
+
+      {/* Community Contributions */}
+      <div className="my-10">
+        <h4 className="text-2xl font-bold mb-5">📜 Community Contributions</h4>
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <h4 className="text-xl font-bold mb-2">Published Ruby Gems</h4>
+            <ul className="list-disc ml-5">
+              {gems.map((gem, index) => (
+                <li key={index}>
+                  <a
+                    href={gem.link}
+                    className="font-bold text-blue-800 underline"
+                    target="_blank"
+                  >
+                    {gem.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex-1">
+            <h4 className="text-xl font-bold mb-2">
+              Open Source Contributions
+            </h4>
+            <ul className="list-disc ml-5">
+              {contributions.map((contribution, index) => (
+                <li key={index}>
+                  <a
+                    href={contribution.link}
+                    className="font-bold text-blue-800 underline"
+                    target="_blank"
+                  >
+                    {contribution.name}
+                  </a>
+                  <span className="mx-1">by</span>
+                  <a
+                    href={contribution.author.link}
+                    className="text-blue-800"
+                    target="_blank"
+                  >
+                    {contribution.author.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </Template.Resume>
   );
 }
