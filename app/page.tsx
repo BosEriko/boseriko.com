@@ -2,14 +2,14 @@
 
 import Template from "@template";
 import { useEffect, useState } from "react";
-import html2canvas from "html2canvas-pro";
-import jsPDF from "jspdf";
+import { useRouter } from "next/navigation";
 
 import experience from "../data/experience.json";
 
 type TopicCount = Record<string, number>;
 
 export default function Home() {
+  const router = useRouter();
   const [topics, setTopics] = useState<TopicCount>({});
 
   useEffect(() => {
@@ -19,38 +19,10 @@ export default function Home() {
       .catch(console.error);
   }, []);
 
-  const handleDownloadPDF = async () => {
-    const elementsToHide = document.querySelectorAll(".hidden-from-pdf");
-    elementsToHide.forEach((el) => {
-      (el as HTMLElement).style.display = "none";
-    });
-
-    const element = document.body;
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
-
-    elementsToHide.forEach((el) => {
-      (el as HTMLElement).style.display = "";
-    });
-
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("Bos Eriko's Resume.pdf");
-  };
-
   return (
     <Template.Default>
       {/* Page Content */}
       <div className="p-6 max-w-4xl mx-auto space-y-8 mt-6">
-        <button
-          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded"
-          onClick={handleDownloadPDF}
-        >
-          Download PDF
-        </button>
         {/* Header */}
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
