@@ -6,7 +6,7 @@
       "start": 1601164800000,
       "end": 1717776000000
     },
-    "location": "kuru.studio",
+    "location": "github.com/kuru-studio/kuru-studio-server",
     "active": false,
     "responsibilities": [
       "Built the front-end using TypeScript, NextJS, ReactJS, and Redux for state management.",
