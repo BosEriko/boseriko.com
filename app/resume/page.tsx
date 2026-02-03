@@ -5,19 +5,31 @@ export default function Resume() {
   return (
     <Template.Resume>
       {/* Header */}
-      <div className="text-center">
+      <div className="text-left mb-5">
         <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
         <p className="text-gray-600">
           Full Stack Developer & Software Engineer
         </p>
       </div>
 
+      <hr />
+
+      {/* Objective */}
+      <div className="my-5">
+        <h4 className="text-2xl font-bold mb-2">🏁 Objective</h4>
+        <div className="text-justify">
+          I am seeking employment with a company where I can use my skills and
+          also grow as a person. I want to work in an environment where I can
+          learn more knowledge related to my skill set. I want to excel and be
+          the best that I can be at programming and also be crucial to any team
+          that I can be a part of.
+        </div>
+      </div>
+
+      <hr />
+
       {/* Work Experience */}
       <section>
-        <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
-          Work Experience
-        </h2>
-
         <ul className="space-y-6">
           {experience.map((job, index) => (
             <li
