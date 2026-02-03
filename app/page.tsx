@@ -1,5 +1,6 @@
 "use client";
 
+import Template from "@template";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import html2canvas from "html2canvas-pro";
@@ -43,7 +44,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <Template.Default>
       {/* Top Navbar */}
       <nav className="hidden-from-pdf bg-gray-800 text-white px-6 py-4 flex justify-between items-center">
         <h1
@@ -157,6 +158,6 @@ export default function Home() {
           </ul>
         </section>
       </div>
-    </div>
+    </Template.Default>
   );
 }

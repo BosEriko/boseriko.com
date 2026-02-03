@@ -1,4 +1,5 @@
 "use client";
+import Template from "@template";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -35,32 +36,34 @@ export default function BlogPost() {
   }, [id]);
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      {loading ? (
-        <p>Loading...</p>
-      ) : content ? (
-        <div
-          style={{
-            background: "#f0f0f0",
-            padding: "1rem",
-            borderRadius: "8px",
-          }}
-        >
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={{
-              img: ({ ...props }) => (
-                <img {...props} style={{ maxWidth: "100%" }} />
-              ),
+    <Template.Default>
+      <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+        {loading ? (
+          <p>Loading...</p>
+        ) : content ? (
+          <div
+            style={{
+              background: "#f0f0f0",
+              padding: "1rem",
+              borderRadius: "8px",
             }}
           >
-            {content}
-          </ReactMarkdown>
-        </div>
-      ) : (
-        <p>No content found.</p>
-      )}
-    </div>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                img: ({ ...props }) => (
+                  <img {...props} style={{ maxWidth: "100%" }} />
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          </div>
+        ) : (
+          <p>No content found.</p>
+        )}
+      </div>
+    </Template.Default>
   );
 }

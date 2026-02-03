@@ -1,3 +1,5 @@
+import Template from "@template";
+
 export default function Resume() {
-  return <div>Resume</div>;
+  return <Template.Resume>Resume</Template.Resume>;
 }
