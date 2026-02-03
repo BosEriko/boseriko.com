@@ -1,5 +1,5 @@
 import Template from "@template";
 
-export default function Touch() {
+export default function Contact() {
   return <Template.Default>Get in Touch</Template.Default>;
 }

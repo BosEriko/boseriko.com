@@ -74,7 +74,7 @@ export default function Home() {
           </button>
           <button
             className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/touch")}
+            onClick={() => router.push("/contact")}
           >
             Get in Touch
           </button>
