@@ -15,12 +15,16 @@
     "incremental": true,
     "plugins": [
       {
-        "name": "next"
-      }
+        "name": "next",
+      },
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "@atom": ["./components/atoms"],
+      "@molecule": ["./components/molecules"],
+      "@organism": ["./components/organisms"],
+      "@template": ["./components/templates"],
+    },
   },
   "include": [
     "next-env.d.ts",
@@ -28,7 +32,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
