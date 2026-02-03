@@ -1,7 +1,6 @@
 "use client";
 
 import Template from "@template";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
@@ -11,7 +10,6 @@ import experience from "../data/experience.json";
 type TopicCount = Record<string, number>;
 
 export default function Home() {
-  const router = useRouter();
   const [topics, setTopics] = useState<TopicCount>({});
 
   useEffect(() => {
@@ -45,56 +43,14 @@ export default function Home() {
 
   return (
     <Template.Default>
-      {/* Top Navbar */}
-      <nav className="hidden-from-pdf bg-gray-800 text-white px-6 py-4 flex justify-between items-center">
-        <h1
-          className="text-xl font-bold cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          Bos Eriko Reyes
-        </h1>
-        <div className="flex space-x-4">
-          <button
-            className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/topic/product")}
-          >
-            Products
-          </button>
-          <button
-            className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/topic/project")}
-          >
-            Projects
-          </button>
-          <button
-            className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/blog")}
-          >
-            Blogs
-          </button>
-          <button
-            className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/contact")}
-          >
-            Get in Touch
-          </button>
-          <button
-            className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/resume")}
-          >
-            Resume
-          </button>
-          <button
-            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded"
-            onClick={handleDownloadPDF}
-          >
-            Download PDF
-          </button>
-        </div>
-      </nav>
-
       {/* Page Content */}
       <div className="p-6 max-w-4xl mx-auto space-y-8 mt-6">
+        <button
+          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded"
+          onClick={handleDownloadPDF}
+        >
+          Download PDF
+        </button>
         {/* Header */}
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
