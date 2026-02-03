@@ -129,7 +129,7 @@ export default function Home() {
               <li
                 key={index}
                 className={`p-4 rounded-lg shadow ${
-                  job.active
+                  !job.date?.end || job.active
                     ? "bg-blue-50 border-l-4 border-blue-500"
                     : "bg-white border border-gray-200"
                 }`}
@@ -140,7 +140,7 @@ export default function Home() {
                   </h3>
                   <span className="text-sm text-gray-500">
                     {new Date(job.date.start).toLocaleDateString()} -{" "}
-                    {job.active
+                    {!job.date?.end || job.active
                       ? "Present"
                       : new Date(job.date.end).toLocaleDateString()}
                   </span>
