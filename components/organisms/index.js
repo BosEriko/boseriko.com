@@ -1,9 +1,5 @@
-import Footer from "./Footer";
 import Header from "./Header";
+import Footer from "./Footer";
+import Navigation from "./Navigation";
 
-const Organism = {
-  Footer,
-  Header,
-};
-
-export default Organism;
+export default { Header, Footer, Navigation };

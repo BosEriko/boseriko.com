@@ -1,21 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Organism from "@organism";
 
 const Header = () => {
-  const router = useRouter();
   return (
     <header>
-      <ul>
-        <li>
-          <button
-            className="text-xl font-bold cursor-pointer"
-            onClick={() => router.push("/")}
-          >
-            Home
-          </button>
-        </li>
-      </ul>
+      <Organism.Navigation />
     </header>
   );
 };
