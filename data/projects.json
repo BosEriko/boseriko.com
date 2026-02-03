@@ -1,0 +1,34 @@
+[
+  {
+    "position": "Lead Developer",
+    "company": "Kuru Studio CMS",
+    "date": {
+      "start": 1601164800000,
+      "end": 1717776000000
+    },
+    "location": "kuru.studio",
+    "active": false,
+    "responsibilities": [
+      "Built the front-end using TypeScript, NextJS, ReactJS, and Redux for state management.",
+      "Developed the back-end using Ruby on Rails with GraphQL for flexible data querying.",
+      "Implemented multitenancy to support multiple company instances.",
+      "Designed and integrated secure authentication and authorization systems."
+    ]
+  },
+  {
+    "position": "Lead Developer",
+    "company": "Kuru Anime",
+    "date": {
+      "start": 1369084800000,
+      "end": 1601068800000
+    },
+    "location": "ucoz.kuru-anime.com",
+    "active": false,
+    "responsibilities": [
+      "Built the front-end with vanilla HTML/CSS and jQuery for interactive features.",
+      "Used uCoz as the back-end platform to manage content and hosting.",
+      "Designed UI layouts and navigation for a better user experience.",
+      "Created scripts to automate content updates and page rendering."
+    ]
+  }
+]
