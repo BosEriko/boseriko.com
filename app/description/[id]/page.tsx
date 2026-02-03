@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
-export default function ProjectEntry() {
+export default function Description() {
   const params = useParams();
   const { id } = params;
   const [content, setContent] = useState<string | null>(null);
@@ -15,7 +15,7 @@ export default function ProjectEntry() {
     const fetchMarkdown = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/projects/${id}`);
+        const res = await fetch(`/api/description/${id}`);
         const data = await res.json();
 
         if (data.content) {

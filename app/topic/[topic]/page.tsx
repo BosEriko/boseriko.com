@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 type Repo = {
   id: number;
@@ -10,7 +10,9 @@ type Repo = {
   updated_at: string;
 };
 
-export default function Product() {
+export default function Topic() {
+  const params = useParams();
+  const { topic } = params;
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -22,7 +24,7 @@ export default function Product() {
   useEffect(() => {
     const fetchRepos = async () => {
       setLoading(true);
-      const res = await fetch(`/api/products?page=${page}`);
+      const res = await fetch(`/api/topic/${topic}?page=${page}`);
       const data = await res.json();
       setRepos(data.items || []);
       setTotalCount(data.total_count || 0);
@@ -36,12 +38,12 @@ export default function Product() {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>My Products</h1>
+      <h1>My Repositories</h1>
 
       {loading ? (
         <p>Loading...</p>
       ) : repos.length === 0 ? (
-        <p>No Products found.</p>
+        <p>No Repository found.</p>
       ) : (
         <div
           style={{
@@ -74,7 +76,9 @@ export default function Product() {
                 >
                   Check on GitHub
                 </button>
-                <button onClick={() => router.push(`/product/${repo.name}`)}>
+                <button
+                  onClick={() => router.push(`/description/${repo.name}`)}
+                >
                   Read More
                 </button>
               </div>

@@ -44,13 +44,13 @@ export default function Home() {
         <div className="flex space-x-4">
           <button
             className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/product")}
+            onClick={() => router.push("/topic/product")}
           >
             Products
           </button>
           <button
             className="px-3 py-1 hover:bg-gray-700 rounded"
-            onClick={() => router.push("/project")}
+            onClick={() => router.push("/topic/project")}
           >
             Projects
           </button>
