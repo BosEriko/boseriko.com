@@ -11,12 +11,11 @@ const Resume: React.FC<ResumeProps> = ({ children }) => {
   };
 
   return (
-    <div className="resume-page min-h-screen flex justify-center py-10 bg-gray-100 print:bg-white">
-      <div className="resume-container w-full max-w-3xl bg-white shadow-xl border border-gray-300 p-10 print:shadow-none print:border-none print:p-0">
+    <div className="resume-page pt-10 bg-gray-100 print:bg-white pb-30">
+      <div className="resume-container mx-auto w-3xl overflow-auto bg-white shadow-xl border border-gray-300 p-10 print:shadow-none print:border-none print:p-0">
         <div>{children}</div>
-        <div className="hidden-from-print mt-10"></div>
         <div className="hidden-from-print fixed bottom-0 left-0 w-full bg-blue-950">
-          <div className="container mx-auto flex justify-center items-center gap-5 text-white h-15">
+          <div className="flex justify-center items-center gap-5 text-white h-15 px-3">
             <div>Bos Eriko Reyes’ Resume — ready to download.</div>
             <button
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded cursor-pointer"
