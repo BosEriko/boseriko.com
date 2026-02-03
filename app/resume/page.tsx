@@ -47,29 +47,34 @@ export default function Resume() {
       <hr />
 
       {/* Work Experience */}
-      <section>
+      <div className="my-5">
+        <h4 className="text-2xl font-bold mb-5">🔥 Experience</h4>
         <ul className="space-y-6">
           {experience.map((job, index) => (
-            <li
-              key={index}
-              className={`p-4 rounded-lg shadow ${
-                !job.date?.end || job.active
-                  ? "bg-blue-50 border-l-4 border-blue-500"
-                  : "bg-white border border-gray-200"
-              }`}
-            >
+            <li key={index}>
               <div className="flex justify-between items-center mb-2">
-                <h3 className="text-xl font-semibold">
-                  {job.position} at {job.company}
-                </h3>
+                <h3 className="text-2xl font-semibold">{job.position}</h3>
                 <span className="text-sm text-gray-500">
-                  {new Date(job.date.start).toLocaleDateString()} -{" "}
+                  {job.date?.start
+                    ? new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                        year: "numeric",
+                      }).format(new Date(job.date.start))
+                    : "N/A"}{" "}
+                  -{" "}
                   {!job.date?.end || job.active
                     ? "Present"
-                    : new Date(job.date.end).toLocaleDateString()}
+                    : new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                        year: "numeric",
+                      }).format(new Date(job.date.end))}
                 </span>
               </div>
-              <p className="text-gray-600 mb-2">{job.location}</p>
+              <p className="text-gray-600 mb-2 flex gap-1">
+                <span className="font-bold">{job.company}</span>
+                <span>at</span>
+                <span className="underline">{job.location}</span>
+              </p>
               <ul className="list-disc list-inside space-y-1">
                 {job.responsibilities.map((task, i) => (
                   <li key={i} className="text-gray-700">
@@ -80,7 +85,7 @@ export default function Resume() {
             </li>
           ))}
         </ul>
-      </section>
+      </div>
     </Template.Resume>
   );
 }
