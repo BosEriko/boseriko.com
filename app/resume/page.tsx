@@ -21,7 +21,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
       <h4 className="text-2xl font-bold mb-5">{title}</h4>
       <ul className="space-y-6">
         {data.map((entry, index) => (
-          <li key={index}>
+          <li key={index} className="inline-table w-full">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-2xl font-semibold">{entry.position}</h3>
               <span className="text-sm text-gray-500">
