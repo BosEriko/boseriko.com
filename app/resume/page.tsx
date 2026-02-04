@@ -157,7 +157,7 @@ export default async function Resume() {
   return (
     <Template.Resume>
       {/* Header */}
-      <div className="inline-table w-full mb-5">
+      <div className="inline-table w-full mb-15">
         <h1 className="text-5xl font-bold mb-2">Bos Eriko Reyes</h1>
         <p className="text-gray-600 mb-3">
           Full Stack Developer & Software Engineer
