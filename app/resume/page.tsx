@@ -171,7 +171,7 @@ export default async function Resume() {
           </div>
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
-            <span>github.boseriko.com</span>
+            <span>github.com/BosEriko</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
