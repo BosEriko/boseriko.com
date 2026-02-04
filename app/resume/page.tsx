@@ -67,7 +67,7 @@ export default function Resume() {
   return (
     <Template.Resume>
       {/* Header */}
-      <div className="text-left mb-10">
+      <div className="mb-10">
         <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
         <p className="text-gray-600 mb-5">
           Full Stack Developer & Software Engineer
