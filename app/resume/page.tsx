@@ -253,7 +253,7 @@ export default async function Resume() {
                   <Atom.Visibility state={!!project.homepage}>
                     <span> Live at </span>
                     <a href={project.homepage} target="_blank">
-                      {project.homepage}
+                      {project.homepage?.replace(/^https?:\/\//, "")}
                     </a>
                     <span>.</span>
                   </Atom.Visibility>
