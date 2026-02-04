@@ -230,7 +230,8 @@ export default async function Resume() {
                     <span>Last Update: </span>
                     <span>
                       {new Intl.DateTimeFormat("en-US", {
-                        month: "short",
+                        month: "long",
+                        day: "2-digit",
                         year: "numeric",
                       }).format(new Date(project.updated_at))}
                     </span>
