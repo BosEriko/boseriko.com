@@ -164,16 +164,16 @@ export default async function Resume() {
         </p>
         <div className="flex items-center text-sm text-gray-700 mb-5">
           <div className="flex items-center gap-2 flex-1">
+            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
+            <span>boseriko.com</span>
+          </div>
+          <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
             <span>resume@boseriko.com</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
             <span>github.com/BosEriko</span>
-          </div>
-          <div className="flex items-center gap-2 flex-1">
-            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
-            <span>boseriko.com</span>
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
