@@ -119,7 +119,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
                 </>
               )}
             </p>
-            <ul className="list-disc list-inside space-y-1">
+            <ul className="list-disc list-outside space-y-1 ml-5">
               {entry.responsibilities.map((task, i) => (
                 <li key={i} className="text-gray-700">
                   {task}
@@ -221,7 +221,7 @@ export default async function Resume() {
             <li key={index} className="inline-table w-full">
               {index < 1 && (
                 <h4 className="text-3xl font-bold mb-5">
-                  🧠 Personal Projects
+                  🗂️ Personal Projects
                 </h4>
               )}
               <div className="flex justify-between items-center mb-2">
@@ -245,7 +245,7 @@ export default async function Resume() {
                   {project.full_name}
                 </a>
               </p>
-              <ul className="list-disc list-inside space-y-1">
+              <ul className="list-disc list-outside space-y-1 ml-5">
                 <li className="text-gray-700">
                   <span className="font-bold">Language: </span>
                   <span>{project.language}</span>
