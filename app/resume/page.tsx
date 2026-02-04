@@ -7,7 +7,6 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import experience from "../../data/experience.json";
-import projects from "../../data/projects.json";
 import awards from "../../data/awards.json";
 import gems from "../../data/gems.json";
 import contributions from "../../data/contributions.json";
@@ -51,8 +50,6 @@ export const metadata: Metadata = {
   title: "Bos Eriko Reyes' Resume",
 };
 
-type TopicCount = Record<string, number>;
-
 interface EntryDate {
   start: number;
   end: number | null;
@@ -71,6 +68,13 @@ interface EntryProps {
   data: EntryItem[];
   title: string;
   icon?: React.ReactNode;
+}
+
+interface Project {
+  name: string;
+  description: string;
+  html_url: string;
+  updated_at: string | Date;
 }
 
 const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
@@ -129,6 +133,13 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
 export default async function Resume() {
   const topics = await fetch(
     "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topic-count.json",
+    {
+      next: { revalidate: 86400 },
+    },
+  ).then((res) => res.json());
+
+  const projects = await fetch(
+    "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=updated&order=desc&page=1&per_page=5",
     {
       next: { revalidate: 86400 },
     },
@@ -197,9 +208,45 @@ export default async function Resume() {
         </p>
       </div>
 
-      {/* Sections */}
+      {/* Experience */}
       <ResumeSection data={experience} title="🔥 Experience" />
-      <ResumeSection data={projects} title="🧠 Personal Projects" />
+
+      {/* Personal Projects */}
+      <div></div>
+
+      <div className="mb-20">
+        <ul className="space-y-6">
+          {projects.items.map((project: Project, index: number) => (
+            <li key={index} className="inline-table w-full">
+              {index < 1 && (
+                <h4 className="text-3xl font-bold mb-5">
+                  🧠 Personal Projects
+                </h4>
+              )}
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-xl font-semibold">{project.name}</h3>
+                <span className="text-xs text-gray-500">
+                  <Atom.Visibility state={!!project.updated_at}>
+                    <span>Last Update: </span>
+                    <span>
+                      {new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                        year: "numeric",
+                      }).format(new Date(project.updated_at))}
+                    </span>
+                  </Atom.Visibility>
+                </span>
+              </div>
+              <p className="text-gray-600 mb-2 flex gap-1">
+                {project.html_url}
+              </p>
+              <p>{project.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Awards & Special Mentions */}
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
 
       {/* Community Contributions */}
