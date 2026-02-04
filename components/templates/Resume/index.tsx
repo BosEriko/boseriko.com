@@ -37,16 +37,7 @@ const Resume: React.FC<ResumeProps> = ({ children }) => {
             display: none !important;
           }
           .resume-container {
-            font-size: 12pt;
-            width: 100%;
-            box-shadow: none !important;
-            border: none !important;
-            padding: 0 !important;
-            background: white !important;
-          }
-          .resume-container > * {
-            page-break-inside: avoid;
-            margin-bottom: 10mm;
+            width: 100% !important;
           }
         }
       `}</style>
