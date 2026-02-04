@@ -246,19 +246,18 @@ export default async function Resume() {
                 </a>
               </p>
               <ul className="list-disc list-outside space-y-1 ml-5">
-                <li className="text-gray-700">Made with {project.language}.</li>
                 <li className="text-gray-700">
-                  It currently has {project.stargazers_count} stargazers.
-                </li>
-                <Atom.Visibility state={!!project.homepage}>
-                  <li className="text-gray-700">
-                    <span>Hosted on </span>
+                  <span>Built with {project.language}. </span>
+                  <span>Currently has {project.stargazers_count} </span>
+                  <span>stargazer{project.stargazers_count > 1 && "s"}.</span>
+                  <Atom.Visibility state={!!project.homepage}>
+                    <span> Live at </span>
                     <a href={project.homepage} target="_blank">
                       {project.homepage}
                     </a>
                     <span>.</span>
-                  </li>
-                </Atom.Visibility>
+                  </Atom.Visibility>
+                </li>
                 <li className="text-gray-700">{project.description}</li>
               </ul>
             </li>
