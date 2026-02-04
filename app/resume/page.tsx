@@ -1,4 +1,5 @@
 import Template from "@template";
+import type { Metadata } from "next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
@@ -8,6 +9,10 @@ import projects from "../../data/projects.json";
 import awards from "../../data/awards.json";
 import gems from "../../data/gems.json";
 import contributions from "../../data/contributions.json";
+
+export const metadata: Metadata = {
+  title: "Bos Eriko Reyes' Resume",
+};
 
 interface EntryProps {
   data: typeof experience;
