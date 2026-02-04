@@ -86,7 +86,7 @@ export default function Resume() {
         <div className="flex items-center text-sm text-gray-700">
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
-            <span>bos@eriko.ph</span>
+            <span>resume@boseriko.com</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
