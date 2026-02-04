@@ -15,8 +15,22 @@ export const metadata: Metadata = {
   title: "Bos Eriko Reyes' Resume",
 };
 
+interface EntryDate {
+  start: number;
+  end: number | null;
+}
+
+interface EntryItem {
+  position: string;
+  company: string;
+  date: EntryDate;
+  location: string;
+  active: boolean;
+  responsibilities: string[];
+}
+
 interface EntryProps {
-  data: typeof experience;
+  data: EntryItem[];
   title: string;
   icon?: React.ReactNode;
 }
@@ -46,7 +60,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
                     {new Intl.DateTimeFormat("en-US", {
                       month: "short",
                       year: "numeric",
-                    }).format(new Date(entry.date.end))}
+                    }).format(new Date(entry.date.end as number))}
                   </Atom.Visibility>
                 </Atom.Visibility>
               </span>
