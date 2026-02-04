@@ -240,7 +240,7 @@ export default async function Resume() {
                 </span>
               </div>
               <p className="text-gray-600 mb-2 flex gap-1">
-                <span>GitHub:</span>
+                <span className="font-bold">GitHub:</span>
                 <a href={project.html_url} target="_blank">
                   {project.full_name}
                 </a>
