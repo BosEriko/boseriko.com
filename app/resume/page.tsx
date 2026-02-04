@@ -76,6 +76,7 @@ interface Project {
   language: string;
   description: string;
   html_url: string;
+  homepage: string;
   updated_at: string | Date;
 }
 
@@ -239,16 +240,28 @@ export default async function Resume() {
                 </span>
               </div>
               <p className="text-gray-600 mb-2 flex gap-1">
-                <span>Created</span>
-                <span>with</span>
-                <span className="font-bold">{project.language}</span>
-                <span>at</span>
+                <span>GitHub:</span>
                 <a href={project.html_url} target="_blank">
                   {project.full_name}
                 </a>
               </p>
               <ul className="list-disc list-inside space-y-1">
-                <li className="text-gray-700">{project.description}</li>
+                <li className="text-gray-700">
+                  <span className="font-bold">Description: </span>
+                  <span>{project.description}</span>
+                </li>
+                <li className="text-gray-700">
+                  <span className="font-bold">Language: </span>
+                  <span>{project.language}</span>
+                </li>
+                <li className="text-gray-700">
+                  <span className="font-bold">Website: </span>
+                  <span>
+                    <a href={project.homepage} target="_blank">
+                      {project.homepage}
+                    </a>
+                  </span>
+                </li>
               </ul>
             </li>
           ))}
