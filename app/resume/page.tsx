@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   title: "Bos Eriko Reyes' Resume",
 };
 
+type TopicCount = Record<string, number>;
+
 interface EntryDate {
   start: number;
   end: number | null;
@@ -88,7 +90,14 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   );
 };
 
-export default function Resume() {
+export default async function Resume() {
+  const topics = await fetch(
+    "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topic-count.json",
+    {
+      next: { revalidate: 86400 },
+    },
+  ).then((res) => res.json());
+
   const formatFullDate = (date: Date) =>
     new Intl.DateTimeFormat("en-US", {
       month: "long",
@@ -104,7 +113,7 @@ export default function Resume() {
         <p className="text-gray-600 mb-5">
           Full Stack Developer & Software Engineer
         </p>
-        <div className="flex items-center text-sm text-gray-700">
+        <div className="flex items-center text-sm text-gray-700 mb-5">
           <div className="flex items-center gap-2 flex-1">
             <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
             <span>resume@boseriko.com</span>
@@ -117,6 +126,16 @@ export default function Resume() {
             <FontAwesomeIcon icon={faLinkedin} className="h-4 w-4" />
             <span>linkedin.boseriko.com</span>
           </div>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {Object.entries(topics).map(([topic]) => (
+            <div
+              key={topic}
+              className="rounded border border-gray-300 text-gray-500 px-3 py-1 text-xs font-medium uppercase"
+            >
+              {topic}
+            </div>
+          ))}
         </div>
       </div>
 
