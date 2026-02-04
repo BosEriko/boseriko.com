@@ -251,7 +251,11 @@ export default async function Resume() {
                   <span>Currently has {project.stargazers_count} </span>
                   <span>stargazer{project.stargazers_count > 1 && "s"}.</span>
                   <Atom.Visibility state={!!project.homepage}>
-                    <span> Live at {project.homepage}.</span>
+                    <span> Live at </span>
+                    <a href={project.homepage} target="_blank">
+                      {project.homepage}
+                    </a>
+                    <span>.</span>
                   </Atom.Visibility>
                 </li>
                 <li className="text-gray-700">{project.description}</li>
