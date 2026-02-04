@@ -7,7 +7,7 @@ interface DefaultProps {
 
 const Default: React.FC<DefaultProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#f8f1e3]">
+    <div className="flex flex-col min-h-screen">
       <Organism.Header />
       <div className="flex-1">{children}</div>
       <Organism.Footer />
