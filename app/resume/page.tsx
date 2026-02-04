@@ -247,7 +247,9 @@ export default async function Resume() {
                   {project.full_name}
                 </a>
               </p>
-              <p>{project.description}</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li className="text-gray-700">{project.description}</li>
+              </ul>
             </li>
           ))}
         </ul>
