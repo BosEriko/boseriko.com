@@ -159,19 +159,19 @@ export default async function Resume() {
       {/* Header */}
       <div className="inline-table w-full mb-5">
         <h1 className="text-5xl font-bold mb-2">Bos Eriko Reyes</h1>
-        <p className="text-gray-600 mb-5">
+        <p className="text-gray-600 mb-3">
           Full Stack Developer & Software Engineer
         </p>
-        <div className="flex items-center text-sm text-gray-700 mb-5">
-          <div className="flex items-center gap-2 flex-1">
+        <div className="flex items-center text-sm text-gray-700 mb-4 gap-5">
+          <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
             <span>boseriko.com</span>
           </div>
-          <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
             <span>resume@boseriko.com</span>
           </div>
-          <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
             <span>github.com/BosEriko</span>
           </div>
