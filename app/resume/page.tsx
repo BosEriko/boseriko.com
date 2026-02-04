@@ -88,8 +88,6 @@ export default function Resume() {
         </div>
       </div>
 
-      <hr />
-
       {/* Objective */}
       <div className="my-10">
         <h4 className="text-2xl font-bold mb-5">🏁 Objective</h4>
@@ -102,16 +100,10 @@ export default function Resume() {
         </p>
       </div>
 
-      <hr />
-
       {/* Sections */}
       <ResumeSection data={experience} title="🔥 Experience" />
-      <hr />
       <ResumeSection data={projects} title="🧠 Personal Projects" />
-      <hr />
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
-
-      <hr />
 
       {/* Community Contributions */}
       <div className="my-10">
