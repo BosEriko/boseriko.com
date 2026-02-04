@@ -212,8 +212,6 @@ export default async function Resume() {
       <ResumeSection data={experience} title="🔥 Experience" />
 
       {/* Personal Projects */}
-      <div></div>
-
       <div className="mb-20">
         <ul className="space-y-6">
           {projects.items.map((project: Project, index: number) => (
