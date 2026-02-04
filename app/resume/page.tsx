@@ -14,7 +14,21 @@ import contributions from "../../data/contributions.json";
 
 import "devicon/devicon.min.css";
 
-type Topic = "javascript" | "typescript" | "ruby" | "elixir" | "php";
+type Topic =
+  | "javascript"
+  | "typescript"
+  | "ruby"
+  | "elixir"
+  | "php"
+  | "react"
+  | "nextjs"
+  | "nodejs"
+  | "rails"
+  | "graphql"
+  | "docker"
+  | "tailwind"
+  | "postgresql"
+  | "mysql";
 
 const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
   javascript: { deviconClass: "devicon-javascript-plain", bg: "bg-yellow-400" },
@@ -22,6 +36,15 @@ const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
   ruby: { deviconClass: "devicon-ruby-plain", bg: "bg-red-500" },
   elixir: { deviconClass: "devicon-elixir-plain", bg: "bg-purple-600" },
   php: { deviconClass: "devicon-php-plain", bg: "bg-blue-500" },
+  react: { deviconClass: "devicon-react-original", bg: "bg-cyan-400" },
+  nextjs: { deviconClass: "devicon-nextjs-original", bg: "bg-gray-900" },
+  nodejs: { deviconClass: "devicon-nodejs-plain", bg: "bg-green-600" },
+  rails: { deviconClass: "devicon-rails-plain", bg: "bg-red-600" },
+  graphql: { deviconClass: "devicon-graphql-plain", bg: "bg-pink-500" },
+  docker: { deviconClass: "devicon-docker-plain", bg: "bg-blue-400" },
+  tailwind: { deviconClass: "devicon-tailwindcss-plain", bg: "bg-teal-400" },
+  postgresql: { deviconClass: "devicon-postgresql-plain", bg: "bg-blue-800" },
+  mysql: { deviconClass: "devicon-mysql-plain", bg: "bg-blue-600" },
 };
 
 export const metadata: Metadata = {
