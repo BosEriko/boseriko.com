@@ -3,8 +3,8 @@ import Atom from "@atom";
 import type { Metadata } from "next";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import experience from "../../data/experience.json";
 import awards from "../../data/awards.json";
@@ -173,8 +173,8 @@ export default async function Resume() {
             <span>github.boseriko.com</span>
           </div>
           <div className="flex items-center gap-2 flex-1">
-            <FontAwesomeIcon icon={faLinkedin} className="h-4 w-4" />
-            <span>linkedin.boseriko.com</span>
+            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
+            <span>boseriko.com</span>
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
