@@ -17,11 +17,11 @@ interface EntryProps {
 
 const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   return (
-    <div className="mb-10">
-      <h4 className="text-3xl font-bold mb-5">{title}</h4>
+    <div className="mb-20">
       <ul className="space-y-6">
         {data.map((entry, index) => (
           <li key={index} className="inline-table w-full">
+            {index < 1 && <h4 className="text-3xl font-bold mb-5">{title}</h4>}
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xl font-semibold">{entry.position}</h3>
               <span className="text-xs text-gray-500">
@@ -89,7 +89,7 @@ export default function Resume() {
       </div>
 
       {/* Objective */}
-      <div className="mb-10">
+      <div className="mb-20">
         <h4 className="text-3xl font-bold mb-5">🏁 Objective</h4>
         <p className="text-justify">
           I am seeking employment with a company where I can use my skills and
@@ -106,7 +106,7 @@ export default function Resume() {
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
 
       {/* Community Contributions */}
-      <div>
+      <div className="inline-table w-full">
         <h4 className="text-3xl font-bold mb-5">📜 Community Contributions</h4>
         <div className="flex gap-3">
           <div className="flex-1">
