@@ -14,7 +14,6 @@ import contributions from "../../data/contributions.json";
 import "devicon/devicon.min.css";
 
 type Topic =
-  | "javascript"
   | "typescript"
   | "ruby"
   | "elixir"
@@ -30,7 +29,6 @@ type Topic =
   | "mysql";
 
 const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
-  javascript: { deviconClass: "devicon-javascript-plain", bg: "bg-yellow-400" },
   typescript: { deviconClass: "devicon-typescript-plain", bg: "bg-blue-600" },
   ruby: { deviconClass: "devicon-ruby-plain", bg: "bg-red-500" },
   elixir: { deviconClass: "devicon-elixir-plain", bg: "bg-purple-600" },
