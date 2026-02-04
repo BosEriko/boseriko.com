@@ -89,10 +89,17 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
 };
 
 export default function Resume() {
+  const formatFullDate = (date: Date) =>
+    new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      day: "2-digit",
+      year: "numeric",
+    }).format(date);
+
   return (
     <Template.Resume>
       {/* Header */}
-      <div className="mb-5">
+      <div className="inline-table w-full mb-5">
         <h1 className="text-5xl font-bold mb-2">Bos Eriko Reyes</h1>
         <p className="text-gray-600 mb-5">
           Full Stack Developer & Software Engineer
@@ -114,7 +121,7 @@ export default function Resume() {
       </div>
 
       {/* Objective */}
-      <div className="mb-20">
+      <div className="inline-table w-full mb-20">
         <h4 className="text-3xl font-bold mb-5">🏁 Objective</h4>
         <p className="text-justify">
           I am seeking employment with a company where I can use my skills and
@@ -131,7 +138,7 @@ export default function Resume() {
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
 
       {/* Community Contributions */}
-      <div className="inline-table w-full">
+      <div className="inline-table w-full mb-20">
         <h4 className="text-3xl font-bold mb-5">📜 Community Contributions</h4>
         <div className="flex gap-3">
           <div className="flex-1">
@@ -177,6 +184,11 @@ export default function Resume() {
             </ul>
           </div>
         </div>
+      </div>
+
+      {/* Last Update */}
+      <div className="text-xs text-center text-gray-400 italic">
+        Last Update: {formatFullDate(new Date())}
       </div>
     </Template.Resume>
   );
