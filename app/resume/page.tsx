@@ -34,7 +34,7 @@ const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
   elixir: { deviconClass: "devicon-elixir-plain", bg: "bg-purple-600" },
   php: { deviconClass: "devicon-php-plain", bg: "bg-blue-500" },
   react: { deviconClass: "devicon-react-original", bg: "bg-cyan-400" },
-  nextjs: { deviconClass: "devicon-nextjs-original", bg: "bg-gray-900" },
+  nextjs: { deviconClass: "devicon-nextjs-plain", bg: "bg-gray-900" },
   nodejs: { deviconClass: "devicon-nodejs-plain", bg: "bg-green-600" },
   rails: { deviconClass: "devicon-rails-plain", bg: "bg-red-600" },
   graphql: { deviconClass: "devicon-graphql-plain", bg: "bg-pink-500" },
