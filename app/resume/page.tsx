@@ -3,15 +3,8 @@ import Atom from "@atom";
 import type { Metadata } from "next";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import {
-  faGithub,
-  faLinkedin,
-  faJs,
-  faPhp,
-  faReact,
-} from "@fortawesome/free-brands-svg-icons";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import experience from "../../data/experience.json";
 import projects from "../../data/projects.json";
@@ -19,14 +12,16 @@ import awards from "../../data/awards.json";
 import gems from "../../data/gems.json";
 import contributions from "../../data/contributions.json";
 
+import "devicon/devicon.min.css";
+
 type Topic = "javascript" | "typescript" | "ruby" | "elixir" | "php";
 
-const topicData: Record<Topic, { icon: IconDefinition; bg: string }> = {
-  javascript: { icon: faJs, bg: "bg-yellow-400" },
-  typescript: { icon: faReact, bg: "bg-blue-600" },
-  ruby: { icon: faCircle, bg: "bg-red-500" },
-  elixir: { icon: faCircle, bg: "bg-purple-600" },
-  php: { icon: faPhp, bg: "bg-blue-500" },
+const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
+  javascript: { deviconClass: "devicon-javascript-plain", bg: "bg-yellow-400" },
+  typescript: { deviconClass: "devicon-typescript-plain", bg: "bg-blue-600" },
+  ruby: { deviconClass: "devicon-ruby-plain", bg: "bg-red-500" },
+  elixir: { deviconClass: "devicon-elixir-plain", bg: "bg-purple-600" },
+  php: { deviconClass: "devicon-php-plain", bg: "bg-blue-500" },
 };
 
 export const metadata: Metadata = {
@@ -147,16 +142,20 @@ export default async function Resume() {
         </div>
         <div className="flex flex-wrap gap-2">
           {Object.entries(topics).map(([topic]) => {
-            const { icon, bg } = topicData[topic] || {};
+            const { deviconClass, bg } = topicData[topic as Topic] || {};
             return (
               <div
                 key={topic}
-                className={`text-white flex items-center gap-1 rounded px-3 py-1 text-xs font-medium uppercase ${
-                  bg ? bg : "bg-white"
+                className={`text-white flex items-center gap-2 rounded px-3 py-1 text-xs font-medium uppercase ${
+                  bg || "bg-gray-300"
                 }`}
               >
-                {icon && <FontAwesomeIcon icon={icon} className={`h-3 w-3`} />}
-                {topic}
+                <div>
+                  {deviconClass && (
+                    <i className={`${deviconClass} h-3 w-3`}></i>
+                  )}
+                </div>
+                <div>{topic}</div>
               </div>
             );
           })}
