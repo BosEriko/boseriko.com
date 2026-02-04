@@ -1,4 +1,5 @@
 import Template from "@template";
+import Atom from "@atom";
 import type { Metadata } from "next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -30,19 +31,24 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xl font-semibold">{entry.position}</h3>
               <span className="text-xs text-gray-500">
-                {entry.date?.start
-                  ? new Intl.DateTimeFormat("en-US", {
-                      month: "short",
-                      year: "numeric",
-                    }).format(new Date(entry.date.start))
-                  : "N/A"}{" "}
-                -{" "}
-                {!entry.date?.end || entry.active
-                  ? "Present"
-                  : new Intl.DateTimeFormat("en-US", {
+                <Atom.Visibility state={!!entry.date?.start}>
+                  {new Intl.DateTimeFormat("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  }).format(new Date(entry.date.start))}
+                </Atom.Visibility>
+                <Atom.Visibility state={!!(entry.date?.end || entry.active)}>
+                  <span> - </span>
+                  <Atom.Visibility state={entry.active}>
+                    Present
+                  </Atom.Visibility>
+                  <Atom.Visibility state={!entry.active}>
+                    {new Intl.DateTimeFormat("en-US", {
                       month: "short",
                       year: "numeric",
                     }).format(new Date(entry.date.end))}
+                  </Atom.Visibility>
+                </Atom.Visibility>
               </span>
             </div>
             <p className="text-gray-600 mb-2 flex gap-1">
