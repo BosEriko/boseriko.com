@@ -247,10 +247,6 @@ export default async function Resume() {
               </p>
               <ul className="list-disc list-inside space-y-1">
                 <li className="text-gray-700">
-                  <span className="font-bold">Description: </span>
-                  <span>{project.description}</span>
-                </li>
-                <li className="text-gray-700">
                   <span className="font-bold">Language: </span>
                   <span>{project.language}</span>
                 </li>
@@ -261,6 +257,10 @@ export default async function Resume() {
                       {project.homepage}
                     </a>
                   </span>
+                </li>
+                <li className="text-gray-700">
+                  <span className="font-bold">Description: </span>
+                  <span>{project.description}</span>
                 </li>
               </ul>
             </li>
