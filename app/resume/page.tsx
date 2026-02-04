@@ -72,6 +72,8 @@ interface EntryProps {
 
 interface Project {
   name: string;
+  full_name: string;
+  language: string;
   description: string;
   html_url: string;
   updated_at: string | Date;
@@ -237,7 +239,13 @@ export default async function Resume() {
                 </span>
               </div>
               <p className="text-gray-600 mb-2 flex gap-1">
-                {project.html_url}
+                <span>Created</span>
+                <span>with</span>
+                <span className="font-bold">{project.language}</span>
+                <span>at</span>
+                <a href={project.html_url} target="_blank">
+                  {project.full_name}
+                </a>
               </p>
               <p>{project.description}</p>
             </li>
