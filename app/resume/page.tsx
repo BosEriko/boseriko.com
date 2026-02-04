@@ -45,7 +45,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
               {entry.location && (
                 <>
                   <span>at</span>
-                  <span className="underline">{entry.location}</span>
+                  <span>{entry.location}</span>
                 </>
               )}
             </p>
@@ -116,7 +116,7 @@ export default function Resume() {
                 <li key={index}>
                   <a
                     href={gem.link}
-                    className="font-bold text-blue-800 underline"
+                    className="font-bold text-blue-800"
                     target="_blank"
                   >
                     {gem.name}
@@ -134,7 +134,7 @@ export default function Resume() {
                 <li key={index}>
                   <a
                     href={contribution.link}
-                    className="font-bold text-blue-800 underline"
+                    className="font-bold text-blue-800"
                     target="_blank"
                   >
                     {contribution.name}
