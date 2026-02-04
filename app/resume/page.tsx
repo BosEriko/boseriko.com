@@ -77,6 +77,7 @@ interface Project {
   description: string;
   html_url: string;
   homepage: string;
+  stargazers_count: number;
   updated_at: string | Date;
 }
 
@@ -240,28 +241,27 @@ export default async function Resume() {
                 </span>
               </div>
               <p className="text-gray-600 mb-2 flex gap-1">
-                <span className="font-bold">GitHub:</span>
+                <span className="font-bold">GitHub</span>
+                <span>at</span>
                 <a href={project.html_url} target="_blank">
                   {project.full_name}
                 </a>
               </p>
               <ul className="list-disc list-outside space-y-1 ml-5">
+                <li className="text-gray-700">Made with {project.language}.</li>
                 <li className="text-gray-700">
-                  <span className="font-bold">Language: </span>
-                  <span>{project.language}</span>
+                  It currently has {project.stargazers_count} stargazers.
                 </li>
-                <li className="text-gray-700">
-                  <span className="font-bold">Website: </span>
-                  <span>
+                <Atom.Visibility state={!!project.homepage}>
+                  <li className="text-gray-700">
+                    <span>Hosted on </span>
                     <a href={project.homepage} target="_blank">
                       {project.homepage}
                     </a>
-                  </span>
-                </li>
-                <li className="text-gray-700">
-                  <span className="font-bold">Description: </span>
-                  <span>{project.description}</span>
-                </li>
+                    <span>.</span>
+                  </li>
+                </Atom.Visibility>
+                <li className="text-gray-700">{project.description}</li>
               </ul>
             </li>
           ))}
