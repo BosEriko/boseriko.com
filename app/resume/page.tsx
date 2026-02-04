@@ -17,14 +17,14 @@ interface EntryProps {
 
 const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   return (
-    <div className="my-10">
-      <h4 className="text-2xl font-bold mb-5">{title}</h4>
+    <div className="mb-10">
+      <h4 className="text-3xl font-bold mb-5">{title}</h4>
       <ul className="space-y-6">
         {data.map((entry, index) => (
           <li key={index} className="inline-table w-full">
             <div className="flex justify-between items-center mb-2">
-              <h3 className="text-2xl font-semibold">{entry.position}</h3>
-              <span className="text-sm text-gray-500">
+              <h3 className="text-xl font-semibold">{entry.position}</h3>
+              <span className="text-xs text-gray-500">
                 {entry.date?.start
                   ? new Intl.DateTimeFormat("en-US", {
                       month: "short",
@@ -67,8 +67,8 @@ export default function Resume() {
   return (
     <Template.Resume>
       {/* Header */}
-      <div className="mb-10">
-        <h1 className="text-4xl font-bold mb-2">Bos Eriko Reyes</h1>
+      <div className="mb-5">
+        <h1 className="text-5xl font-bold mb-2">Bos Eriko Reyes</h1>
         <p className="text-gray-600 mb-5">
           Full Stack Developer & Software Engineer
         </p>
@@ -89,8 +89,8 @@ export default function Resume() {
       </div>
 
       {/* Objective */}
-      <div className="my-10">
-        <h4 className="text-2xl font-bold mb-5">🏁 Objective</h4>
+      <div className="mb-10">
+        <h4 className="text-3xl font-bold mb-5">🏁 Objective</h4>
         <p className="text-justify">
           I am seeking employment with a company where I can use my skills and
           also grow as a person. I want to work in an environment where I can
@@ -106,8 +106,8 @@ export default function Resume() {
       <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
 
       {/* Community Contributions */}
-      <div className="my-10">
-        <h4 className="text-2xl font-bold mb-5">📜 Community Contributions</h4>
+      <div>
+        <h4 className="text-3xl font-bold mb-5">📜 Community Contributions</h4>
         <div className="flex gap-3">
           <div className="flex-1">
             <h4 className="text-xl font-bold mb-2">Published Ruby Gems</h4>
