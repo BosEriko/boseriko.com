@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 
 import * as Tooltip from "@radix-ui/react-tooltip";
@@ -14,6 +14,7 @@ import {
 
 const Navigation = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const items = [
@@ -70,23 +71,26 @@ const Navigation = () => {
       )}
 
       <ul className="hidden md:flex md:items-center">
-        {items.map((item) => (
-          <li key={item.path}>
-            <button
-              className="px-7 py-5 hover:bg-[#f7b43d] cursor-pointer hover:text-gray-700 border-l border-gray-200 transition-all"
-              onClick={() => router.push(item.path)}
-            >
-              {item.label}
-            </button>
-          </li>
-        ))}
+        {items.map((item) => {
+          const isActive = pathname === item.path;
+          return (
+            <li key={item.path} className="border-l border-gray-200">
+              <button
+                className={`${isActive ? "border-b-[#f7b43d]" : "border-b-white"} px-7 py-5 hover:bg-[#f7b43d] cursor-pointer hover:text-gray-700 transition-all border-b-4 hover:border-b-[#f7b43d]`}
+                onClick={() => router.push(item.path)}
+              >
+                {item.label}
+              </button>
+            </li>
+          );
+        })}
 
-        <li>
+        <li className=" border-x border-gray-200">
           <Tooltip.Provider delayDuration={0}>
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
                 <button
-                  className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
+                  className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer transition-all border-b-5 border-b-white hover:border-b-[#f7b43d]"
                   onClick={() => window.open("/resume", "_blank")}
                 >
                   <FontAwesomeIcon icon={faFileLines} className="text-lg" />
