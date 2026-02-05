@@ -21,11 +21,9 @@ const components: Components = {
       </div>
     </div>
   ),
-  p: ({ children }) => {
-    return (
-      <div className="my-4 text-base leading-7 text-gray-800">{children}</div>
-    );
-  },
+  p: ({ children }) => (
+    <div className="my-4 text-base leading-7 text-gray-800">{children}</div>
+  ),
   h1: ({ children }) => (
     <h1 className="text-4xl font-bold my-4 text-gray-900">{children}</h1>
   ),
@@ -38,6 +36,16 @@ const components: Components = {
   h4: ({ children }) => (
     <h4 className="text-xl font-medium my-1 text-gray-600">{children}</h4>
   ),
+  div: ({ className, children, ...props }) => {
+    if (className?.includes("highlight__panel")) {
+      return null;
+    }
+    return (
+      <div className={className} {...props}>
+        {children}
+      </div>
+    );
+  },
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
