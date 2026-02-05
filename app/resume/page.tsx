@@ -254,7 +254,13 @@ export default async function Resume() {
                     <span>.</span>
                   </Atom.Visibility>
                 </li>
-                <li className="text-gray-700">{project.description}</li>
+                <Atom.Visibility state={!!project.description}>
+                  {project.description.split(". ").map((item, index) => (
+                    <li className="text-gray-700" key={index}>
+                      <span>{item.endsWith(".") ? item : item + "."}</span>
+                    </li>
+                  ))}
+                </Atom.Visibility>
               </ul>
             </li>
           ))}
