@@ -90,6 +90,15 @@ export default async function BlogPost({ params }: PageProps) {
           <div className="border-b border-x rounded-b-lg rounded-x-lg bg-white border-gray-200">
             <Atom.Markdown content={post.body_html} />
           </div>
+
+          <div className="mt-5 text-center">
+            <a
+              href="/blog"
+              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 inline-block"
+            >
+              Back to Blogs
+            </a>
+          </div>
         </div>
       </Template.Default>
     );
