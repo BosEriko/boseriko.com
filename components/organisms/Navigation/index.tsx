@@ -76,7 +76,7 @@ const Navigation = () => {
           return (
             <li key={item.path} className="border-l border-gray-200">
               <button
-                className={`${isActive ? "border-b-[#f7b43d]" : "border-b-white"} px-7 py-5 hover:bg-[#f7b43d] cursor-pointer hover:text-gray-700 transition-all border-b-4 hover:border-b-[#f7b43d]`}
+                className={`${isActive ? "border-t-[#f7b43d]" : "border-t-white"} px-7 py-4 hover:bg-[#f7b43d] cursor-pointer hover:text-gray-700 transition-all border-y-5 border-b-white hover:border-y-[#f7b43d]`}
                 onClick={() => router.push(item.path)}
               >
                 {item.label}
@@ -90,7 +90,7 @@ const Navigation = () => {
             <Tooltip.Root>
               <Tooltip.Trigger asChild>
                 <button
-                  className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer transition-all border-b-5 border-b-white hover:border-b-[#f7b43d]"
+                  className="px-7 py-4 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer transition-all border-y-5 border-y-white hover:border-y-[#f7b43d]"
                   onClick={() => window.open("/resume", "_blank")}
                 >
                   <FontAwesomeIcon icon={faFileLines} className="text-lg" />
