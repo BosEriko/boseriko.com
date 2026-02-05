@@ -75,7 +75,7 @@ export default function Blog() {
           <p>No blog posts found.</p>
         ) : (
           <>
-            <ul className="space-y-6">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {posts.map((post) => {
                 const cover = post.cover_image || post.social_image;
 
