@@ -141,7 +141,7 @@ export default async function Resume() {
   ).then((res) => res.json());
 
   const projects = await fetch(
-    "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=updated&order=desc&page=1&per_page=5",
+    "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=stars&order=desc&page=1&per_page=5",
     {
       next: { revalidate: 86400 },
     },
