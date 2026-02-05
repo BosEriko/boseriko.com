@@ -75,30 +75,30 @@ export default function Blog() {
           <p>No blog posts found.</p>
         ) : (
           <>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
               {posts.map((post) => {
                 const cover = post.cover_image || post.social_image;
 
                 return (
-                  <li key={post.slug} className="border rounded-lg p-4">
+                  <li
+                    key={post.slug}
+                    className="
+                      border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
+                      transition-all duration-300 ease-in-out
+                      hover:border-[#f7b43d] hover:scale-105
+                    "
+                    onClick={() => router.push(`/blog/${post.slug}`)}
+                  >
                     {cover && (
                       <img
                         src={cover}
                         alt={post.title}
-                        className="w-full h-48 object-cover rounded mb-3"
+                        className="w-full h-48 object-cover"
                         loading="lazy"
                       />
                     )}
 
-                    <h2 className="text-xl font-semibold mb-1">{post.title}</h2>
-
-                    <p className="text-gray-600 mb-2">{post.description}</p>
-
-                    <div className="text-sm text-gray-500 mb-3">
-                      {new Date(post.published_at).toLocaleDateString()}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2 m-3">
                       {(post.tag_list || []).map((tag) => (
                         <span
                           key={tag}
@@ -109,22 +109,38 @@ export default function Blog() {
                       ))}
                     </div>
 
-                    <button
-                      onClick={() => router.push(`/blog/${post.slug}`)}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Read more →
-                    </button>
+                    <h2 className="text-xl font-semibold mx-3">{post.title}</h2>
+
+                    <div className="text-sm text-gray-500 mb-3 mx-3">
+                      {new Date(post.published_at).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+
+                    <p className="text-gray-600 mb-3 mx-3">
+                      {post.description}
+                    </p>
                   </li>
                 );
               })}
             </ul>
 
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8 flex items-center justify-center gap-4">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="px-3 py-1 border rounded disabled:opacity-50"
+                className="
+                  border rounded-lg bg-white border-gray-200 cursor-pointer
+                  transition-all duration-300 ease-in-out
+                  px-3 py-2
+                  hover:border-[#f7b43d]
+                  disabled:cursor-not-allowed
+                  disabled:bg-gray-100
+                  disabled:border-gray-300
+                  disabled:text-gray-400
+                "
               >
                 Previous
               </button>
@@ -134,7 +150,16 @@ export default function Blog() {
               <button
                 onClick={() => setPage((p) => p + 1)}
                 disabled={!hasNext}
-                className="px-3 py-1 border rounded disabled:opacity-50"
+                className="
+                  border rounded-lg bg-white border-gray-200 cursor-pointer
+                  transition-all duration-300 ease-in-out
+                  px-3 py-2
+                  hover:border-[#f7b43d]
+                  disabled:cursor-not-allowed
+                  disabled:bg-gray-100
+                  disabled:border-gray-300
+                  disabled:text-gray-400
+                "
               >
                 Next
               </button>
