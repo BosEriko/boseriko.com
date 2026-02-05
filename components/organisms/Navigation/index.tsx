@@ -54,7 +54,7 @@ const Navigation = () => {
           <button
             className="px-8 py-3 rounded-full bg-[#f7b43d] text-white text-2xl hover:bg-white hover:text-gray-700 transition"
             onClick={() => {
-              router.push("/resume");
+              () => window.open("/resume", "_blank");
               setOpen(false);
             }}
           >
