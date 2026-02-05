@@ -1,6 +1,6 @@
 "use client";
 
-import Organism from "@organism";
+import Navigation from "../Navigation";
 import { useRouter } from "next/navigation";
 import { Pixelify_Sans } from "next/font/google";
 
@@ -23,7 +23,7 @@ const Header = () => {
           </h2>
         </button>
         <div>
-          <Organism.Navigation />
+          <Navigation />
         </div>
       </div>
     </header>
