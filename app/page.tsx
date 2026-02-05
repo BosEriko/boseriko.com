@@ -1,5 +1,4 @@
 "use client";
-
 import Template from "@template";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";

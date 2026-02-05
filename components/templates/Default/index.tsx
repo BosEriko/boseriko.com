@@ -15,7 +15,7 @@ const Default: React.FC<DefaultProps> = ({ children }) => {
     <div className={`${roboto_condensed.className} flex flex-col min-h-screen`}>
       <Organism.Header />
       <div className="flex-1">
-        <div className="container mx-auto p-4">{children}</div>
+        <div className="container mx-auto px-4 py-10">{children}</div>
       </div>
       <Organism.Footer />
     </div>
