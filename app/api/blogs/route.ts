@@ -1,8 +1,15 @@
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(_req: NextRequest) {
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> },
+) {
+  const { searchParams } = new URL(req.url);
+  const page = searchParams.get("page") || "1";
+  const perPage = "10";
+
   const res = await fetch(
-    "https://api.github.com/repos/BosEriko/blog/contents",
+    `https://dev.to/api/articles?username=boseriko&page=${page}&per_page=${perPage}`,
     {
       next: {
         revalidate: 86400,
@@ -10,6 +17,14 @@ export async function GET(_req: NextRequest) {
     },
   );
 
+  if (!res.ok) {
+    return NextResponse.json(
+      { error: "Failed to fetch posts from dev.to" },
+      { status: res.status },
+    );
+  }
+
   const data = await res.json();
+
   return NextResponse.json(data);
 }

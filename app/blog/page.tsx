@@ -1,12 +1,21 @@
 "use client";
+
 import Template from "@template";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 type Post = {
-  name: string;
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  cover_image: string | null;
+  social_image: string;
+  published_at: string;
+  readable_publish_date: string;
+  tag_list: string[];
+  url: string;
   path: string;
-  html_url: string;
 };
 
 export default function Blog() {
@@ -20,33 +29,33 @@ export default function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("/api/blogs");
+        setLoading(true);
+
+        const res = await fetch(`/api/blogs?page=${page}`, {
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch blog posts");
+        }
+
         const data = await res.json();
-
-        const sortedPosts = (data || []).sort((a: Post, b: Post) =>
-          b.name.localeCompare(a.name),
-        );
-
-        setPosts(sortedPosts);
+        setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error(err);
+        setPosts([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, []);
-
-  const totalPages = Math.ceil(posts.length / perPage);
-  const start = (page - 1) * perPage;
-  const end = start + perPage;
-  const paginatedPosts = posts.slice(start, end);
+  }, [page]);
 
   return (
     <Template.Default>
-      <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <h1>My Blog</h1>
+      <div className="p-8 font-sans">
+        <h1 className="text-3xl font-bold mb-6">My Blog</h1>
 
         {loading ? (
           <p>Loading...</p>
@@ -54,44 +63,70 @@ export default function Blog() {
           <p>No blog posts found.</p>
         ) : (
           <>
-            <ul>
-              {paginatedPosts.map((post) => (
-                <li key={post.path} style={{ marginBottom: "1rem" }}>
-                  <button
-                    onClick={() => router.push(`/blog/${post.name}`)}
-                    style={{
-                      fontSize: "1rem",
-                      padding: "0.5rem 1rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {post.name.replace(/\.md$/, "")}
-                  </button>
-                </li>
-              ))}
+            <ul className="space-y-6">
+              {posts.map((post) => {
+                const cover = post.cover_image || post.social_image;
+
+                return (
+                  <li key={post.id} className="border rounded-lg p-4">
+                    {cover && (
+                      <img
+                        src={cover}
+                        alt={post.title}
+                        className="w-full h-48 object-cover rounded mb-3"
+                        loading="lazy"
+                      />
+                    )}
+
+                    <h2 className="text-xl font-semibold mb-1">{post.title}</h2>
+
+                    <p className="text-gray-600 mb-2">{post.description}</p>
+
+                    <div className="text-sm text-gray-500 mb-3">
+                      {new Date(post.published_at).toLocaleDateString()}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {(post.tag_list || []).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs bg-gray-100 px-2 py-1 rounded"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => router.push(`/blog/${post.slug}`)}
+                      className="text-blue-600 hover:underline"
+                    >
+                      Read more →
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
 
-            {totalPages > 1 && (
-              <div style={{ marginTop: "1rem" }}>
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  style={{ marginRight: "1rem" }}
-                >
-                  Previous
-                </button>
-                <span>
-                  Page {page} of {totalPages}
-                </span>
-                <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  style={{ marginLeft: "1rem" }}
-                >
-                  Next
-                </button>
-              </div>
-            )}
+            <div className="mt-8 flex items-center gap-4">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="px-3 py-1 border rounded disabled:opacity-50"
+              >
+                Previous
+              </button>
+
+              <span>Page {page}</span>
+
+              <button
+                onClick={() => setPage((p) => p + 1)}
+                disabled={posts.length < perPage}
+                className="px-3 py-1 border rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
           </>
         )}
       </div>
