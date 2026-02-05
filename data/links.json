@@ -1,21 +1,9 @@
 [
   {
-    "name": "steam",
-    "icon": "faSteam",
-    "url": "https://steamcommunity.com/id/BosEriko/",
-    "color": "#00adee"
-  },
-  {
-    "name": "facebook",
-    "icon": "faFacebook",
-    "url": "https://www.facebook.com/boseriko",
-    "color": "#1877f2"
-  },
-  {
-    "name": "twitch",
-    "icon": "faTwitch",
-    "url": "https://www.twitch.tv/boseriko",
-    "color": "#9146ff"
+    "name": "linkedin",
+    "icon": "faLinkedin",
+    "url": "https://www.linkedin.com/in/boseriko",
+    "color": "#0a66c2"
   },
   {
     "name": "youtube",
@@ -24,27 +12,39 @@
     "color": "#ff0000"
   },
   {
-    "name": "instagram",
-    "icon": "faInstagram",
-    "url": "https://www.instagram.com/boseriko",
-    "color": "#e1306c"
-  },
-  {
     "name": "tiktok",
     "icon": "faTiktok",
     "url": "https://www.tiktok.com/@boseriko",
     "color": "#010101"
   },
   {
-    "name": "x",
+    "name": "twitch",
+    "icon": "faTwitch",
+    "url": "https://www.twitch.tv/boseriko",
+    "color": "#9146ff"
+  },
+  {
+    "name": "Twitter",
     "icon": "faXTwitter",
     "url": "https://x.com/boseriko",
     "color": "#000000"
   },
   {
-    "name": "linkedin",
-    "icon": "faLinkedin",
-    "url": "https://www.linkedin.com/in/boseriko",
-    "color": "#0a66c2"
+    "name": "facebook",
+    "icon": "faFacebook",
+    "url": "https://www.facebook.com/boseriko",
+    "color": "#1877f2"
+  },
+  {
+    "name": "instagram",
+    "icon": "faInstagram",
+    "url": "https://www.instagram.com/boseriko",
+    "color": "#e1306c"
+  },
+  {
+    "name": "steam",
+    "icon": "faSteam",
+    "url": "https://steamcommunity.com/id/BosEriko/",
+    "color": "#00adee"
   }
 ]
