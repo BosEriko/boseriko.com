@@ -68,7 +68,7 @@ export default function Blog() {
                 const cover = post.cover_image || post.social_image;
 
                 return (
-                  <li key={post.id} className="border rounded-lg p-4">
+                  <li key={post.slug} className="border rounded-lg p-4">
                     {cover && (
                       <img
                         src={cover}
