@@ -1,5 +1,6 @@
 import Template from "@template";
 import Atom from "@atom";
+import Head from "next/head";
 
 type Post = {
   id: number;
@@ -35,6 +36,21 @@ export default async function BlogPost({ params }: PageProps) {
 
     return (
       <Template.Default>
+        <Head>
+          <title>{post.title}</title>
+          <meta name="description" content={post.description} />
+          <link rel="canonical" href={post.url} />
+          <meta property="og:title" content={post.title} />
+          <meta property="og:description" content={post.description} />
+          <meta property="og:image" content={cover || ""} />
+          <meta property="og:url" content={post.url} />
+          <meta property="og:type" content="article" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={post.title} />
+          <meta name="twitter:description" content={post.description} />
+          <meta name="twitter:image" content={cover || ""} />
+        </Head>
+
         <div className="p-8 font-sans max-w-3xl mx-auto">
           <div className="flex flex-wrap gap-2 justify-center mb-3">
             {(post.tags || []).map((tag) => (
