@@ -7,6 +7,7 @@ import {
   faInstagram,
   faTiktok,
   faXTwitter,
+  faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
 const socialLinks = [
@@ -33,6 +34,11 @@ const socialLinks = [
   },
   { name: "tiktok", icon: faTiktok, url: "https://www.tiktok.com/@boseriko" },
   { name: "x", icon: faXTwitter, url: "https://x.com/boseriko" },
+  {
+    name: "linkedin",
+    icon: faLinkedin,
+    url: "https://www.linkedin.com/in/boseriko",
+  },
 ];
 
 const Footer = () => {
