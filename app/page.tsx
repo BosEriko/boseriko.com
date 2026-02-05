@@ -16,9 +16,9 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 const PictureStack: React.FC<PictureStackProps> = ({ url }) => {
   return (
     <div className="relative flex items-center justify-center aspect-square w-60 lg:w-80 xl:w-125 group">
-      <div className="absolute rounded-md rotate-3 bg-[#f7b43d] w-full aspect-square opacity-70 transition-all duration-500 group-hover:rotate-10 group-hover:scale-105 shadow-md group-hover:shadow-lg" />
-      <div className="absolute rounded-md -rotate-2 bg-[#f7b43d] w-full aspect-square opacity-80 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-105 shadow-md group-hover:shadow-lg" />
-      <div className="absolute rounded-md rotate-1 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden transition-all duration-500 group-hover:rotate-3 group-hover:scale-110 shadow-md group-hover:shadow-lg">
+      <div className="absolute rounded-md rotate-10 bg-[#f7b43d] w-full aspect-square opacity-70 transition-all duration-500 group-hover:rotate-3 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md" />
+      <div className="absolute rounded-md -rotate-6 bg-[#f7b43d] w-full aspect-square opacity-80 transition-all duration-500 group-hover:-rotate-2 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md" />
+      <div className="absolute rounded-md rotate-3 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden transition-all duration-500 group-hover:rotate-1 scale-110 group-hover:scale-100 shadow-lg group-hover:shadow-md">
         <img
           src={url}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
