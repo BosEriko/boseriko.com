@@ -1,6 +1,8 @@
 import Template from "@template";
 import Atom from "@atom";
 import Head from "next/head";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 type Post = {
   id: number;
@@ -89,6 +91,32 @@ export default async function BlogPost({ params }: PageProps) {
 
           <div className="border-b border-x rounded-b-lg rounded-x-lg bg-white border-gray-200">
             <Atom.Markdown content={post.body_html} />
+            <div className="pb-5 px-5 flex gap-4">
+              <a
+                href={`${post.url}#comments`}
+                target="_blank"
+                className="flex gap-2 text-gray-700 text-sm items-center bg-gray-100 px-3 py-2 rounded cursor-pointer hover:bg-[#f7b43d] transition-all group"
+              >
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className="text-[#f7b43d] group-hover:text-gray-700"
+                />
+                <span>{post.public_reactions_count}</span>
+                <span>Reaction{post.public_reactions_count > 1 && "s"}</span>
+              </a>
+              <a
+                href={`${post.url}#comments`}
+                target="_blank"
+                className="flex gap-2 text-gray-700 text-sm items-center bg-gray-100 px-3 py-2 rounded cursor-pointer hover:bg-[#f7b43d] transition-all group"
+              >
+                <FontAwesomeIcon
+                  icon={faComment}
+                  className="text-[#f7b43d] group-hover:text-gray-700"
+                />
+                <span>{post.comments_count}</span>
+                <span>Comment{post.comments_count > 1 && "s"}</span>
+              </a>
+            </div>
           </div>
 
           <div className="mt-5 flex justify-between">
