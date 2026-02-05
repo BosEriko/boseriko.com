@@ -227,14 +227,10 @@ export default async function Resume() {
                 <h3 className="text-xl font-semibold">{project.name}</h3>
                 <span className="text-xs text-gray-500">
                   <Atom.Visibility state={!!project.updated_at}>
-                    <span>Last Update: </span>
-                    <span>
-                      {new Intl.DateTimeFormat("en-US", {
-                        month: "long",
-                        day: "2-digit",
-                        year: "numeric",
-                      }).format(new Date(project.updated_at))}
-                    </span>
+                    {new Intl.DateTimeFormat("en-US", {
+                      month: "short",
+                      year: "numeric",
+                    }).format(new Date(project.updated_at))}
                   </Atom.Visibility>
                 </span>
               </div>
