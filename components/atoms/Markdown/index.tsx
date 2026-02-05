@@ -40,6 +40,9 @@ const components: Components = {
   h4: ({ children }) => (
     <h4 className="text-xl font-medium my-1 text-gray-600">{children}</h4>
   ),
+  h5: ({ children }) => (
+    <h5 className="text-xl font-medium my-1 text-gray-600">{children}</h5>
+  ),
   div: ({ className, children, ...props }) => {
     if (className?.includes("highlight__panel")) return null;
     return (
