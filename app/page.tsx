@@ -16,9 +16,9 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 const PictureStack: React.FC<PictureStackProps> = ({ url }) => {
   return (
     <div className="relative flex items-center justify-center aspect-square w-60 lg:w-80 xl:w-125 group">
-      <div className="absolute rounded-md rotate-3 bg-[#f7b43d] w-full aspect-square opacity-70 transition-transform duration-500 group-hover:rotate-10 group-hover:scale-105" />
-      <div className="absolute rounded-md -rotate-2 bg-[#f7b43d] w-full aspect-square opacity-80 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105" />
-      <div className="absolute rounded-md rotate-1 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden transition-transform duration-500 group-hover:rotate-3 group-hover:scale-110">
+      <div className="absolute rounded-md rotate-3 bg-[#f7b43d] w-full aspect-square opacity-70 transition-all duration-500 group-hover:rotate-10 group-hover:scale-105 shadow-md group-hover:shadow-lg" />
+      <div className="absolute rounded-md -rotate-2 bg-[#f7b43d] w-full aspect-square opacity-80 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-105 shadow-md group-hover:shadow-lg" />
+      <div className="absolute rounded-md rotate-1 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden transition-all duration-500 group-hover:rotate-3 group-hover:scale-110 shadow-md group-hover:shadow-lg">
         <img
           src={url}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -58,7 +58,7 @@ export default function Home() {
                 key={topic}
                 onClick={() => router.push(`/topic/${topic}`)}
                 className="rounded-full pl-3 pr-1 py-1 text-xs font-medium transition-all duration-300 ease-out uppercase flex gap-3 items-center cursor-pointer
-                           bg-yellow-200 border border-yellow-300 text-yellow-600 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                           bg-yellow-200 border border-yellow-300 text-yellow-600 hover:-translate-y-1 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
               >
                 <span>{topic}</span>
                 <span className="w-5 h-5 rounded-full flex items-center justify-center bg-yellow-500 text-yellow-200 text-xs">
@@ -71,14 +71,14 @@ export default function Home() {
             <button
               onClick={() => window.open("/resume", "_blank")}
               className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-[#f7b43d] text-gray-700 font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
             >
               Resume
             </button>
             <button
               onClick={() => router.push("/topic/product")}
               className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 hover:shadow-md cursor-pointer"
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
             >
               View Products
             </button>
