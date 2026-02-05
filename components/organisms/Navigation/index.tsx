@@ -3,8 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -83,14 +82,39 @@ const Navigation = () => {
         ))}
 
         <li>
-          <Tippy content="Resume">
-            <button
-              className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
-              onClick={() => window.open("/resume", "_blank")}
-            >
-              <FontAwesomeIcon icon={faFileLines} className="text-lg" />
-            </button>
-          </Tippy>
+          <Tooltip.Provider delayDuration={0}>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <button
+                  className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
+                  onClick={() => window.open("/resume", "_blank")}
+                >
+                  <FontAwesomeIcon icon={faFileLines} className="text-lg" />
+                </button>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content
+                  side="top"
+                  sideOffset={8}
+                  className="
+                    z-50
+                    rounded-md
+                    bg-[#333]
+                    px-3 py-1.5
+                    text-xs font-medium text-white
+                    shadow-lg
+                    animate-in fade-in zoom-in-95
+                    data-[state=closed]:animate-out
+                    data-[state=closed]:fade-out
+                    data-[state=closed]:zoom-out-95
+                  "
+                >
+                  Resume
+                  <Tooltip.Arrow className="fill-[#333]" />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </Tooltip.Provider>
         </li>
       </ul>
     </nav>
