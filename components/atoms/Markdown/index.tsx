@@ -3,6 +3,8 @@ import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface MarkdownProps {
   content: string;
@@ -36,17 +38,44 @@ const components: Components = {
   h4: ({ children }) => (
     <h4 className="text-xl font-medium my-1 text-gray-600">{children}</h4>
   ),
-  h5: ({ children }) => (
-    <h5 className="text-xl font-medium my-1 text-gray-600">{children}</h5>
-  ),
   div: ({ className, children, ...props }) => {
-    if (className?.includes("highlight__panel")) {
-      return null;
-    }
+    if (className?.includes("highlight__panel")) return null;
     return (
       <div className={className} {...props}>
         {children}
       </div>
+    );
+  },
+  pre: ({ children }) => {
+    const codeElement = React.Children.only(
+      children,
+    ) as React.ReactElement<any>;
+    const className: string = codeElement.props.className || "";
+    const match = /language-(\w+)/.exec(className);
+
+    return match ? (
+      <SyntaxHighlighter
+        style={oneDark}
+        language={match[1]}
+        PreTag="div"
+        className="my-4 rounded-lg overflow-x-auto"
+      >
+        {String(codeElement.props.children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <pre className="bg-gray-100 text-red-500 px-3 py-2 rounded my-4 overflow-x-auto">
+        {codeElement.props.children}
+      </pre>
+    );
+  },
+  code: ({ children, className, ...props }) => {
+    return (
+      <code
+        {...props}
+        className="bg-gray-100 text-red-500 px-1 py-0.5 rounded text-sm font-mono"
+      >
+        {children}
+      </code>
     );
   },
 };
