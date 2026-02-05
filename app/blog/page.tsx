@@ -31,7 +31,7 @@ export default function Blog() {
       try {
         setLoading(true);
 
-        const res = await fetch(`/api/blogs?page=${page}`, {
+        const res = await fetch(`/api/blogs?page=${page}&per_page=${perPage}`, {
           cache: "no-store",
         });
 
