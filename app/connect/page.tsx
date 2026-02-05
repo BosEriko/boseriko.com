@@ -29,7 +29,7 @@ const socialLinks = socialLinksData.map((link) => ({
   icon: iconMap[link.icon as keyof typeof iconMap],
 }));
 
-export default function Links() {
+export default function Connect() {
   return (
     <Template.Default>
       <div className="text-center space-y-4">

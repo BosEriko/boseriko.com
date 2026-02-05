@@ -21,7 +21,7 @@ const Navigation = () => {
     { label: "Products", path: "/topic/product" },
     { label: "Projects", path: "/topic/project" },
     { label: "Blogs", path: "/blog" },
-    { label: "Links", path: "/link" },
+    { label: "Connect", path: "/connect" },
   ];
 
   return (
