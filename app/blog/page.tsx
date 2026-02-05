@@ -22,6 +22,7 @@ export default function Blog() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [hasNext, setHasNext] = useState(false);
   const router = useRouter();
 
   const perPage = 10;
@@ -40,7 +41,8 @@ export default function Blog() {
         }
 
         const data = await res.json();
-        setPosts(Array.isArray(data) ? data : []);
+        setPosts(Array.isArray(data.posts) ? data.posts : []);
+        setHasNext(data.hasNext);
       } catch (err) {
         console.error(err);
         setPosts([]);
@@ -121,7 +123,7 @@ export default function Blog() {
 
               <button
                 onClick={() => setPage((p) => p + 1)}
-                disabled={posts.length < perPage}
+                disabled={!hasNext}
                 className="px-3 py-1 border rounded disabled:opacity-50"
               >
                 Next
