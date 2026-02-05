@@ -43,8 +43,8 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="p-4 border-t border-gray-200">
-      <div className="container mx-auto flex justify-between items-center">
+    <footer className="py-4 border-t border-gray-200">
+      <div className="container mx-auto flex justify-between items-center px-4">
         <div>Bos Eriko Reyes &copy; {new Date().getFullYear()}</div>
         <div className="flex justify-center space-x-3">
           {socialLinks.map((social) => (
