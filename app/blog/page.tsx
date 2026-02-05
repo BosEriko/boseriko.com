@@ -25,7 +25,7 @@ export default function Blog() {
   const [hasNext, setHasNext] = useState(false);
   const router = useRouter();
 
-  const perPage = 10;
+  const perPage = 8;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -56,8 +56,18 @@ export default function Blog() {
 
   return (
     <Template.Default>
-      <div className="p-8 font-sans">
-        <h1 className="text-3xl font-bold mb-6">My Blog</h1>
+      <div className="text-center space-y-4 container mx-auto my-10 px-5">
+        <h1 className="font-bold text-4xl">Blog</h1>
+        <h4 className="text-gray-500">
+          <span>I write stuff on </span>
+          <a
+            href="https://dev.to/boseriko"
+            target="_blank"
+            className="bg-yellow-300 texty-gray-700 px-1"
+          >
+            dev.to
+          </a>
+        </h4>
 
         {loading ? (
           <p>Loading...</p>
