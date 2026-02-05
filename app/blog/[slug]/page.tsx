@@ -77,7 +77,7 @@ export default async function BlogPost({ params }: PageProps) {
 
           <h1 className="text-3xl font-bold text-center mb-10">{post.title}</h1>
 
-          <div className="rounded-t-lg bg-white border-t border-x border-gray-200 overflow-hidden">
+          <div className="rounded-t-lg bg-white border-t border-x border-gray-200 overflow-hidden -mb-5">
             {cover && (
               <img
                 src={cover}
