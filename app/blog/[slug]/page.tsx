@@ -14,7 +14,7 @@ type Post = {
   social_image?: string;
   published_at: string;
   readable_publish_date: string;
-  tag_list: string[];
+  tags: string[];
   body_markdown: string;
   url: string;
 };
@@ -87,7 +87,7 @@ export default function BlogPost() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {(post.tag_list || []).map((tag) => (
+          {(post.tags || []).map((tag) => (
             <span key={tag} className="text-xs bg-gray-100 px-2 py-1 rounded">
               #{tag}
             </span>
