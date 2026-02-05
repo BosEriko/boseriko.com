@@ -1,9 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: Promise<{ id: string }> },
-) {
+export async function GET(req: NextRequest, context: { params: {} }) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page") || "1";
   const perPage = "10";

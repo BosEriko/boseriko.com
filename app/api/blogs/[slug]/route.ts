@@ -8,7 +8,6 @@ export async function GET(
   const username = "boseriko";
 
   try {
-    console.log(`https://dev.to/api/articles/${username}/${slug}`);
     const res = await fetch(`https://dev.to/api/articles/${username}/${slug}`, {
       next: { revalidate: 86400 },
     });
