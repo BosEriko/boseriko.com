@@ -93,7 +93,7 @@ export default async function BlogPost({ params }: PageProps) {
             <Atom.Markdown content={post.body_html} />
             <div className="pb-5 px-5 flex gap-4">
               <a
-                href={`${post.url}#comments`}
+                href={`${post.url}`}
                 target="_blank"
                 className="flex gap-2 text-gray-700 text-sm items-center bg-gray-100 px-3 py-2 rounded cursor-pointer hover:bg-[#f7b43d] transition-all group"
               >

@@ -3,6 +3,8 @@
 import Template from "@template";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
 type Post = {
   id: number;
@@ -16,6 +18,8 @@ type Post = {
   tag_list: string[];
   url: string;
   path: string;
+  comments_count: number;
+  public_reactions_count: number;
 };
 
 export default function Blog() {
@@ -85,7 +89,7 @@ export default function Blog() {
                     className="
                       border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
                       transition-all duration-300 ease-in-out
-                      hover:border-[#f7b43d] hover:scale-105
+                      hover:border-[#f7b43d] hover:scale-105 relative
                     "
                     onClick={() => router.push(`/blog/${post.slug}`)}
                   >
@@ -119,9 +123,24 @@ export default function Blog() {
                       })}
                     </div>
 
-                    <p className="text-gray-600 mb-3 mx-3">
+                    <p className="text-gray-600 mb-13 mx-3">
                       {post.description}
                     </p>
+
+                    <div className="flex gap-4 text-gray-700 absolute bottom-3 left-3">
+                      <div className="flex gap-1 text-xs items-center">
+                        <FontAwesomeIcon icon={faHeart} />
+                        <span>{post.public_reactions_count}</span>
+                        <span>
+                          Reaction{post.public_reactions_count > 1 && "s"}
+                        </span>
+                      </div>
+                      <div className="flex gap-2 text-xs items-center">
+                        <FontAwesomeIcon icon={faComment} />
+                        <span>{post.comments_count}</span>
+                        <span>Comment{post.comments_count > 1 && "s"}</span>
+                      </div>
+                    </div>
                   </li>
                 );
               })}
