@@ -1,0 +1,57 @@
+// Markdown.tsx
+import React from "react";
+import ReactMarkdown, { Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+
+interface MarkdownProps {
+  content: string;
+}
+
+const components: Components = {
+  img: ({ ...props }) => (
+    <div className="relative flex items-center justify-center aspect-video w-full group my-25 scale-110">
+      <div className="absolute rounded-md rotate-10 bg-[#f7b43d] w-full aspect-video opacity-70 transition-all duration-500 group-hover:rotate-3 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md"></div>
+      <div className="absolute rounded-md -rotate-6 bg-[#f7b43d] w-full aspect-video opacity-80 transition-all duration-500 group-hover:-rotate-2 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md"></div>
+      <div className="absolute rounded-md rotate-3 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-video overflow-hidden transition-all duration-500 group-hover:rotate-1 scale-110 group-hover:scale-100 shadow-lg group-hover:shadow-md">
+        <img
+          {...props}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+    </div>
+  ),
+  p: ({ children }) => {
+    return (
+      <div className="my-4 text-base leading-7 text-gray-800">{children}</div>
+    );
+  },
+  h1: ({ children }) => (
+    <h1 className="text-4xl font-bold my-4 text-gray-900">{children}</h1>
+  ),
+  h2: ({ children }) => (
+    <h2 className="text-3xl font-semibold my-3 text-gray-800">{children}</h2>
+  ),
+  h3: ({ children }) => (
+    <h3 className="text-2xl font-medium my-2 text-gray-700">{children}</h3>
+  ),
+  h4: ({ children }) => (
+    <h4 className="text-xl font-medium my-1 text-gray-600">{children}</h4>
+  ),
+};
+
+const Markdown: React.FC<MarkdownProps> = ({ content }) => {
+  return (
+    <div className="p-5">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={components}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
+};
+
+export default Markdown;

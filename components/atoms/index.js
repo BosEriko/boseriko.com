@@ -1,3 +1,4 @@
 import Visibility from "./Visibility";
+import Markdown from "./Markdown";
 
-export default { Visibility };
+export default { Visibility, Markdown };
