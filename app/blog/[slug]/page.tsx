@@ -13,6 +13,9 @@ type Post = {
   body_markdown: string;
   body_html: string;
   url: string;
+  reading_time_minutes: number;
+  public_reactions_count: number;
+  comments_count: number;
 };
 
 interface PageProps {
@@ -61,11 +64,15 @@ export default async function BlogPost({ params }: PageProps) {
           </div>
 
           <div className="text-gray-500 text-sm text-center mb-2">
-            {new Date(post.published_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            <span>
+              {new Date(post.published_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+            <span className="font-bold"> &middot; </span>
+            <span>{post.reading_time_minutes} min read</span>
           </div>
 
           <h1 className="text-3xl font-bold text-center mb-10">{post.title}</h1>
