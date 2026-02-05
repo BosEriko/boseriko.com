@@ -9,37 +9,23 @@ import {
   faXTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import socialLinksData from "@data/links.json";
 
-const socialLinks = [
-  {
-    name: "steam",
-    icon: faSteam,
-    url: "https://steamcommunity.com/id/BosEriko/",
-  },
-  {
-    name: "facebook",
-    icon: faFacebook,
-    url: "https://www.facebook.com/boseriko",
-  },
-  { name: "twitch", icon: faTwitch, url: "https://www.twitch.tv/boseriko" },
-  {
-    name: "youtube",
-    icon: faYoutube,
-    url: "https://www.youtube.com/@BosEriko",
-  },
-  {
-    name: "instagram",
-    icon: faInstagram,
-    url: "https://www.instagram.com/boseriko",
-  },
-  { name: "tiktok", icon: faTiktok, url: "https://www.tiktok.com/@boseriko" },
-  { name: "x", icon: faXTwitter, url: "https://x.com/boseriko" },
-  {
-    name: "linkedin",
-    icon: faLinkedin,
-    url: "https://www.linkedin.com/in/boseriko",
-  },
-];
+const iconMap = {
+  faSteam,
+  faFacebook,
+  faTwitch,
+  faYoutube,
+  faInstagram,
+  faTiktok,
+  faXTwitter,
+  faLinkedin,
+};
+
+const socialLinks = socialLinksData.map((link) => ({
+  ...link,
+  icon: iconMap[link.icon as keyof typeof iconMap],
+}));
 
 const Footer = () => {
   return (

@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import experience from "../../data/experience.json";
-import awards from "../../data/awards.json";
-import gems from "../../data/gems.json";
-import contributions from "../../data/contributions.json";
+import experience from "@data/experience.json";
+import awards from "@data/awards.json";
+import gems from "@data/gems.json";
+import contributions from "@data/contributions.json";
 
 import "devicon/devicon.min.css";
 
