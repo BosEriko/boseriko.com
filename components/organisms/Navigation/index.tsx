@@ -19,9 +19,9 @@ const Navigation = () => {
 
   const items = [
     { label: "Home", path: "/" },
-    { label: "Products", path: "/topic/product" },
-    { label: "Projects", path: "/topic/project" },
-    { label: "Blogs", path: "/blog" },
+    // { label: "Products", path: "/topic/product" },
+    // { label: "Projects", path: "/topic/project" },
+    // { label: "Blogs", path: "/blog" },
     { label: "Connect", path: "/connect" },
   ];
 
