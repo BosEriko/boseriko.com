@@ -91,10 +91,18 @@ export default async function BlogPost({ params }: PageProps) {
             <Atom.Markdown content={post.body_html} />
           </div>
 
-          <div className="mt-5 text-center">
+          <div className="mt-5 flex justify-between">
+            <a
+              href="#"
+              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
+            >
+              Back to Top
+            </a>
             <a
               href="/blog"
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 inline-block"
+              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-[#f7b43d] text-gray-700 font-bold transition-all duration-300 ease-out
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
             >
               Back to Blogs
             </a>
