@@ -15,11 +15,14 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 const PictureStack: React.FC<PictureStackProps> = ({ url }) => {
   return (
-    <div className="relative flex items-center justify-center aspect-square w-60 lg:w-80 xl:w-125">
-      <div className="absolute rounded-md rotate-3 bg-[#f7b43d] w-full aspect-square opacity-70" />
-      <div className="absolute rounded-md -rotate-2 bg-[#f7b43d] w-full aspect-square opacity-80" />
-      <div className="absolute rounded-md rotate-1 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden">
-        <img src={url} className="w-full h-full" />
+    <div className="relative flex items-center justify-center aspect-square w-60 lg:w-80 xl:w-125 group">
+      <div className="absolute rounded-md rotate-3 bg-[#f7b43d] w-full aspect-square opacity-70 transition-transform duration-500 group-hover:rotate-10 group-hover:scale-105" />
+      <div className="absolute rounded-md -rotate-2 bg-[#f7b43d] w-full aspect-square opacity-80 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105" />
+      <div className="absolute rounded-md rotate-1 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-square overflow-hidden transition-transform duration-500 group-hover:rotate-3 group-hover:scale-110">
+        <img
+          src={url}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
       </div>
     </div>
   );
@@ -41,7 +44,7 @@ export default function Home() {
       <div className="container mx-auto px-4 flex flex-col-reverse lg:flex-row items-center mb-40 gap-10 mt-10">
         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6 w-full">
           <h1
-            className={`${poppins.className} text-6xl sm:text-8xl md:text-9xl font-bold text-gray-900`}
+            className={`${poppins.className} text-6xl sm:text-8xl md:text-9xl font-bold text-gray-900 transition-all duration-500 ease-in-out hover:text-[#f7b43d]`}
           >
             Bos Eriko
           </h1>
