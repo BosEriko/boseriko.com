@@ -50,7 +50,14 @@ export default function Home() {
           </h1>
           <hr className="bg-[#f7b43d] w-24 h-2 border-0 rounded-full" />
           <div className="text-lg md:text-xl text-gray-700">
-            I'm a full stack developer making random things
+            <span>I'm a </span>
+            <span className="border-b-2 border-[#f7b43d]">
+              full stack developer
+            </span>
+            <span> who likes </span>
+            <span className="bg-yellow-300 texty-gray-700 px-1">anime</span>
+            <span> and </span>
+            <span className="bg-yellow-300 text-gray-700 px-1">streaming</span>
           </div>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             {Object.entries(topics).map(([topic, count]) => (
