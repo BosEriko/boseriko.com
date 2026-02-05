@@ -3,6 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileLines,
@@ -80,12 +83,14 @@ const Navigation = () => {
         ))}
 
         <li>
-          <button
-            className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
-            onClick={() => window.open("/resume", "_blank")}
-          >
-            <FontAwesomeIcon icon={faFileLines} className="text-lg" />
-          </button>
+          <Tippy content="Resume">
+            <button
+              className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
+              onClick={() => window.open("/resume", "_blank")}
+            >
+              <FontAwesomeIcon icon={faFileLines} className="text-lg" />
+            </button>
+          </Tippy>
         </li>
       </ul>
     </nav>
