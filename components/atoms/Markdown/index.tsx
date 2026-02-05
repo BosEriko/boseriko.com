@@ -3,7 +3,9 @@ import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+// @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// @ts-ignore
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface MarkdownProps {
