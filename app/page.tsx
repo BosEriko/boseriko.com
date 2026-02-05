@@ -73,7 +73,7 @@ export default function Home() {
               Resume
             </button>
             <button
-              onClick={() => router.push("/product")}
+              onClick={() => router.push("/topic/product")}
               className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
                        hover:-translate-y-1 hover:shadow-md cursor-pointer"
             >
