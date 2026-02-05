@@ -10,7 +10,7 @@ const pixelify = Pixelify_Sans({
 
 const Header = () => {
   return (
-    <header className="text-black border-b border-gray-200">
+    <header className="text-black border-b border-gray-200 bg-white">
       <div className="container mx-auto flex justify-between items-center px-4">
         <div>
           <h2
