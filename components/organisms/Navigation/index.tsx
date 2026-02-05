@@ -3,6 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileLines,
+  faBars,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+
 const Navigation = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -17,12 +24,12 @@ const Navigation = () => {
 
   return (
     <nav className="relative z-50">
-      <div className="flex items-center justify-between md:hidden p-4">
+      <div className="flex items-center justify-between md:hidden py-4">
         <button
-          className="px-3 py-2 border rounded"
+          className="px-3 py-2 rounded bg-[#f7b43d] text-white"
           onClick={() => setOpen((v) => !v)}
         >
-          ☰
+          <FontAwesomeIcon icon={faBars} className="text-md" />
         </button>
       </div>
 
@@ -31,7 +38,7 @@ const Navigation = () => {
           {items.map((item) => (
             <button
               key={item.path}
-              className="text-2xl px-6 py-3 hover:text-blue-400 transition"
+              className="text-2xl px-6 py-3 hover:text-[#f7b43d] transition"
               onClick={() => {
                 router.push(item.path);
                 setOpen(false);
@@ -42,7 +49,7 @@ const Navigation = () => {
           ))}
 
           <button
-            className="px-8 py-3 rounded-full bg-blue-500 text-white text-2xl hover:bg-blue-600 transition"
+            className="px-8 py-3 rounded-full bg-[#f7b43d] text-white text-2xl hover:bg-white hover:text-gray-700 transition"
             onClick={() => {
               router.push("/resume");
               setOpen(false);
@@ -55,16 +62,16 @@ const Navigation = () => {
             className="absolute top-4 right-4 text-3xl"
             onClick={() => setOpen(false)}
           >
-            ✕
+            <FontAwesomeIcon icon={faXmark} className="text-lg" />
           </button>
         </div>
       )}
 
-      <ul className="hidden md:flex md:gap-2 md:items-center">
+      <ul className="hidden md:flex md:items-center">
         {items.map((item) => (
           <li key={item.path}>
             <button
-              className="px-3 py-2 hover:bg-gray-700 rounded"
+              className="px-7 py-5 hover:bg-[#f7b43d] cursor-pointer hover:text-gray-700 border-l border-gray-200 transition-all"
               onClick={() => router.push(item.path)}
             >
               {item.label}
@@ -74,10 +81,10 @@ const Navigation = () => {
 
         <li>
           <button
-            className="px-4 py-2 rounded-full border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white transition"
+            className="px-7 py-5 text-[#f7b43d] hover:bg-[#f7b43d] hover:text-gray-700 cursor-pointer border-x border-gray-200 transition-all"
             onClick={() => window.open("/resume", "_blank")}
           >
-            Resume
+            <FontAwesomeIcon icon={faFileLines} className="text-lg" />
           </button>
         </li>
       </ul>

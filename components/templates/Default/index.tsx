@@ -1,13 +1,18 @@
 import React, { ReactNode } from "react";
 import Organism from "@organism";
+import { Roboto_Condensed } from "next/font/google";
 
 interface DefaultProps {
   children: ReactNode;
 }
 
+const roboto_condensed = Roboto_Condensed({
+  weight: ["100"],
+});
+
 const Default: React.FC<DefaultProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`${roboto_condensed.className} flex flex-col min-h-screen`}>
       <Organism.Header />
       <div className="flex-1">{children}</div>
       <Organism.Footer />
