@@ -1,8 +1,5 @@
-"use client";
-
 import Template from "@template";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,41 +20,40 @@ type Post = {
   public_reactions_count: number;
 };
 
-export default function Blog() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [hasNext, setHasNext] = useState(false);
-  const router = useRouter();
+interface PageProps {
+  searchParams: any;
+}
 
-  const perPage = 8;
+export default async function Blog({ searchParams }: PageProps) {
+  const awaitedSearchParams = await searchParams;
+  const page = Number(awaitedSearchParams.page ?? 1);
+  const perPage = 12;
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
+  const res = await fetch(
+    `https://dev.to/api/articles?username=boseriko&page=${page}&per_page=${perPage}`,
+    { next: { revalidate: 86400 } },
+  );
 
-        const res = await fetch(`/api/blogs?page=${page}&per_page=${perPage}`, {
-          cache: "no-store",
-        });
+  const nextRes = await fetch(
+    `https://dev.to/api/articles?username=boseriko&page=${page + 1}&per_page=${perPage}`,
+    { next: { revalidate: 86400 } },
+  );
+  const nextData = nextRes.ok ? await nextRes.json() : [];
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch blog posts");
-        }
+  if (!res.ok) {
+    throw new Error("Failed to fetch blog posts");
+  }
 
-        const data = await res.json();
-        setPosts(Array.isArray(data.posts) ? data.posts : []);
-        setHasNext(data.hasNext);
-      } catch (err) {
-        console.error(err);
-        setPosts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!nextRes.ok) {
+    throw new Error("Failed to check if there's a next page");
+  }
 
-    fetchPosts();
-  }, [page]);
+  const data = await res.json();
+
+  const posts: Post[] = Array.isArray(data) ? data : [];
+  const hasNext: boolean = Boolean(
+    Array.isArray(nextData) && nextData.length > 0,
+  );
 
   return (
     <Template.Default>
@@ -74,9 +70,7 @@ export default function Blog() {
           </a>
         </h4>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <p>No blog posts found.</p>
         ) : (
           <>
@@ -88,108 +82,115 @@ export default function Blog() {
                   <li
                     key={post.slug}
                     className="
-                      border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
+                      border rounded-lg bg-white border-gray-200 overflow-hidden
                       transition-all duration-300 ease-in-out
                       hover:border-[#f7b43d] hover:scale-105 relative
                     "
-                    onClick={() => router.push(`/blog/${post.slug}`)}
                   >
-                    {cover && (
-                      <img
-                        src={cover}
-                        alt={post.title}
-                        className="w-full h-48 object-cover"
-                        loading="lazy"
-                      />
-                    )}
+                    <Link href={`/blog/${post.slug}`} className="block h-full">
+                      {cover && (
+                        <img
+                          src={cover}
+                          alt={post.title}
+                          className="w-full h-48 object-cover"
+                          loading="lazy"
+                        />
+                      )}
 
-                    <div className="flex flex-wrap gap-2 m-3">
-                      {(post.tag_list || []).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs bg-gray-100 px-2 py-1 rounded"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
+                      <div className="flex flex-wrap gap-2 m-3">
+                        {(post.tag_list || []).map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs bg-gray-100 px-2 py-1 rounded"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
 
-                    <h2 className="text-xl font-semibold mx-3">{post.title}</h2>
+                      <h2 className="text-xl font-semibold mx-3">
+                        {post.title}
+                      </h2>
 
-                    <div className="text-sm text-gray-500 mb-3 mx-3">
-                      <span>
-                        {new Date(post.published_at).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          },
-                        )}
-                      </span>
-                      <span className="font-bold"> &middot; </span>
-                      <span>{post.reading_time_minutes} min read</span>
-                    </div>
-
-                    <p className="text-gray-600 mb-13 mx-3">
-                      {post.description}
-                    </p>
-
-                    <div className="flex gap-4 text-gray-700 absolute bottom-3 left-3">
-                      <div className="flex gap-1 text-xs items-center">
-                        <FontAwesomeIcon icon={faHeart} />
-                        <span>{post.public_reactions_count}</span>
+                      <div className="text-sm text-gray-500 mb-3 mx-3">
                         <span>
-                          Reaction{post.public_reactions_count > 1 && "s"}
+                          {new Date(post.published_at).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            },
+                          )}
                         </span>
+                        <span className="font-bold"> &middot; </span>
+                        <span>{post.reading_time_minutes} min read</span>
                       </div>
-                      <div className="flex gap-2 text-xs items-center">
-                        <FontAwesomeIcon icon={faComment} />
-                        <span>{post.comments_count}</span>
-                        <span>Comment{post.comments_count > 1 && "s"}</span>
+
+                      <p className="text-gray-600 mb-13 mx-3">
+                        {post.description}
+                      </p>
+
+                      <div className="flex gap-4 text-gray-700 absolute bottom-3 left-3">
+                        <div className="flex gap-1 text-xs items-center">
+                          <FontAwesomeIcon icon={faHeart} />
+                          <span>{post.public_reactions_count}</span>
+                          <span>
+                            Reaction
+                            {post.public_reactions_count > 1 && "s"}
+                          </span>
+                        </div>
+                        <div className="flex gap-2 text-xs items-center">
+                          <FontAwesomeIcon icon={faComment} />
+                          <span>{post.comments_count}</span>
+                          <span>Comment{post.comments_count > 1 && "s"}</span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </li>
                 );
               })}
             </ul>
 
+            {/* Pagination */}
             <div className="mt-8 flex items-center justify-center gap-4">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                className="
-                  border rounded-lg bg-white border-gray-200 cursor-pointer
-                  transition-all duration-300 ease-in-out
-                  px-3 py-2
-                  hover:border-[#f7b43d]
-                  disabled:cursor-not-allowed
-                  disabled:bg-gray-100
-                  disabled:border-gray-300
-                  disabled:text-gray-400
-                "
-              >
-                Previous
-              </button>
+              <Link href={`/blog?page=${Math.max(1, page - 1)}`}>
+                <button
+                  disabled={page === 1}
+                  className="
+                    border rounded-lg bg-white border-gray-200 cursor-pointer
+                    transition-all duration-300 ease-in-out
+                    px-3 py-2
+                    hover:border-[#f7b43d]
+                    disabled:cursor-not-allowed
+                    disabled:bg-gray-100
+                    disabled:border-gray-300
+                    disabled:text-gray-400
+                  "
+                >
+                  Previous
+                </button>
+              </Link>
 
               <span>Page {page}</span>
 
-              <button
-                onClick={() => setPage((p) => p + 1)}
-                disabled={!hasNext}
-                className="
-                  border rounded-lg bg-white border-gray-200 cursor-pointer
-                  transition-all duration-300 ease-in-out
-                  px-3 py-2
-                  hover:border-[#f7b43d]
-                  disabled:cursor-not-allowed
-                  disabled:bg-gray-100
-                  disabled:border-gray-300
-                  disabled:text-gray-400
-                "
-              >
-                Next
-              </button>
+              <Link href={`/blog?page=${page + 1}`}>
+                <button
+                  disabled={!hasNext}
+                  className="
+                    border rounded-lg bg-white border-gray-200 cursor-pointer
+                    transition-all duration-300 ease-in-out
+                    px-3 py-2
+                    hover:border-[#f7b43d]
+                    disabled:cursor-not-allowed
+                    disabled:bg-gray-100
+                    disabled:border-gray-300
+                    disabled:text-gray-400
+                  "
+                >
+                  Next
+                </button>
+              </Link>
             </div>
           </>
         )}
