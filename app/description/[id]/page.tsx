@@ -1,5 +1,6 @@
 "use client";
 import Template from "@template";
+import Atom from "@atom";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -49,17 +50,7 @@ export default function Description() {
               borderRadius: "8px",
             }}
           >
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                img: ({ ...props }) => (
-                  <img {...props} style={{ maxWidth: "100%" }} />
-                ),
-              }}
-            >
-              {content}
-            </ReactMarkdown>
+            <Atom.Markdown content={content} />
           </div>
         ) : (
           <p>No content found.</p>
