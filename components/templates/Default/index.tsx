@@ -5,6 +5,7 @@ import { Roboto_Condensed } from "next/font/google";
 
 interface DefaultProps {
   children: ReactNode;
+  backgroundColor?: string;
   orientation?: "default" | "center" | "minimal";
 }
 
@@ -15,10 +16,12 @@ const roboto_condensed = Roboto_Condensed({
 const Default: React.FC<DefaultProps> = ({
   children,
   orientation = "default",
+  backgroundColor = "#f8f1e3",
 }) => {
   return (
     <div
-      className={`${roboto_condensed.className} flex flex-col min-h-screen bg-[#f8f1e3]`}
+      className={`${roboto_condensed.className} flex flex-col min-h-screen`}
+      style={{ backgroundColor }}
     >
       <Organism.Header />
       <Atom.Visibility state={"default" == orientation}>

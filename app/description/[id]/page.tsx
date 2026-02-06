@@ -45,7 +45,7 @@ export default async function Description({ params }: PageProps) {
     );
 
     return (
-      <Template.Default orientation="minimal">
+      <Template.Default orientation="minimal" backgroundColor="white">
         <Atom.Markdown content={content} simple={false} />
         <Atom.Visibility state={!!(topics.length > 0)}>
           <ul className="mb-4 flex flex-wrap gap-2">
