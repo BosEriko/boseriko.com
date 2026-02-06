@@ -118,16 +118,17 @@ export default function Topic() {
         ) : repos.length === 0 ? (
           <p>No Repository found.</p>
         ) : (
-          <div
-            style={{
-              border: "1px solid #ccc",
-              padding: "1rem",
-              borderRadius: "8px",
-              maxWidth: "600px",
-            }}
-          >
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
             {repos.map((repo) => (
-              <div key={repo.id} style={{ marginBottom: "1.5rem" }}>
+              <li
+                key={repo.id}
+                className="
+                  border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
+                  transition-all duration-300 ease-in-out
+                  hover:border-[#f7b43d] hover:scale-105 relative
+                "
+                onClick={() => router.push(`/description/${repo.name}`)}
+              >
                 <h2>
                   <a
                     href={repo.html_url}
@@ -141,44 +142,48 @@ export default function Topic() {
                 <p style={{ fontSize: "0.8rem", color: "#666" }}>
                   Updated at: {new Date(repo.updated_at).toLocaleString()}
                 </p>
-
-                <div style={{ marginTop: "0.5rem" }}>
-                  <button
-                    onClick={() => window.open(repo.html_url, "_blank")}
-                    style={{ marginRight: "0.5rem" }}
-                  >
-                    Check on GitHub
-                  </button>
-                  <button
-                    onClick={() => router.push(`/description/${repo.name}`)}
-                  >
-                    Read More
-                  </button>
-                </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
-        {totalPages > 1 && (
-          <div style={{ marginTop: "1rem" }}>
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-            >
-              Previous
-            </button>
-            <span style={{ margin: "0 1rem" }}>
-              Page {page} of {totalPages}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-            >
-              Next
-            </button>
-          </div>
-        )}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="
+              border rounded-lg bg-white border-gray-200 cursor-pointer
+              transition-all duration-300 ease-in-out
+              px-3 py-2
+              hover:border-[#f7b43d]
+              disabled:cursor-not-allowed
+              disabled:bg-gray-100
+              disabled:border-gray-300
+              disabled:text-gray-400
+            "
+          >
+            Previous
+          </button>
+
+          <span>Page {page}</span>
+
+          <button
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page === totalPages}
+            className="
+              border rounded-lg bg-white border-gray-200 cursor-pointer
+              transition-all duration-300 ease-in-out
+              px-3 py-2
+              hover:border-[#f7b43d]
+              disabled:cursor-not-allowed
+              disabled:bg-gray-100
+              disabled:border-gray-300
+              disabled:text-gray-400
+            "
+          >
+            Next
+          </button>
+        </div>
       </div>
     </Template.Default>
   );
