@@ -1,14 +1,14 @@
 ---
 cover_photo: "https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg"
-masonry_photos: "https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg, https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg, https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg, https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg, https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg, https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg"
+masonry_photos: "
+  https://wallpaperaccess.com/full/9877574.jpg,
+  https://wallpaperaccess.com/full/9877574.jpg,
+  https://wallpaperaccess.com/full/9877574.jpg,
+  https://wallpaperaccess.com/full/9877574.jpg,
+  https://wallpaperaccess.com/full/9877574.jpg,
+  https://wallpaperaccess.com/full/9877574.jpg
+"
 ---
-
-# boseriko.com
-A website for my creation
-
-## Tools
-- NextJS
-- GitHub
 
 ## GitHub Integration
 This project is using GitHub to showcase all my creations. It checks all the projects that I have with a topic of `product` or `project` which are then sorted by last update. Then each project entry fetches `PORTFOLIO.md` as content of each project on the website.

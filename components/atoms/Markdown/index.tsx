@@ -145,7 +145,12 @@ const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
           }
         >
           <Atom.Masonry
-            images={data.masonry_photos?.split(", ") || []}
+            images={
+              data.masonry_photos
+                ?.split(",")
+                .map((s) => s.trim())
+                .filter(Boolean) || []
+            }
             maxWidth={1100}
           />
         </Atom.Visibility>
