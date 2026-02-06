@@ -14,6 +14,14 @@ interface MarkdownProps {
   simple?: boolean | true;
 }
 
+interface FrontMatter {
+  title: string;
+  published: boolean;
+  cover_photo?: string;
+  masonry_photos?: string;
+  [key: string]: any;
+}
+
 const components: Components = {
   img: ({ ...props }) => (
     <div className="relative flex items-center justify-center aspect-video w-full group my-25 scale-110">
@@ -95,7 +103,9 @@ const components: Components = {
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
-  const { data, content: body } = matter(content || "");
+  const parsed = matter(content || "");
+  const data: FrontMatter = parsed.data as FrontMatter;
+  const body: string = parsed.content;
 
   return (
     <Fragment>
@@ -128,6 +138,17 @@ const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
             {body}
           </ReactMarkdown>
         </div>
+        <Atom.Visibility
+          state={
+            !!data.masonry_photos &&
+            !!(data.masonry_photos.split(", ").length > 5)
+          }
+        >
+          <Atom.Masonry
+            images={data.masonry_photos?.split(", ") || []}
+            maxWidth={1100}
+          />
+        </Atom.Visibility>
       </Atom.Visibility>
     </Fragment>
   );
