@@ -2,6 +2,8 @@
 import Template from "@template";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 type Repo = {
   id: number;
@@ -138,16 +140,19 @@ export default function Topic() {
                   <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
                     {repo.language}
                   </div>
-                  <div className="text-sm flex items-center gap-1">
-                    <div>
+                  <div className="text-xs flex items-center gap-2 text-gray-400">
+                    <div className="flex gap-1 items-center">
+                      <FontAwesomeIcon icon={faEye} />
                       <span>{repo.watchers_count} watcher</span>
                       <span>{repo.watchers_count > 1 && "s"}</span>
                     </div>
-                    <div>
+                    <div className="flex gap-1 items-center">
+                      <FontAwesomeIcon icon={faCodeBranch} />
                       <span>{repo.forks_count} fork</span>
                       <span>{repo.forks_count > 1 && "s"}</span>
                     </div>
-                    <div>
+                    <div className="flex gap-1 items-center">
+                      <FontAwesomeIcon icon={faStar} />
                       <span>{repo.stargazers_count} star</span>
                       <span>{repo.stargazers_count > 1 && "s"}</span>
                     </div>
