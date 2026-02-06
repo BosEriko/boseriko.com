@@ -33,9 +33,8 @@ const Masonry: React.FC<MasonryProps> = ({ images, maxWidth = 1000 }) => {
               overflow: "hidden",
               borderRadius: "8px",
               cursor: "pointer",
-              transition: "transform 0.2s",
             }}
-            className="shadow-lg"
+            className="shadow-lg hover:scale-105 transition"
           >
             <img
               src={src}
