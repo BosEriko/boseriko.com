@@ -35,6 +35,7 @@ const Masonry: React.FC<MasonryProps> = ({ images, maxWidth = 1000 }) => {
               cursor: "pointer",
               transition: "transform 0.2s",
             }}
+            className="shadow-lg"
           >
             <img
               src={src}
