@@ -2,7 +2,7 @@ import Template from "@template";
 import Atom from "@atom";
 
 interface PageProps {
-  params: { id: string };
+  params: any;
 }
 
 export default async function Description({ params }: PageProps) {
