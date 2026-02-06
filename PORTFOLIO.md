@@ -1,12 +1,12 @@
 ---
-cover_photo: "https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg"
+cover_photo: "https://i.imgur.com/bnhx1SQ.png"
 masonry_photos: "
-  https://wallpaperaccess.com/full/9877574.jpg,
-  https://wallpaperaccess.com/full/9877574.jpg,
-  https://wallpaperaccess.com/full/9877574.jpg,
-  https://wallpaperaccess.com/full/9877574.jpg,
-  https://wallpaperaccess.com/full/9877574.jpg,
-  https://wallpaperaccess.com/full/9877574.jpg
+  https://i.imgur.com/bnhx1SQ.png,
+  https://i.imgur.com/llcYYKz.png,
+  https://i.imgur.com/qZ7ig5H.png,
+  https://i.imgur.com/Am9FIIH.png,
+  https://i.imgur.com/LtLLZM6.png,
+  https://i.imgur.com/2VshqTP.png
 "
 ---
 
