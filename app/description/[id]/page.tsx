@@ -7,6 +7,7 @@ interface Repo {
   homepage: string;
   updated_at: string;
   stargazers_count: number;
+  html_url: string;
   topics: string[];
 }
 
@@ -54,10 +55,10 @@ export default async function Description({ params }: PageProps) {
     );
 
     const name: string = repoJson.name;
-    const created_at: string = repoJson.created_at;
     const updated_at: string = repoJson.updated_at;
     const homepage: string = repoJson.homepage;
     const stargazers_count: number = repoJson.stargazers_count;
+    const html_url: string = repoJson.html_url;
     const description: string = repoJson.description;
 
     return (
@@ -92,6 +93,12 @@ export default async function Description({ params }: PageProps) {
             <span>
               <a href={homepage} target="_blank" className="hover:underline">
                 {homepage?.replace(/^https?:\/\//, "")}
+              </a>
+            </span>
+            <span className="font-bold"> &middot; </span>
+            <span>
+              <a href={html_url} target="_blank" className="hover:underline">
+                {stargazers_count} stargazer{stargazers_count > 1 && "s"}
               </a>
             </span>
           </div>
