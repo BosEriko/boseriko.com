@@ -32,7 +32,7 @@ const Default: React.FC<DefaultProps> = ({
         </div>
       </Atom.Visibility>
       <Atom.Visibility state={"minimal" == orientation}>
-        <div>{children}</div>
+        <div className="flex-1">{children}</div>
       </Atom.Visibility>
       <Organism.Footer />
     </div>
