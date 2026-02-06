@@ -88,7 +88,7 @@ export default async function Topic({ params, searchParams }: PageProps) {
   const awaitedSearchParams = await searchParams;
   const topic = awaitedParams.topic;
   const page = Number(awaitedSearchParams.page ?? 1);
-  const perPage = 1;
+  const perPage = 12;
 
   const res = await fetch(
     `https://api.github.com/search/repositories?q=user:boseriko+topic:${topic}&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
