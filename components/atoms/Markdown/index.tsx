@@ -112,9 +112,14 @@ const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
       </Atom.Visibility>
       <Atom.Visibility state={!simple}>
         <Atom.Visibility state={!!data.cover_photo}>
-          <img src={data.cover_photo} />
+          <div className="mx-auto max-w-300">
+            <img
+              src={data.cover_photo}
+              className="w-full rounded-lg shadow-lg"
+            />
+          </div>
         </Atom.Visibility>
-        <div className="p-5">
+        <div className="mx-auto max-w-250 p-5">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
