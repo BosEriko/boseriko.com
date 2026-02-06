@@ -1,4 +1,3 @@
-"use client";
 import Template from "@template";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
