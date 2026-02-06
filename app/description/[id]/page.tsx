@@ -40,7 +40,9 @@ export default async function Description({ params }: PageProps) {
       "utf-8",
     );
 
-    const topics: string[] = repoJson?.topics ?? [];
+    const topics: string[] = (repoJson?.topics ?? []).filter(
+      (topic: any) => topic !== "product" && topic !== "project",
+    );
 
     return (
       <Template.Default>
