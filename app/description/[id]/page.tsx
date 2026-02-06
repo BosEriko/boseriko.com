@@ -8,8 +8,8 @@ interface PageProps {
 export default async function Description({ params }: PageProps) {
   const { id } = await params;
   const revalidate = 86400;
-  const portfolioURL = `https://api.github.com/repos/BosEriko/${id}/contents/PORTFOLIO.md`;
-  const repoURL = `https://api.github.com/repos/BosEriko/${id}`;
+  const portfolioURL = `https://api.github.com/repos/boseriko/${id}/contents/PORTFOLIO.md`;
+  const repoURL = `https://api.github.com/repos/boseriko/${id}`;
 
   try {
     const [contentRes, repoRes] = await Promise.all([
