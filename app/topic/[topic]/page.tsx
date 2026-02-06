@@ -158,28 +158,42 @@ export default async function Topic({ params, searchParams }: PageProps) {
         )}
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <Link
-            href={`/topic/${topic}?page=${Math.max(1, page - 1)}`}
-            className={`
-              border rounded-lg bg-white border-gray-200 px-3 py-2
-              transition-all
-              ${page === 1 ? "pointer-events-none opacity-50" : "hover:border-[#f7b43d]"}
-            `}
-          >
-            Previous
+          <Link href={`/topic/${topic}?page=${Math.max(1, page - 1)}`}>
+            <button
+              disabled={page === 1}
+              className="
+                border rounded-lg bg-white border-gray-200 cursor-pointer
+                transition-all duration-300 ease-in-out
+                px-3 py-2
+                hover:border-[#f7b43d]
+                disabled:cursor-not-allowed
+                disabled:bg-gray-100
+                disabled:border-gray-300
+                disabled:text-gray-400
+              "
+            >
+              Previous
+            </button>
           </Link>
 
           <span>Page {page}</span>
 
-          <Link
-            href={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}
-            className={`
-              border rounded-lg bg-white border-gray-200 px-3 py-2
-              transition-all
-              ${page === totalPages ? "pointer-events-none opacity-50" : "hover:border-[#f7b43d]"}
-            `}
-          >
-            Next
+          <Link href={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}>
+            <button
+              disabled={page === totalPages}
+              className="
+                border rounded-lg bg-white border-gray-200 cursor-pointer
+                transition-all duration-300 ease-in-out
+                px-3 py-2
+                hover:border-[#f7b43d]
+                disabled:cursor-not-allowed
+                disabled:bg-gray-100
+                disabled:border-gray-300
+                disabled:text-gray-400
+              "
+            >
+              Next
+            </button>
           </Link>
         </div>
       </div>
