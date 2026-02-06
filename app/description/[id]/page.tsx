@@ -17,22 +17,19 @@ export default async function Description({ params }: PageProps) {
     );
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch description: ${res.status}`);
+      return (
+        <Template.Default>
+          <div className="text-center">No PORTFOLIO.md found.</div>
+        </Template.Default>
+      );
     }
 
     const data = await res.json();
     const content = atob(data.content.replace(/\n/g, ""));
 
     return (
-      <Template.Default center={true}>
-        <div>
-          <Atom.Visibility state={!!content}>
-            <Atom.Markdown content={content} simple={false} />
-          </Atom.Visibility>
-          <Atom.Visibility state={!content}>
-            <div className="text-center">No PORTFOLIO.md found.</div>
-          </Atom.Visibility>
-        </div>
+      <Template.Default>
+        <Atom.Markdown content={content} simple={false} />
       </Template.Default>
     );
   } catch (err) {
