@@ -47,7 +47,7 @@ export default function Description() {
               borderRadius: "8px",
             }}
           >
-            <Atom.Description content={content} />
+            <Atom.Markdown content={content} />
           </div>
         ) : (
           <p>No content found.</p>

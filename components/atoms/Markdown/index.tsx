@@ -1,4 +1,5 @@
 import React from "react";
+import matter from "gray-matter";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -92,6 +93,8 @@ const components: Components = {
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
+  const { data, content: body } = matter(content);
+
   return (
     <div className="p-5">
       <ReactMarkdown
@@ -99,7 +102,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
         rehypePlugins={[rehypeRaw]}
         components={components}
       >
-        {content}
+        {body}
       </ReactMarkdown>
     </div>
   );
