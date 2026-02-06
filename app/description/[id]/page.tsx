@@ -50,10 +50,12 @@ export default async function Description({ params }: PageProps) {
       "utf-8",
     );
 
+    const type: string = repoJson?.topics?.includes("product")
+      ? "product"
+      : "project";
     const topics: string[] = (repoJson?.topics ?? []).filter(
       (topic: any) => topic !== "product" && topic !== "project",
     );
-
     const name: string = repoJson.name;
     const updated_at: string = repoJson.updated_at;
     const homepage: string = repoJson.homepage;
@@ -112,6 +114,23 @@ export default async function Description({ params }: PageProps) {
           </h4>
 
           <Atom.Markdown content={content} simple={false} />
+
+          <div className="mt-5 flex justify-between max-w-250 mx-auto">
+            <a
+              href="#"
+              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
+            >
+              Back to Top
+            </a>
+            <a
+              href={`/topic/${type}`}
+              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-[#f7b43d] text-gray-700 font-bold transition-all duration-300 ease-out
+                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
+            >
+              Back to {type.charAt(0).toUpperCase() + type.slice(1)}s
+            </a>
+          </div>
         </div>
       </Template.Default>
     );
