@@ -111,7 +111,17 @@ export default async function Topic({ params, searchParams }: PageProps) {
         </h1>
 
         <h4 className="text-gray-500">
-          {pageDescription[topic]?.description ?? "Unknown Description"}
+          <span>
+            {pageDescription[topic]?.description ?? "Unknown Description"}
+          </span>
+          <span> Find more at my </span>
+          <a
+            href="https://github.com/BosEriko"
+            target="_blank"
+            className="bg-yellow-300 texty-gray-700 px-1"
+          >
+            GitHub
+          </a>
         </h4>
 
         {repos.length === 0 ? (
