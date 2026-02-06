@@ -60,11 +60,14 @@ export default async function Description({ params }: PageProps) {
           <Atom.Visibility state={!!(topics.length > 0)}>
             <ul className="mb-4 flex flex-wrap gap-2 justify-center">
               {topics.map((topic) => (
-                <li
-                  key={topic}
-                  className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
-                >
-                  #{topic}
+                <li key={topic}>
+                  <a
+                    href={`/topic/${topic}`}
+                    target="_blank"
+                    className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
+                  >
+                    #{topic}
+                  </a>
                 </li>
               ))}
             </ul>
