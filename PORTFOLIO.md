@@ -1,5 +1,6 @@
 ---
 published: true
+cover_photo: https://rare-gallery.com/thumbnail/1329398-Houshou-Marine-Hololive-Heterochromia-PirateVirtual.jpg
 ---
 
 # boseriko.com
