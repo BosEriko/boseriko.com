@@ -1,6 +1,16 @@
 import Template from "@template";
 import Atom from "@atom";
 
+interface Repo {
+  description: string;
+  name: string;
+  homepage: string;
+  created_at: string;
+  updated_at: string;
+  stargazers_count: string;
+  topics: string[];
+}
+
 interface PageProps {
   params: any;
 }
@@ -34,7 +44,7 @@ export default async function Description({ params }: PageProps) {
     }
 
     const contentJson = await contentRes.json();
-    const repoJson = await repoRes.json();
+    const repoJson: Repo = await repoRes.json();
 
     const content = Buffer.from(contentJson.content, "base64").toString(
       "utf-8",
