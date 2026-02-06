@@ -245,7 +245,7 @@ export default async function Resume() {
                     <span>Built with {project.language}. </span>
                   </Atom.Visibility>
                   <span>Currently has {project.stargazers_count} </span>
-                  <span>stargazer{project.stargazers_count > 1 && "s"}.</span>
+                  <span>star{project.stargazers_count > 1 && "s"}.</span>
                   <Atom.Visibility state={!!project.homepage}>
                     <span> Live at </span>
                     <a href={project.homepage} target="_blank">

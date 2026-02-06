@@ -102,7 +102,7 @@ export default async function Description({ params }: PageProps) {
             <span className="font-bold"> &middot; </span>
             <span>
               <a href={html_url} target="_blank" className="hover:underline">
-                {stargazers_count} stargazer{stargazers_count > 1 && "s"}
+                {stargazers_count} star{stargazers_count > 1 && "s"}
               </a>
             </span>
           </div>

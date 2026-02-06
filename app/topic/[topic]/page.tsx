@@ -8,7 +8,10 @@ type Repo = {
   name: string;
   html_url: string;
   description: string | null;
-  updated_at: string;
+  stargazers_count: number;
+  watchers_count: number;
+  forks_count: number;
+  language: string;
 };
 
 const pageDescription: Record<string, { title: string; description: string }> =
@@ -125,23 +128,30 @@ export default function Topic() {
                 className="
                   border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
                   transition-all duration-300 ease-in-out
-                  hover:border-[#f7b43d] hover:scale-105 relative
+                  hover:border-[#f7b43d] hover:scale-105 relative p-5
                 "
                 onClick={() => router.push(`/description/${repo.name}`)}
               >
-                <h2>
-                  <a
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {repo.name}
-                  </a>
-                </h2>
-                <p>{repo.description}</p>
-                <p style={{ fontSize: "0.8rem", color: "#666" }}>
-                  Updated at: {new Date(repo.updated_at).toLocaleString()}
-                </p>
+                <h2 className="font-bold text-lg">{repo.name}</h2>
+                <p className="line-clamp-2 mb-10">{repo.description}</p>
+                <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
+                  <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
+                    {repo.language}
+                  </div>
+                  <div className="text-xs flex items-center gap-1">
+                    <div>
+                      {repo.watchers_count} watcher
+                      {repo.watchers_count > 1 && "s"}
+                    </div>
+                    <div>
+                      {repo.forks_count} fork{repo.forks_count > 1 && "s"}
+                    </div>
+                    <div>
+                      {repo.stargazers_count} star
+                      {repo.stargazers_count > 1 && "s"}
+                    </div>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
