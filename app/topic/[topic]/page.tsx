@@ -1,7 +1,5 @@
-"use client";
 import Template from "@template";
-import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -80,47 +78,43 @@ const pageDescription: Record<string, { title: string; description: string }> =
     },
   };
 
-export default function Topic() {
-  const params = useParams();
-  const { topic: topicParam } = params;
-  const topic = Array.isArray(topicParam) ? topicParam[0] : topicParam;
-  const [repos, setRepos] = useState<Repo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
-  const router = useRouter();
+interface PageProps {
+  params: any;
+  searchParams: any;
+}
 
-  const perPage = 10;
+export default async function Topic({ params, searchParams }: PageProps) {
+  const awaitedParams = await params;
+  const awaitedSearchParams = await searchParams;
+  const topic = awaitedParams.topic;
+  const page = Number(awaitedSearchParams.page ?? 1);
+  const perPage = 1;
 
-  useEffect(() => {
-    const fetchRepos = async () => {
-      setLoading(true);
-      const res = await fetch(`/api/topic/${topic}?page=${page}`);
-      const data = await res.json();
-      setRepos(data.items || []);
-      setTotalCount(data.total_count || 0);
-      setLoading(false);
-    };
+  const res = await fetch(
+    `https://api.github.com/search/repositories?q=user:boseriko+topic:${topic}&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
+    {
+      next: { revalidate: 86400 },
+    },
+  );
 
-    fetchRepos();
-  }, [page]);
+  const data = await res.json();
 
+  const repos: Repo[] = data.items ?? [];
+  const totalCount: number = data.total_count ?? 0;
   const totalPages = Math.ceil(totalCount / perPage);
 
   return (
     <Template.Default>
       <div className="text-center space-y-4 container mx-auto my-10 px-5">
         <h1 className="font-bold text-4xl">
-          {topic ? pageDescription[topic]?.title : "Unknown Topic"}
+          {pageDescription[topic]?.title ?? "Unknown Topic"}
         </h1>
 
         <h4 className="text-gray-500">
-          {topic ? pageDescription[topic]?.description : "Unknown Description"}
+          {pageDescription[topic]?.description ?? "Unknown Description"}
         </h4>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : repos.length === 0 ? (
+        {repos.length === 0 ? (
           <p>No Repository found.</p>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
@@ -132,73 +126,61 @@ export default function Topic() {
                   transition-all duration-300 ease-in-out
                   hover:border-[#f7b43d] hover:scale-105 relative p-5
                 "
-                onClick={() => router.push(`/description/${repo.name}`)}
               >
-                <h2 className="font-bold text-lg">{repo.name}</h2>
-                <p className="line-clamp-2 mb-10">{repo.description}</p>
-                <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
-                  <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
-                    {repo.language}
+                <Link href={`/description/${repo.name}`}>
+                  <h2 className="font-bold text-lg">{repo.name}</h2>
+                  <p className="line-clamp-2 mb-10">{repo.description}</p>
+
+                  <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
+                    <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
+                      {repo.language}
+                    </div>
+
+                    <div className="text-xs flex items-center gap-2 text-gray-400">
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faEye} />
+                        <span>{repo.watchers_count}</span>
+                      </div>
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faCodeBranch} />
+                        <span>{repo.forks_count}</span>
+                      </div>
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faStar} />
+                        <span>{repo.stargazers_count}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs flex items-center gap-2 text-gray-400">
-                    <div className="flex gap-1 items-center">
-                      <FontAwesomeIcon icon={faEye} />
-                      <span>{repo.watchers_count} watcher</span>
-                      <span>{repo.watchers_count > 1 && "s"}</span>
-                    </div>
-                    <div className="flex gap-1 items-center">
-                      <FontAwesomeIcon icon={faCodeBranch} />
-                      <span>{repo.forks_count} fork</span>
-                      <span>{repo.forks_count > 1 && "s"}</span>
-                    </div>
-                    <div className="flex gap-1 items-center">
-                      <FontAwesomeIcon icon={faStar} />
-                      <span>{repo.stargazers_count} star</span>
-                      <span>{repo.stargazers_count > 1 && "s"}</span>
-                    </div>
-                  </div>
-                </div>
+                </Link>
               </li>
             ))}
           </ul>
         )}
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="
-              border rounded-lg bg-white border-gray-200 cursor-pointer
-              transition-all duration-300 ease-in-out
-              px-3 py-2
-              hover:border-[#f7b43d]
-              disabled:cursor-not-allowed
-              disabled:bg-gray-100
-              disabled:border-gray-300
-              disabled:text-gray-400
-            "
+          <Link
+            href={`/topic/${topic}?page=${Math.max(1, page - 1)}`}
+            className={`
+              border rounded-lg bg-white border-gray-200 px-3 py-2
+              transition-all
+              ${page === 1 ? "pointer-events-none opacity-50" : "hover:border-[#f7b43d]"}
+            `}
           >
             Previous
-          </button>
+          </Link>
 
           <span>Page {page}</span>
 
-          <button
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            className="
-              border rounded-lg bg-white border-gray-200 cursor-pointer
-              transition-all duration-300 ease-in-out
-              px-3 py-2
-              hover:border-[#f7b43d]
-              disabled:cursor-not-allowed
-              disabled:bg-gray-100
-              disabled:border-gray-300
-              disabled:text-gray-400
-            "
+          <Link
+            href={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}
+            className={`
+              border rounded-lg bg-white border-gray-200 px-3 py-2
+              transition-all
+              ${page === totalPages ? "pointer-events-none opacity-50" : "hover:border-[#f7b43d]"}
+            `}
           >
             Next
-          </button>
+          </Link>
         </div>
       </div>
     </Template.Default>
