@@ -89,12 +89,14 @@ export default async function Description({ params }: PageProps) {
                 day: "numeric",
               })}
             </span>
-            <span className="font-bold"> &middot; </span>
-            <span>
-              <a href={homepage} target="_blank" className="hover:underline">
-                {homepage?.replace(/^https?:\/\//, "")}
-              </a>
-            </span>
+            <Atom.Visibility state={!!homepage}>
+              <span className="font-bold"> &middot; </span>
+              <span>
+                <a href={homepage} target="_blank" className="hover:underline">
+                  {homepage?.replace(/^https?:\/\//, "")}
+                </a>
+              </span>
+            </Atom.Visibility>
             <span className="font-bold"> &middot; </span>
             <span>
               <a href={html_url} target="_blank" className="hover:underline">
