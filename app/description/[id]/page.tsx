@@ -5,9 +5,8 @@ interface Repo {
   description: string;
   name: string;
   homepage: string;
-  created_at: string;
   updated_at: string;
-  stargazers_count: string;
+  stargazers_count: number;
   topics: string[];
 }
 
@@ -54,17 +53,24 @@ export default async function Description({ params }: PageProps) {
       (topic: any) => topic !== "product" && topic !== "project",
     );
 
+    const name: string = repoJson.name;
+    const created_at: string = repoJson.created_at;
+    const updated_at: string = repoJson.updated_at;
+    const homepage: string = repoJson.homepage;
+    const stargazers_count: number = repoJson.stargazers_count;
+    const description: string = repoJson.description;
+
     return (
       <Template.Default orientation="minimal" backgroundColor="white">
-        <div className="container mx-auto px-4 py-10">
+        <div className="px-4 py-10">
           <Atom.Visibility state={!!(topics.length > 0)}>
-            <ul className="mb-4 flex flex-wrap gap-2 justify-center">
+            <ul className="flex flex-wrap gap-2 justify-center mb-3">
               {topics.map((topic) => (
                 <li key={topic}>
                   <a
                     href={`/topic/${topic}`}
                     target="_blank"
-                    className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
+                    className="text-xs bg-gray-100 px-2 py-1 rounded"
                   >
                     #{topic}
                   </a>
@@ -72,6 +78,30 @@ export default async function Description({ params }: PageProps) {
               ))}
             </ul>
           </Atom.Visibility>
+
+          <div className="text-gray-500 text-sm text-center mb-3">
+            <span>
+              <span>Updated at </span>
+              {new Date(updated_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+            <span className="font-bold"> &middot; </span>
+            <span>
+              <a href={homepage} target="_blank" className="hover:underline">
+                {homepage?.replace(/^https?:\/\//, "")}
+              </a>
+            </span>
+          </div>
+
+          <h1 className="text-3xl font-bold text-center mb-3">{name}</h1>
+
+          <h4 className="text-center mb-10 text-md text-gray-500 max-w-175 mx-auto">
+            {description}
+          </h4>
+
           <Atom.Markdown content={content} simple={false} />
         </div>
       </Template.Default>
