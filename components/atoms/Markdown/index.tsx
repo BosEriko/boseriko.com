@@ -1,4 +1,3 @@
-// Markdown.tsx
 import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
