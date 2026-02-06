@@ -2,21 +2,26 @@ import Template from "@template";
 import Atom from "@atom";
 
 interface PageProps {
-  params: any;
+  params: { id: string };
 }
 
 export default async function Description({ params }: PageProps) {
   const { id } = await params;
+  const revalidate = 86400;
+  const portfolioURL = `https://api.github.com/repos/BosEriko/${id}/contents/PORTFOLIO.md`;
+  const repoURL = `https://api.github.com/repos/BosEriko/${id}`;
 
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/BosEriko/${id}/contents/PORTFOLIO.md`,
-      {
-        next: { revalidate: 86400 },
-      },
-    );
+    const [contentRes, repoRes] = await Promise.all([
+      fetch(portfolioURL, {
+        next: { revalidate },
+      }),
+      fetch(repoURL, {
+        next: { revalidate },
+      }),
+    ]);
 
-    if (!res.ok) {
+    if (!contentRes.ok) {
       return (
         <Template.Default>
           <div className="text-center">
@@ -28,11 +33,29 @@ export default async function Description({ params }: PageProps) {
       );
     }
 
-    const data = await res.json();
-    const content = atob(data.content.replace(/\n/g, ""));
+    const contentJson = await contentRes.json();
+    const repoJson = await repoRes.json();
+
+    const content = Buffer.from(contentJson.content, "base64").toString(
+      "utf-8",
+    );
+
+    const topics: string[] = repoJson?.topics ?? [];
 
     return (
       <Template.Default>
+        {topics.length > 0 && (
+          <ul className="mb-4 flex flex-wrap gap-2">
+            {topics.map((topic) => (
+              <li
+                key={topic}
+                className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
+              >
+                #{topic}
+              </li>
+            ))}
+          </ul>
+        )}
         <Atom.Markdown content={content} simple={false} />
       </Template.Default>
     );
