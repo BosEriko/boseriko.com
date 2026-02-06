@@ -56,19 +56,21 @@ export default async function Description({ params }: PageProps) {
 
     return (
       <Template.Default orientation="minimal" backgroundColor="white">
-        <Atom.Markdown content={content} simple={false} />
-        <Atom.Visibility state={!!(topics.length > 0)}>
-          <ul className="mb-4 flex flex-wrap gap-2">
-            {topics.map((topic) => (
-              <li
-                key={topic}
-                className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
-              >
-                #{topic}
-              </li>
-            ))}
-          </ul>
-        </Atom.Visibility>
+        <div className="container mx-auto px-4 py-10">
+          <Atom.Visibility state={!!(topics.length > 0)}>
+            <ul className="mb-4 flex flex-wrap gap-2 justify-center">
+              {topics.map((topic) => (
+                <li
+                  key={topic}
+                  className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700"
+                >
+                  #{topic}
+                </li>
+              ))}
+            </ul>
+          </Atom.Visibility>
+          <Atom.Markdown content={content} simple={false} />
+        </div>
       </Template.Default>
     );
   } catch (err) {
