@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Atom from "@atom";
 import matter from "gray-matter";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -9,7 +10,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface MarkdownProps {
-  content: string;
+  content: string | null;
+  simple?: boolean | true;
 }
 
 const components: Components = {
@@ -92,19 +94,37 @@ const components: Components = {
   },
 };
 
-const Markdown: React.FC<MarkdownProps> = ({ content }) => {
-  const { data, content: body } = matter(content);
+const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
+  const { data, content: body } = matter(content || "");
 
   return (
-    <div className="p-5">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={components}
-      >
-        {body}
-      </ReactMarkdown>
-    </div>
+    <Fragment>
+      <Atom.Visibility state={simple}>
+        <div className="p-5">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={components}
+          >
+            {body}
+          </ReactMarkdown>
+        </div>
+      </Atom.Visibility>
+      <Atom.Visibility state={!simple}>
+        <Atom.Visibility state={!!data.cover_photo}>
+          <img src={data.cover_photo} />
+        </Atom.Visibility>
+        <div className="p-5">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
+            components={components}
+          >
+            {body}
+          </ReactMarkdown>
+        </div>
+      </Atom.Visibility>
+    </Fragment>
   );
 };
 
