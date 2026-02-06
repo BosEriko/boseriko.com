@@ -40,7 +40,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Template.Default center={true}>
+    <Template.Default orientation="center">
       <div className="container mx-auto px-4 flex flex-col-reverse lg:flex-row items-center mb-40 gap-10 mt-10">
         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6 w-full">
           <h1

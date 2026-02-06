@@ -45,8 +45,9 @@ export default async function Description({ params }: PageProps) {
     );
 
     return (
-      <Template.Default>
-        {topics.length > 0 && (
+      <Template.Default orientation="minimal">
+        <Atom.Markdown content={content} simple={false} />
+        <Atom.Visibility state={!!(topics.length > 0)}>
           <ul className="mb-4 flex flex-wrap gap-2">
             {topics.map((topic) => (
               <li
@@ -57,8 +58,7 @@ export default async function Description({ params }: PageProps) {
               </li>
             ))}
           </ul>
-        )}
-        <Atom.Markdown content={content} simple={false} />
+        </Atom.Visibility>
       </Template.Default>
     );
   } catch (err) {

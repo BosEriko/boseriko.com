@@ -31,7 +31,7 @@ const socialLinks = socialLinksData.map((link) => ({
 
 export default function Connect() {
   return (
-    <Template.Default center={true}>
+    <Template.Default orientation="center">
       <div className="text-center space-y-4 container mx-auto mt-4 mb-40 px-5">
         <h1 className="font-bold text-4xl">Connect with me</h1>
         <h4 className="text-gray-500">Or play with me or whatever</h4>
