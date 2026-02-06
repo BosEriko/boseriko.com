@@ -34,24 +34,19 @@ export default function Description() {
   }, [id]);
 
   return (
-    <Template.Default>
-      <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <h1>Portfolio: {id}</h1>
-        {loading ? (
-          <p>Loading...</p>
-        ) : content ? (
-          <div
-            style={{
-              background: "#f0f0f0",
-              padding: "1rem",
-              borderRadius: "8px",
-            }}
-          >
-            <Atom.Markdown content={content} />
-          </div>
-        ) : (
-          <p>No content found.</p>
-        )}
+    <Template.Default center={true}>
+      <div>
+        <Atom.Visibility state={!!loading}>
+          <div className="text-center">Loading...</div>
+        </Atom.Visibility>
+        <Atom.Visibility state={!loading}>
+          <Atom.Visibility state={!!content}>
+            <Atom.Markdown content={content} simple={false} />
+          </Atom.Visibility>
+          <Atom.Visibility state={!content}>
+            <div className="text-center">No content found.</div>
+          </Atom.Visibility>
+        </Atom.Visibility>
       </div>
     </Template.Default>
   );
