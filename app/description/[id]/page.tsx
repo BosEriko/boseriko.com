@@ -19,7 +19,11 @@ export default async function Description({ params }: PageProps) {
     if (!res.ok) {
       return (
         <Template.Default>
-          <div className="text-center">No PORTFOLIO.md found.</div>
+          <div className="text-center">
+            <span>No PORTFOLIO.md found. </span>
+            <span>Make sure the repository has </span>
+            <span>PORTFOLIO.md on the root directory.</span>
+          </div>
         </Template.Default>
       );
     }
