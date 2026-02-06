@@ -83,6 +83,13 @@ const components: Components = {
       </code>
     );
   },
+  ul: ({ children, className, ...props }) => {
+    return (
+      <ul {...props} className="list-disc list-outside space-y-1 ml-5">
+        {children}
+      </ul>
+    );
+  },
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
