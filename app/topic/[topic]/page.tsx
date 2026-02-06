@@ -11,9 +11,74 @@ type Repo = {
   updated_at: string;
 };
 
+const pageDescription: Record<string, { title: string; description: string }> =
+  {
+    product: {
+      title: "Product",
+      description: "These are repositories that I work on constantly.",
+    },
+    project: {
+      title: "Project",
+      description: "These are repositories that I work on every now and then.",
+    },
+    typescript: {
+      title: "TypeScript",
+      description: "Repositories related to TypeScript.",
+    },
+    ruby: {
+      title: "Ruby",
+      description: "Repositories related to Ruby.",
+    },
+    elixir: {
+      title: "Elixir",
+      description: "Repositories related to Elixir.",
+    },
+    php: {
+      title: "PHP",
+      description: "Repositories related to PHP.",
+    },
+    react: {
+      title: "React",
+      description: "Repositories related to React.",
+    },
+    nextjs: {
+      title: "Next.js",
+      description: "Repositories related to Next.js.",
+    },
+    nodejs: {
+      title: "Node.js",
+      description: "Repositories related to Node.js.",
+    },
+    rails: {
+      title: "Rails",
+      description: "Repositories related to Rails.",
+    },
+    graphql: {
+      title: "GraphQL",
+      description: "Repositories related to GraphQL.",
+    },
+    docker: {
+      title: "Docker",
+      description: "Repositories related to Docker.",
+    },
+    tailwind: {
+      title: "Tailwind",
+      description: "Repositories related to Tailwind.",
+    },
+    postgresql: {
+      title: "PostgreSQL",
+      description: "Repositories related to PostgreSQL.",
+    },
+    mysql: {
+      title: "MySQL",
+      description: "Repositories related to MySQL.",
+    },
+  };
+
 export default function Topic() {
   const params = useParams();
-  const { topic } = params;
+  const { topic: topicParam } = params;
+  const topic = Array.isArray(topicParam) ? topicParam[0] : topicParam;
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -39,8 +104,14 @@ export default function Topic() {
 
   return (
     <Template.Default>
-      <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <h1>My Repositories</h1>
+      <div className="text-center space-y-4 container mx-auto my-10 px-5">
+        <h1 className="font-bold text-4xl">
+          {topic ? pageDescription[topic]?.title : "Unknown Topic"}
+        </h1>
+
+        <h4 className="text-gray-500">
+          {topic ? pageDescription[topic]?.description : "Unknown Description"}
+        </h4>
 
         {loading ? (
           <p>Loading...</p>
