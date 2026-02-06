@@ -18,6 +18,7 @@ type Post = {
   tag_list: string[];
   url: string;
   path: string;
+  reading_time_minutes: number;
   comments_count: number;
   public_reactions_count: number;
 };
@@ -116,11 +117,18 @@ export default function Blog() {
                     <h2 className="text-xl font-semibold mx-3">{post.title}</h2>
 
                     <div className="text-sm text-gray-500 mb-3 mx-3">
-                      {new Date(post.published_at).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
+                      <span>
+                        {new Date(post.published_at).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          },
+                        )}
+                      </span>
+                      <span className="font-bold"> &middot; </span>
+                      <span>{post.reading_time_minutes} min read</span>
                     </div>
 
                     <p className="text-gray-600 mb-13 mx-3">
