@@ -16,5 +16,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/app:Z
+      - /app/node_modules
     environment:
       NODE_ENV: development
