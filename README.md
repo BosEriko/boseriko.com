@@ -5,6 +5,9 @@ My personal website.
 ```sh
 yarn install
 yarn develop
+# or with Docker
+docker-compose build
+docker-compose up
 ```
 
 ## Deploy to Production
