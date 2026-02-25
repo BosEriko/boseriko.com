@@ -22,7 +22,7 @@ const Card: React.FunctionComponent<ICardProps> = ({
     >
       <Link href={url}>
         <img src={coverPhotoUrl} />
-        <div className="p-5">{children}</div>
+        <div className="p-5 mb-5">{children}</div>
       </Link>
     </div>
   );

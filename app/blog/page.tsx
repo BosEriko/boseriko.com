@@ -1,4 +1,5 @@
 import Template from "@template";
+import Atom from "@atom";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
@@ -79,25 +80,9 @@ export default async function Blog({ searchParams }: PageProps) {
                 const cover = post.cover_image || post.social_image;
 
                 return (
-                  <li
-                    key={post.slug}
-                    className="
-                      border rounded-lg bg-white border-gray-200 overflow-hidden
-                      transition-all duration-300 ease-in-out
-                      hover:border-[#f7b43d] hover:scale-105 relative
-                    "
-                  >
-                    <Link href={`/blog/${post.slug}`} className="block h-full">
-                      {cover && (
-                        <img
-                          src={cover}
-                          alt={post.title}
-                          className="w-full h-48 object-cover"
-                          loading="lazy"
-                        />
-                      )}
-
-                      <div className="flex flex-wrap gap-2 m-3">
+                  <li key={post.slug}>
+                    <Atom.Card url={`/blog/${post.slug}`} coverPhotoUrl={cover}>
+                      <div className="flex flex-wrap gap-2 mb-3">
                         {(post.tag_list || []).map((tag) => (
                           <span
                             key={tag}
@@ -108,11 +93,11 @@ export default async function Blog({ searchParams }: PageProps) {
                         ))}
                       </div>
 
-                      <h2 className="text-xl font-semibold mx-3">
+                      <h2 className="text-xl font-semibold">
                         {post.title}
                       </h2>
 
-                      <div className="text-sm text-gray-500 mb-3 mx-3">
+                      <div className="text-sm text-gray-500 mb-3">
                         <span>
                           {new Date(post.published_at).toLocaleDateString(
                             "en-US",
@@ -127,11 +112,11 @@ export default async function Blog({ searchParams }: PageProps) {
                         <span>{post.reading_time_minutes} min read</span>
                       </div>
 
-                      <p className="text-gray-600 mb-13 mx-3">
+                      <p className="text-gray-600">
                         {post.description}
                       </p>
 
-                      <div className="flex gap-4 text-gray-700 absolute bottom-3 left-3">
+                      <div className="flex gap-4 text-gray-700 absolute bottom-5 left-5">
                         <div className="flex gap-1 text-xs items-center">
                           <FontAwesomeIcon icon={faHeart} />
                           <span>{post.public_reactions_count}</span>
@@ -146,7 +131,7 @@ export default async function Blog({ searchParams }: PageProps) {
                           <span>Comment{post.comments_count > 1 && "s"}</span>
                         </div>
                       </div>
-                    </Link>
+                    </Atom.Card>
                   </li>
                 );
               })}
