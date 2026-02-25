@@ -21,7 +21,7 @@ const Card: React.FunctionComponent<ICardProps> = ({
       "
     >
       <Link href={url}>
-        <img src={coverPhotoUrl} />
+        <div style={{ backgroundImage: `url("${coverPhotoUrl}")` }} className="aspect-2/1 bg-cover bg-center"></div>
         <div className="p-5 mb-10">{children}</div>
       </Link>
     </div>
