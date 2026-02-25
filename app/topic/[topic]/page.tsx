@@ -12,6 +12,8 @@ type Repo = {
   watchers_count: number;
   forks_count: number;
   language: string;
+  node_id: string;
+  full_name: string;
 };
 
 const pageDescription: Record<string, { title: string; description: string }> =
@@ -138,6 +140,7 @@ export default async function Topic({ params, searchParams }: PageProps) {
                 "
               >
                 <Link href={`/description/${repo.name}`}>
+                  <img src={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`} />
                   <h2 className="font-bold text-lg">{repo.name}</h2>
                   <p className="line-clamp-2 mb-10">{repo.description}</p>
 
