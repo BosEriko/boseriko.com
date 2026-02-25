@@ -112,23 +112,25 @@ export default async function Blog({ searchParams }: PageProps) {
                         <span>{post.reading_time_minutes} min read</span>
                       </div>
 
-                      <p className="text-gray-600">
+                      <div className="text-gray-600">
                         {post.description}
-                      </p>
+                      </div>
 
-                      <div className="flex gap-4 text-gray-700 absolute bottom-5 left-5">
-                        <div className="flex gap-1 text-xs items-center">
-                          <FontAwesomeIcon icon={faHeart} />
-                          <span>{post.public_reactions_count}</span>
-                          <span>
-                            Reaction
-                            {post.public_reactions_count > 1 && "s"}
-                          </span>
-                        </div>
-                        <div className="flex gap-2 text-xs items-center">
-                          <FontAwesomeIcon icon={faComment} />
-                          <span>{post.comments_count}</span>
-                          <span>Comment{post.comments_count > 1 && "s"}</span>
+                      <div className="absolute left-5 bottom-5 right-5">
+                        <div className="flex gap-4 text-gray-700">
+                          <div className="flex gap-1 text-xs items-center">
+                            <FontAwesomeIcon icon={faHeart} />
+                            <span>{post.public_reactions_count}</span>
+                            <span>
+                              Reaction
+                              {post.public_reactions_count > 1 && "s"}
+                            </span>
+                          </div>
+                          <div className="flex gap-2 text-xs items-center">
+                            <FontAwesomeIcon icon={faComment} />
+                            <span>{post.comments_count}</span>
+                            <span>Comment{post.comments_count > 1 && "s"}</span>
+                          </div>
                         </div>
                       </div>
                     </Atom.Card>
