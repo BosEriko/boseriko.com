@@ -1,4 +1,5 @@
 import Template from "@template";
+import Atom from "@atom";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -131,42 +132,32 @@ export default async function Topic({ params, searchParams }: PageProps) {
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
             {repos.map((repo) => (
-              <li
-                key={repo.id}
-                className="
-                  border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
-                  transition-all duration-300 ease-in-out
-                  hover:border-[#f7b43d] hover:scale-105 relative
-                "
-              >
-                <Link href={`/description/${repo.name}`}>
-                  <img src={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`} />
-                  <div className="p-5">
-                    <h2 className="font-bold text-lg">{repo.name}</h2>
-                    <p className="line-clamp-2 mb-10">{repo.description}</p>
+              <li key={repo.id}>
+                <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
+                  <h2 className="font-bold text-lg">{repo.name}</h2>
+                  <p className="line-clamp-2 mb-10">{repo.description}</p>
 
-                    <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
-                      <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
-                        {repo.language}
+                  <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
+                    <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
+                      {repo.language}
+                    </div>
+
+                    <div className="text-xs flex items-center gap-2 text-gray-400">
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faEye} />
+                        <span>{repo.watchers_count}</span>
                       </div>
-
-                      <div className="text-xs flex items-center gap-2 text-gray-400">
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faEye} />
-                          <span>{repo.watchers_count}</span>
-                        </div>
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faCodeBranch} />
-                          <span>{repo.forks_count}</span>
-                        </div>
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faStar} />
-                          <span>{repo.stargazers_count}</span>
-                        </div>
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faCodeBranch} />
+                        <span>{repo.forks_count}</span>
+                      </div>
+                      <div className="flex gap-1 items-center">
+                        <FontAwesomeIcon icon={faStar} />
+                        <span>{repo.stargazers_count}</span>
                       </div>
                     </div>
                   </div>
-                </Link>
+                </Atom.Card>
               </li>
             ))}
           </ul>
