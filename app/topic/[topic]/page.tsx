@@ -15,6 +15,7 @@ type Repo = {
   language: string;
   node_id: string;
   full_name: string;
+  default_branch: string;
 };
 
 const pageDescription: Record<string, { title: string; description: string }> =
@@ -133,7 +134,7 @@ export default async function Topic({ params, searchParams }: PageProps) {
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
             {repos.map((repo) => (
               <li key={repo.id}>
-                <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
+                <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/COVER.png`} fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
                   <h2 className="font-bold text-lg">{repo.name}</h2>
 
                   <p className="line-clamp-2">{repo.description}</p>

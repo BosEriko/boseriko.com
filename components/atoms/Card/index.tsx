@@ -1,17 +1,37 @@
-import { ReactNode, Fragment } from "react";
+"use client";
+import { ReactNode, Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 
 interface ICardProps {
   url: string;
   coverPhotoUrl: string;
+  fallbackCoverPhotoUrl?: string | null;
+  key: string,
   children: ReactNode;
 }
 
 const Card: React.FunctionComponent<ICardProps> = ({
   url,
   coverPhotoUrl,
+  fallbackCoverPhotoUrl = null,
+  key,
   children,
 }) => {
+  const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = coverPhotoUrl;
+
+    img.onload = () => {
+      setCoverUrl(coverPhotoUrl);
+    };
+
+    img.onerror = () => {
+      setCoverUrl(fallbackCoverPhotoUrl);
+    };
+  }, [coverPhotoUrl, fallbackCoverPhotoUrl]);
+
   return (
     <div
       className="
@@ -21,7 +41,7 @@ const Card: React.FunctionComponent<ICardProps> = ({
       "
     >
       <Link href={url}>
-        <div style={{ backgroundImage: `url("${coverPhotoUrl}")` }} className="aspect-2/1 bg-cover bg-center"></div>
+        <div style={{ backgroundImage: `url('${coverUrl}')` }} className="aspect-2/1 bg-cover bg-center repo-cover"></div>
         <div className="p-5 mb-10">{children}</div>
       </Link>
     </div>
