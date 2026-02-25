@@ -7,7 +7,7 @@ yarn install
 yarn develop
 # or with Docker
 docker-compose build
-docker-compose up
+docker-compose up dev
 ```
 
 ## Deploy to Production
