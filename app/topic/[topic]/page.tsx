@@ -136,31 +136,33 @@ export default async function Topic({ params, searchParams }: PageProps) {
                 className="
                   border rounded-lg bg-white border-gray-200 overflow-hidden cursor-pointer
                   transition-all duration-300 ease-in-out
-                  hover:border-[#f7b43d] hover:scale-105 relative p-5
+                  hover:border-[#f7b43d] hover:scale-105 relative
                 "
               >
                 <Link href={`/description/${repo.name}`}>
                   <img src={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`} />
-                  <h2 className="font-bold text-lg">{repo.name}</h2>
-                  <p className="line-clamp-2 mb-10">{repo.description}</p>
+                  <div className="p-5">
+                    <h2 className="font-bold text-lg">{repo.name}</h2>
+                    <p className="line-clamp-2 mb-10">{repo.description}</p>
 
-                  <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
-                    <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
-                      {repo.language}
-                    </div>
+                    <div className="absolute left-5 bottom-5 right-5 flex justify-between items-center">
+                      <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
+                        {repo.language}
+                      </div>
 
-                    <div className="text-xs flex items-center gap-2 text-gray-400">
-                      <div className="flex gap-1 items-center">
-                        <FontAwesomeIcon icon={faEye} />
-                        <span>{repo.watchers_count}</span>
-                      </div>
-                      <div className="flex gap-1 items-center">
-                        <FontAwesomeIcon icon={faCodeBranch} />
-                        <span>{repo.forks_count}</span>
-                      </div>
-                      <div className="flex gap-1 items-center">
-                        <FontAwesomeIcon icon={faStar} />
-                        <span>{repo.stargazers_count}</span>
+                      <div className="text-xs flex items-center gap-2 text-gray-400">
+                        <div className="flex gap-1 items-center">
+                          <FontAwesomeIcon icon={faEye} />
+                          <span>{repo.watchers_count}</span>
+                        </div>
+                        <div className="flex gap-1 items-center">
+                          <FontAwesomeIcon icon={faCodeBranch} />
+                          <span>{repo.forks_count}</span>
+                        </div>
+                        <div className="flex gap-1 items-center">
+                          <FontAwesomeIcon icon={faStar} />
+                          <span>{repo.stargazers_count}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
