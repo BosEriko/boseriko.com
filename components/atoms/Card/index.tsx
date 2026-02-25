@@ -6,7 +6,6 @@ interface ICardProps {
   url: string;
   coverPhotoUrl: string;
   fallbackCoverPhotoUrl?: string | null;
-  key: string,
   children: ReactNode;
 }
 
@@ -14,7 +13,6 @@ const Card: React.FunctionComponent<ICardProps> = ({
   url,
   coverPhotoUrl,
   fallbackCoverPhotoUrl = null,
-  key,
   children,
 }) => {
   const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
