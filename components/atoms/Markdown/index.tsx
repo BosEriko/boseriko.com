@@ -17,7 +17,6 @@ interface MarkdownProps {
 interface FrontMatter {
   title: string;
   published: boolean;
-  cover_photo?: string;
   masonry_photos?: string;
   [key: string]: any;
 }
@@ -121,14 +120,6 @@ const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
         </div>
       </Atom.Visibility>
       <Atom.Visibility state={!simple}>
-        <Atom.Visibility state={!!data.cover_photo}>
-          <div className="mx-auto max-w-300">
-            <img
-              src={data.cover_photo}
-              className="w-full rounded-lg shadow-lg"
-            />
-          </div>
-        </Atom.Visibility>
         <div className="mx-auto max-w-250 p-5">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}

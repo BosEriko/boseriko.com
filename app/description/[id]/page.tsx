@@ -9,6 +9,8 @@ interface Repo {
   stargazers_count: number;
   html_url: string;
   topics: string[];
+  full_name: string;
+  default_branch: string;
 }
 
 interface PageProps {
@@ -62,6 +64,8 @@ export default async function Description({ params }: PageProps) {
     const stargazers_count: number = repoJson.stargazers_count;
     const html_url: string = repoJson.html_url;
     const description: string = repoJson.description;
+    const full_name: string = repoJson.full_name;
+    const default_branch: string = repoJson.default_branch;
 
     return (
       <Template.Default orientation="minimal" backgroundColor="white">
@@ -112,6 +116,10 @@ export default async function Description({ params }: PageProps) {
           <h4 className="text-center mb-10 text-md text-gray-500 max-w-175 mx-auto">
             {description}
           </h4>
+
+          <div className="mx-auto max-w-300">
+            <img src={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`} className="w-full rounded-lg shadow-lg" />
+          </div>
 
           <Atom.Markdown content={content} simple={false} />
 

@@ -1,5 +1,4 @@
 ---
-cover_photo: "https://i.imgur.com/bnhx1SQ.png"
 masonry_photos: "
   https://i.imgur.com/bnhx1SQ.png,
   https://i.imgur.com/llcYYKz.png,
