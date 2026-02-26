@@ -121,7 +121,9 @@ export default async function Description({ params }: PageProps) {
             <img src={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`} className="w-full rounded-lg shadow-lg" />
           </div>
 
-          <Atom.Markdown content={content} simple={false} />
+          <div className="mx-auto max-w-250 p-5">
+            <Atom.Markdown content={content} />
+          </div>
 
           <div className="mt-5 flex justify-between max-w-250 mx-auto">
             <a

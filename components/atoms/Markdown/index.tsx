@@ -11,14 +11,6 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface MarkdownProps {
   content: string | null;
-  simple?: boolean | true;
-}
-
-interface FrontMatter {
-  title: string;
-  published: boolean;
-  masonry_photos?: string;
-  [key: string]: any;
 }
 
 const components: Components = {
@@ -101,51 +93,22 @@ const components: Components = {
   },
 };
 
-const Markdown: React.FC<MarkdownProps> = ({ content, simple = true }) => {
+const Markdown: React.FC<MarkdownProps> = ({ content }) => {
   const parsed = matter(content || "");
   const data: FrontMatter = parsed.data as FrontMatter;
   const body: string = parsed.content;
 
   return (
     <Fragment>
-      <Atom.Visibility state={simple}>
-        <div className="p-5">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={components}
-          >
-            {body}
-          </ReactMarkdown>
-        </div>
-      </Atom.Visibility>
-      <Atom.Visibility state={!simple}>
-        <div className="mx-auto max-w-250 p-5">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-            components={components}
-          >
-            {body}
-          </ReactMarkdown>
-        </div>
-        <Atom.Visibility
-          state={
-            !!data.masonry_photos &&
-            !!(data.masonry_photos.split(", ").length > 5)
-          }
+      <div className="p-5">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={components}
         >
-          <Atom.Masonry
-            images={
-              data.masonry_photos
-                ?.split(",")
-                .map((s) => s.trim())
-                .filter(Boolean) || []
-            }
-            maxWidth={1100}
-          />
-        </Atom.Visibility>
-      </Atom.Visibility>
+          {body}
+        </ReactMarkdown>
+      </div>
     </Fragment>
   );
 };
