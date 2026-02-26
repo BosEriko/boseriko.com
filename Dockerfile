@@ -1,23 +1,25 @@
-# Use Node.js 20 LTS as base
-FROM node:20-alpine
-
-# Set working directory
+# ---------- 1. Install dependencies ----------
+FROM node:20-alpine AS deps
 WORKDIR /app
-
-# Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of your app
+# ---------- 2. Build the app ----------
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Build the Next.js app
 RUN npm run build
 
-# Expose the port Next.js will run on
-EXPOSE 3000
+# ---------- 3. Production runtime ----------
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
 
-# Start the app
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 3000
 CMD ["npm", "start"]
