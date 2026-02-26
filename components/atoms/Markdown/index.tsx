@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import Atom from "@atom";
-import matter from "gray-matter";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -94,10 +93,6 @@ const components: Components = {
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
-  const parsed = matter(content || "");
-  const data: FrontMatter = parsed.data as FrontMatter;
-  const body: string = parsed.content;
-
   return (
     <Fragment>
       <div className="p-5">
@@ -106,7 +101,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
           rehypePlugins={[rehypeRaw]}
           components={components}
         >
-          {body}
+          {content}
         </ReactMarkdown>
       </div>
     </Fragment>
