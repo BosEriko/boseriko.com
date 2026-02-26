@@ -1,6 +1,9 @@
 import Template from "@template";
 import Atom from "@atom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFileLines, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 interface Repo {
   description: string;
   name: string;
@@ -118,28 +121,35 @@ export default async function Description({ params }: PageProps) {
           </h4>
 
           <div className="mx-auto max-w-300">
-            <img src={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`} className="w-full rounded-lg shadow-lg" />
+            <img src={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`} className="w-full rounded-lg shadow-lg border-3 border-[#f7b43d]" />
           </div>
 
           <div className="mx-auto max-w-250 p-5">
             <Atom.Markdown content={content} />
           </div>
 
-          <div className="mt-5 flex justify-between max-w-250 mx-auto">
-            <a
-              href="#"
-              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Back to Top
-            </a>
-            <a
-              href={`/topic/${type}`}
-              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-[#f7b43d] text-gray-700 font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Back to {type.charAt(0).toUpperCase() + type.slice(1)}s
-            </a>
+          <div className="mx-auto max-w-300 bg-[#f7b43d] rounded-md mt-5 p-10 text-center text-white flex flex-col gap-5 shadow-lg">
+            <h2 className="font-bold text-4xl">Like what you see?</h2>
+            <p className="font-bold text-xl">Let's work together and make your ideas come to life!<br />Or maybe view more of my {type.charAt(0).toUpperCase() + type.slice(1)}s?</p>
+            <div className="flex flex-row gap-5 justify-center">
+              <a
+                href={`/resume`}
+                target="_blank"
+                className="px-6 py-2 rounded-md border-2 border-white bg-white text-[#f7b43d] font-bold transition-all duration-300 ease-out
+                        hover:-translate-y-1 flex gap-1 items-center"
+              >
+                <FontAwesomeIcon icon={faFileLines} />
+                <span>Check Resume</span>
+              </a>
+              <a
+                href={`/topic/${type}`}
+                className="px-6 py-2 rounded-md border-2 border-white bg-[#f7b43d] text-white font-bold transition-all duration-300 ease-out
+                        hover:-translate-y-1 flex gap-1 items-center"
+              >
+                <FontAwesomeIcon icon={faArrowRight} />
+                <span>See More {type.charAt(0).toUpperCase() + type.slice(1)}s</span>
+              </a>
+            </div>
           </div>
         </div>
       </Template.Default>
