@@ -2,7 +2,7 @@
 Some frequently asked questions.
 
 ### How do you add a repository on product or project page?
-Repositories are automatically added to product or project page when `product` or `project` is added to the topics of a repository.
+Repositories are automatically added to product or project page when `product` or `project` is added to the topics of a public repository.
 
 ### Where does the content of a repository page come from?
 It comes from **PORTFOLIO.md** on the root of a repository.
