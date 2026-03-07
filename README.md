@@ -1,13 +1,15 @@
 # boseriko.com
 My personal website.
 
-## Run Project
+## Run Project Locally
 ```sh
 yarn install
 yarn develop
-# or with Docker
-docker-compose build
-docker-compose up dev
+```
+
+## Run Project in Docker
+```sh
+./docker.sh
 ```
 
 ## Deploy to Production
