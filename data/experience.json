@@ -1,13 +1,26 @@
 [
   {
     "position": "Full Stack Developer",
+    "company": "The DNA Company",
+    "date": {
+      "start": 1774569600000,
+      "end": null
+    },
+    "location": "Remote",
+    "active": true,
+    "responsibilities": [
+      "Maintained and enhanced a TypeScript application."
+    ]
+  },
+  {
+    "position": "Full Stack Developer",
     "company": "ReferScout",
     "date": {
       "start": 1696540800000,
       "end": 1760428800000
     },
     "location": "Remote",
-    "active": true,
+    "active": false,
     "responsibilities": [
       "Maintained and enhanced a Ruby on Rails back-end application.",
       "Built and optimized a ReactJS front-end interface for seamless usability.",
