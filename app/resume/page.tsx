@@ -293,7 +293,7 @@ export default async function Resume() {
               </ul>
             </div>
             <div>
-              <h4 className="text-xl font-bold mb-2">Published Ruby Gems</h4>
+              <h4 className="text-xl font-bold mb-2">Ruby Gems</h4>
               <ul className="list-disc ml-5">
                 {gems.map((gem, index) => (
                   <li key={index}>
