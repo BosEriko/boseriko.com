@@ -233,11 +233,11 @@ export default async function Resume() {
                 </span>
               </div>
               <p className="text-gray-600 mb-2 flex gap-1">
-                <span className="font-bold">GitHub</span>
-                <span>at</span>
-                <a href={project.html_url} target="_blank">
+                <a href={project.html_url} className="font-bold" target="_blank">
                   {project.full_name}
                 </a>
+                <span>at</span>
+                <span>github.com</span>
               </p>
               <ul className="list-disc list-outside space-y-1 ml-5">
                 <li className="text-gray-700">
