@@ -9,6 +9,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import experience from "@data/experience.json";
 import awards from "@data/awards.json";
 import gems from "@data/gems.json";
+import packages from "@data/packages.json";
 import contributions from "@data/contributions.json";
 
 import "devicon/devicon.min.css";
@@ -274,21 +275,39 @@ export default async function Resume() {
       <div className="inline-table w-full mb-20">
         <h4 className="text-3xl font-bold mb-5">📜 Community Contributions</h4>
         <div className="flex gap-3">
-          <div className="flex-1">
-            <h4 className="text-xl font-bold mb-2">Published Ruby Gems</h4>
-            <ul className="list-disc ml-5">
-              {gems.map((gem, index) => (
-                <li key={index}>
-                  <a
-                    href={gem.link}
-                    className="font-bold text-blue-800"
-                    target="_blank"
-                  >
-                    {gem.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="flex-1 flex gap-5 flex-col">
+            <div>
+              <h4 className="text-xl font-bold mb-2">NPM Packages</h4>
+              <ul className="list-disc ml-5">
+                {packages.map((npm, index) => (
+                  <li key={index}>
+                    <a
+                      href={npm.link}
+                      className="font-bold text-blue-800"
+                      target="_blank"
+                    >
+                      {npm.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-2">Published Ruby Gems</h4>
+              <ul className="list-disc ml-5">
+                {gems.map((gem, index) => (
+                  <li key={index}>
+                    <a
+                      href={gem.link}
+                      className="font-bold text-blue-800"
+                      target="_blank"
+                    >
+                      {gem.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="flex-1">
             <h4 className="text-xl font-bold mb-2">
