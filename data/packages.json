@@ -2,5 +2,9 @@
   {
     "name": "create-nails",
     "link": "https://www.npmjs.com/package/create-nails"
+  },
+  {
+    "name": "core-nails",
+    "link": "https://www.npmjs.com/package/core-nails"
   }
 ]
