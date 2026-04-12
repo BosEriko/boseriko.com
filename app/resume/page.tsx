@@ -294,7 +294,7 @@ export default async function Resume() {
             <div>
               <h4 className="text-xl font-bold mb-2">NPM Packages</h4>
               <ul className="list-disc ml-5">
-                {packages.map((npm, index) => (
+                {packages.map((npm: any, index: number) => (
                   <li key={index}>
                     <a
                       href={npm.link}
@@ -310,7 +310,7 @@ export default async function Resume() {
             <div>
               <h4 className="text-xl font-bold mb-2">Ruby Gems</h4>
               <ul className="list-disc ml-5">
-                {gems.map((gem, index) => (
+                {gems.map((gem: any, index: number) => (
                   <li key={index}>
                     <a
                       href={gem.link}
@@ -329,7 +329,7 @@ export default async function Resume() {
               Open Source Contributions
             </h4>
             <ul className="list-disc ml-5">
-              {contributions.map((contribution, index) => (
+              {contributions.map((contribution: any, index: number) => (
                 <li key={index}>
                   <a
                     href={contribution.link}
