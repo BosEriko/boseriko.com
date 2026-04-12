@@ -86,7 +86,7 @@ interface Project {
   updated_at: string | Date;
 }
 
-const ResumeSection = ({ data, title }: EntryProps) => {
+function ResumeSection({ data, title }: EntryProps) {
   return (
     <div className="mb-20">
       <ul className="space-y-6">
