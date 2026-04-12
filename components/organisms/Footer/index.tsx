@@ -41,7 +41,7 @@ const Footer = () => {
           Bos Eriko &copy; {new Date().getFullYear()}
         </div>
         <div className="flex flex-wrap justify-center gap-3">
-          {socialLinks.map((social) => (
+          {socialLinks.map((social: any) => (
             <a
               key={social.name}
               href={social.url}
