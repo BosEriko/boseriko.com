@@ -10,7 +10,13 @@ import {
   faXTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import socialLinksData from "@data/links.json";
+
+const socialLinksData = await fetch(
+  "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/links.json",
+  {
+    next: { revalidate: 86400 },
+  },
+).then((res) => res.json());
 
 const iconMap = {
   faSteam,
