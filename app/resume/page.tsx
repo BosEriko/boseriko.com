@@ -353,7 +353,6 @@ export default async function Resume() {
         </div>
       </div>
 
-      {/* Last Update */}
       <div className="text-xs text-center text-gray-400 italic">
         Last Update: {formatFullDate(new Date())}
       </div>
