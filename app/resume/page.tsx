@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import "devicon/devicon.min.css";
 
-const fetchData = async <T>(name: string, revalidate = 86400): Promise<T> => {
+const fetchData = async (name: string, revalidate = 86400) => {
   const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/${name}.json`, {
     next: { revalidate },
   });
@@ -86,7 +86,7 @@ interface Project {
   updated_at: string | Date;
 }
 
-function ResumeSection({ data, title }: EntryProps) {
+const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   return (
     <div className="mb-20">
       <ul className="space-y-6">
@@ -155,12 +155,12 @@ export default async function Resume() {
     packages,
     contributions,
   ] = await Promise.all([
-    fetchData("topic-count"),
-    fetchData("experience"),
-    fetchData("awards"),
-    fetchData("gems"),
-    fetchData("packages"),
-    fetchData("contributions"),
+    fetchData<any>("topic-count"),
+    fetchData<any>("experience"),
+    fetchData<any>("awards"),
+    fetchData<any>("gems"),
+    fetchData<any>("packages"),
+    fetchData<any>("contributions"),
   ]);
 
   const formatFullDate = (date: Date) =>
