@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import "devicon/devicon.min.css";
 
-const fetchData = async (name: string, revalidate = 86400) => {
+const fetchData = async <T>(name: string, revalidate = 86400): Promise<T> => {
   const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/${name}.json`, {
     next: { revalidate },
   });
