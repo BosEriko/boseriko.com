@@ -14,7 +14,7 @@ const fetchData = async (name: string, revalidate = 86400) => {
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch: ${url}`);
+    throw new Error(`Failed to fetch: ${name}`);
   }
 
   return res.json();
