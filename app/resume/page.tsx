@@ -6,13 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import experience from "@data/experience.json";
-import awards from "@data/awards.json";
-import gems from "@data/gems.json";
-import packages from "@data/packages.json";
-import contributions from "@data/contributions.json";
-
 import "devicon/devicon.min.css";
+
+const fetchData = async (name: string, revalidate = 86400) => {
+  const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/${name}.json`, {
+    next: { revalidate },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch: ${url}`);
+  }
+
+  return res.json();
+};
 
 type Topic =
   | "typescript"
@@ -134,19 +140,28 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
 };
 
 export default async function Resume() {
-  const topics = await fetch(
-    "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topic-count.json",
-    {
-      next: { revalidate: 86400 },
-    },
-  ).then((res) => res.json());
-
   const projects = await fetch(
     "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=stars&order=desc&page=1&per_page=5",
     {
       next: { revalidate: 86400 },
     },
   ).then((res) => res.json());
+
+  const [
+    topics,
+    experience,
+    awards,
+    gems,
+    packages,
+    contributions,
+  ] = await Promise.all([
+    fetchData("topic-count"),
+    fetchData("experience"),
+    fetchData("awards"),
+    fetchData("gems"),
+    fetchData("packages"),
+    fetchData("contributions"),
+  ]);
 
   const formatFullDate = (date: Date) =>
     new Intl.DateTimeFormat("en-US", {
