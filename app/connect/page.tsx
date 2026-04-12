@@ -48,7 +48,7 @@ export default function Connect() {
                         md:grid-cols-3
                         lg:grid-cols-4"
         >
-          {socialLinks.map((social) => (
+          {socialLinks.map((social: any) => (
             <a
               key={social.name}
               href={social.url}
