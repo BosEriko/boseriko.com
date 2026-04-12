@@ -86,7 +86,7 @@ interface Project {
   updated_at: string | Date;
 }
 
-const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
+const ResumeSection = ({ data, title }: EntryProps) => {
   return (
     <div className="mb-20">
       <ul className="space-y-6">
