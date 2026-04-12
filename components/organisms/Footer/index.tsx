@@ -28,7 +28,7 @@ const iconMap = {
   faLinkedin,
 };
 
-const socialLinks = socialLinksData.map((link) => ({
+const socialLinks = socialLinksData.map((link: any) => ({
   ...link,
   icon: iconMap[link.icon as keyof typeof iconMap],
 }));
