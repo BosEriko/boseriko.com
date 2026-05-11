@@ -90,7 +90,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   return (
     <div className="mb-20">
       <ul className="space-y-6">
-        {data.map((entry, index) => (
+        {data.filter((entry) => entry.hidden !== true).map((entry, index) => (
           <li key={index} className="inline-table w-full">
             {index < 1 && <h4 className="text-3xl font-bold mb-5">{title}</h4>}
             <div className="flex justify-between items-center mb-2">
