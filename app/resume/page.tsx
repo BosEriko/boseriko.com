@@ -66,6 +66,7 @@ interface EntryItem {
   date: EntryDate;
   location: string;
   active: boolean;
+  hidden: boolean;
   responsibilities: string[];
 }
 
