@@ -18,69 +18,16 @@ type Repo = {
   default_branch: string;
 };
 
-const pageDescription: Record<string, { title: string; description: string }> =
-  {
-    product: {
-      title: "Product",
-      description: "These are repositories that I work on constantly.",
-    },
-    project: {
-      title: "Project",
-      description: "These are repositories that I work on every now and then.",
-    },
-    typescript: {
-      title: "TypeScript",
-      description: "Repositories related to TypeScript.",
-    },
-    ruby: {
-      title: "Ruby",
-      description: "Repositories related to Ruby.",
-    },
-    elixir: {
-      title: "Elixir",
-      description: "Repositories related to Elixir.",
-    },
-    php: {
-      title: "PHP",
-      description: "Repositories related to PHP.",
-    },
-    react: {
-      title: "React",
-      description: "Repositories related to React.",
-    },
-    nextjs: {
-      title: "Next.js",
-      description: "Repositories related to Next.js.",
-    },
-    nodejs: {
-      title: "Node.js",
-      description: "Repositories related to Node.js.",
-    },
-    rails: {
-      title: "Rails",
-      description: "Repositories related to Rails.",
-    },
-    graphql: {
-      title: "GraphQL",
-      description: "Repositories related to GraphQL.",
-    },
-    docker: {
-      title: "Docker",
-      description: "Repositories related to Docker.",
-    },
-    tailwind: {
-      title: "Tailwind",
-      description: "Repositories related to Tailwind.",
-    },
-    postgresql: {
-      title: "PostgreSQL",
-      description: "Repositories related to PostgreSQL.",
-    },
-    mysql: {
-      title: "MySQL",
-      description: "Repositories related to MySQL.",
-    },
-  };
+const TOPICS_URL = "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json";
+
+async function getTopics() {
+  const res = await fetch(TOPICS_URL, {
+    next: { revalidate: 86400 },
+  });
+
+  if (!res.ok) return {};
+  return res.json();
+}
 
 interface PageProps {
   params: any;
@@ -93,6 +40,9 @@ export default async function Topic({ params, searchParams }: PageProps) {
   const topic = awaitedParams.topic;
   const page = Number(awaitedSearchParams.page ?? 1);
   const perPage = 12;
+
+  const topics = await getTopics();
+  const topicInfo = topics[topic];
 
   const res = await fetch(
     `https://api.github.com/search/repositories?q=user:boseriko+topic:${topic}&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
@@ -111,12 +61,12 @@ export default async function Topic({ params, searchParams }: PageProps) {
     <Template.Default>
       <div className="text-center space-y-4 container mx-auto my-10 px-5">
         <h1 className="font-bold text-4xl">
-          {pageDescription[topic]?.title ?? "Unknown Topic"}
+          {topicInfo?.title ?? "Unknown Topic"}
         </h1>
 
         <h4 className="text-gray-500">
           <span>
-            {pageDescription[topic]?.description ?? "Unknown Description"}
+            {topicInfo?.description ?? "Unknown Description"}
           </span>
           <span> Find more at my </span>
           <a
