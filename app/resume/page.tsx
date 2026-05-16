@@ -194,7 +194,7 @@ export default async function Resume() {
               <div
                 key={topic}
                 className="text-white flex items-center gap-2 rounded px-3 py-1 text-xs font-medium uppercase"
-                style={{ backgroundColor: bg }}
+                style={{ backgroundColor: bg ?? "#D1D5DB" }}
               >
                 <div>
                   {deviconClass && (
