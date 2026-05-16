@@ -140,6 +140,7 @@ export default async function Resume() {
 
   const [
     topics,
+    count,
     experience,
     awards,
     gems,
@@ -147,12 +148,17 @@ export default async function Resume() {
     contributions,
   ] = await Promise.all([
     fetchTopics<Record<string, TopicDataItem>>(),
+    fetchData<any>("topic-count"),
     fetchData<any>("experience"),
     fetchData<any>("awards"),
     fetchData<any>("gems"),
     fetchData<any>("packages"),
     fetchData<any>("contributions"),
   ]);
+
+  const filteredTopics = Object.fromEntries(
+    Object.keys(count).map((key) => [key, topics[key]])
+  );
 
   const formatFullDate = (date: Date) =>
     new Intl.DateTimeFormat("en-US", {
@@ -182,7 +188,7 @@ export default async function Resume() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(topics).map(([topic, value]) => {
+          {Object.entries(filteredTopics).map(([topic, value]) => {
             const { deviconClass, bg } = value as TopicDataItem;
             return (
               <div
