@@ -118,7 +118,7 @@ export default async function Description({ params }: PageProps) {
         </div>
 
         <div className="mx-auto max-w-250 p-5">
-          <Atom.Visibility state={content}>
+          <Atom.Visibility state={!!content}>
             <Atom.Markdown content={content} />
           </Atom.Visibility>
           <Atom.Visibility state={!content}>
