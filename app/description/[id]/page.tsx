@@ -4,6 +4,8 @@ import Atom from "@atom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileLines, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
+const revalidate = 86400;
+
 interface Repo {
   node_id: string;
   description: string;
@@ -23,16 +25,12 @@ interface PageProps {
 
 export default async function Description({ params }: PageProps) {
   const { id } = await params;
-  const revalidate = 86400;
-  const portfolioURL = `https://api.github.com/repos/boseriko/${id}/contents/PORTFOLIO.md`;
-  const readmeURL = `https://api.github.com/repos/boseriko/${id}/contents/README.md`;
-  const repoURL = `https://api.github.com/repos/boseriko/${id}`;
   let content = null;
 
   const [contentRes, readmeRes, repoRes] = await Promise.all([
-    fetch(portfolioURL, { next: { revalidate } }),
-    fetch(readmeURL, { next: { revalidate } }),
-    fetch(repoURL, { next: { revalidate } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}/contents/PORTFOLIO.md`, { next: { revalidate } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}/contents/README.md`, { next: { revalidate } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}`, { next: { revalidate } }),
   ]);
 
   if (readmeRes.ok) {
