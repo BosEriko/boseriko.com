@@ -1,6 +1,6 @@
-"use client";
-import { ReactNode, Fragment, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import Link from "next/link";
+import Cover from "../Cover";
 
 interface ICardProps {
   url: string;
@@ -15,21 +15,6 @@ const Card: React.FunctionComponent<ICardProps> = ({
   fallbackCoverPhotoUrl = null,
   children,
 }) => {
-  const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
-
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = coverPhotoUrl;
-
-    img.onload = () => {
-      setCoverUrl(coverPhotoUrl);
-    };
-
-    img.onerror = () => {
-      setCoverUrl(fallbackCoverPhotoUrl);
-    };
-  }, [coverPhotoUrl, fallbackCoverPhotoUrl]);
-
   return (
     <div
       className="
@@ -39,7 +24,7 @@ const Card: React.FunctionComponent<ICardProps> = ({
       "
     >
       <Link href={url}>
-        <div style={{ backgroundImage: `url('${coverUrl}')` }} className="aspect-2/1 bg-cover bg-center repo-cover"></div>
+        <Cover coverPhotoUrl={coverPhotoUrl} fallbackCoverPhotoUrl={fallbackCoverPhotoUrl} />
         <div className="p-5 mb-10">{children}</div>
       </Link>
     </div>
