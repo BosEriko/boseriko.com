@@ -24,7 +24,7 @@ const Card: React.FunctionComponent<ICardProps> = ({
       "
     >
       <Link href={url}>
-        <Cover coverPhotoUrl={coverPhotoUrl} fallbackCoverPhotoUrl={fallbackCoverPhotoUrl} />
+        <Cover coverPhotoUrl={coverPhotoUrl} fallbackCoverPhotoUrl={fallbackCoverPhotoUrl} className="aspect-2/1 bg-cover bg-center repo-cover" />
         <div className="p-5 mb-10">{children}</div>
       </Link>
     </div>

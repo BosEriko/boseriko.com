@@ -11,7 +11,7 @@ interface ICoverProps {
 const Cover: React.FunctionComponent<ICoverProps> = ({
   coverPhotoUrl,
   fallbackCoverPhotoUrl = null,
-  className = "aspect-2/1 bg-cover bg-center repo-cover",
+  className = null,
 }) => {
   const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
 
