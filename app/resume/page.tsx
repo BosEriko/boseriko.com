@@ -8,7 +8,9 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import "devicon/devicon.min.css";
 
-const fetchData = async <T,>(name: string, revalidate = 86400): Promise<T> => {
+const revalidate = 86400;
+
+const fetchData = async <T,>(name: string): Promise<T> => {
   const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/${name}.json`, {
     next: { revalidate },
   });
@@ -20,7 +22,7 @@ const fetchData = async <T,>(name: string, revalidate = 86400): Promise<T> => {
   return res.json();
 };
 
-const fetchTopics = async <T,>(revalidate = 86400): Promise<T> => {
+const fetchTopics = async <T,>(): Promise<T> => {
   const res = await fetch("https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json", {
     next: { revalidate },
   });
@@ -132,7 +134,7 @@ export default async function Resume() {
   const projects = await fetch(
     "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=stars&order=desc&page=1&per_page=5",
     {
-      next: { revalidate: 86400 },
+      next: { revalidate },
     },
   ).then((res) => res.json());
 
