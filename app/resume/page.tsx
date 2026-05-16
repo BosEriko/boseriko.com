@@ -20,35 +20,23 @@ const fetchData = async <T,>(name: string, revalidate = 86400): Promise<T> => {
   return res.json();
 };
 
-type Topic =
-  | "typescript"
-  | "ruby"
-  | "elixir"
-  | "php"
-  | "react"
-  | "nextjs"
-  | "nodejs"
-  | "rails"
-  | "graphql"
-  | "docker"
-  | "tailwind"
-  | "postgresql"
-  | "mysql";
+const fetchTopics = async <T,>(revalidate = 86400): Promise<T> => {
+  const res = await fetch("https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json", {
+    next: { revalidate },
+  });
 
-const topicData: Record<Topic, { deviconClass: string; bg: string }> = {
-  typescript: { deviconClass: "devicon-typescript-plain", bg: "bg-blue-600" },
-  ruby: { deviconClass: "devicon-ruby-plain", bg: "bg-red-500" },
-  elixir: { deviconClass: "devicon-elixir-plain", bg: "bg-purple-600" },
-  php: { deviconClass: "devicon-php-plain", bg: "bg-blue-500" },
-  react: { deviconClass: "devicon-react-original", bg: "bg-cyan-400" },
-  nextjs: { deviconClass: "devicon-nextjs-plain", bg: "bg-gray-900" },
-  nodejs: { deviconClass: "devicon-nodejs-plain", bg: "bg-green-600" },
-  rails: { deviconClass: "devicon-rails-plain", bg: "bg-red-600" },
-  graphql: { deviconClass: "devicon-graphql-plain", bg: "bg-pink-500" },
-  docker: { deviconClass: "devicon-docker-plain", bg: "bg-blue-400" },
-  tailwind: { deviconClass: "devicon-tailwindcss-plain", bg: "bg-teal-400" },
-  postgresql: { deviconClass: "devicon-postgresql-plain", bg: "bg-blue-800" },
-  mysql: { deviconClass: "devicon-mysql-plain", bg: "bg-blue-600" },
+  if (!res.ok) {
+    throw new Error("Failed to fetch topics");
+  }
+
+  return res.json();
+};
+
+type TopicDataItem = {
+  title: string;
+  description: string;
+  deviconClass?: string | null;
+  bg?: string | null;
 };
 
 export const metadata: Metadata = {
@@ -156,7 +144,7 @@ export default async function Resume() {
     packages,
     contributions,
   ] = await Promise.all([
-    fetchData<any>("topic-count"),
+    fetchTopics<Record<string, TopicDataItem>>(),
     fetchData<any>("experience"),
     fetchData<any>("awards"),
     fetchData<any>("gems"),
@@ -192,8 +180,8 @@ export default async function Resume() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(topics).map(([topic]) => {
-            const { deviconClass, bg } = topicData[topic as Topic] || {};
+          {Object.entries(topics).map(([topic, value]) => {
+            const { deviconClass, bg } = value as TopicDataItem;
             return (
               <div
                 key={topic}
