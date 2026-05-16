@@ -5,13 +5,13 @@ import Link from "next/link";
 interface ICoverProps {
   coverPhotoUrl: string;
   fallbackCoverPhotoUrl?: string | null;
-  className?: string | null;
+  className?: string;
 }
 
 const Cover: React.FunctionComponent<ICoverProps> = ({
   coverPhotoUrl,
   fallbackCoverPhotoUrl = null,
-  className = null,
+  className,
 }) => {
   const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
 
