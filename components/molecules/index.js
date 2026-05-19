@@ -1,3 +1,3 @@
-import Pills from "./pills";
+import Pills from "./Pills";
 
 export default { Pills };

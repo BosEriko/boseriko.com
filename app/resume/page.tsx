@@ -1,5 +1,6 @@
 import Template from "@template";
 import Atom from "@atom";
+import Molecule from "@molecule";
 import type { Metadata } from "next";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,25 +21,6 @@ const fetchData = async <T,>(name: string): Promise<T> => {
   }
 
   return res.json();
-};
-
-const fetchTopics = async <T,>(): Promise<T> => {
-  const res = await fetch("https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json", {
-    next: { revalidate },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch topics");
-  }
-
-  return res.json();
-};
-
-type TopicDataItem = {
-  title: string;
-  description: string;
-  deviconClass?: string | null;
-  bg?: string | null;
 };
 
 export const metadata: Metadata = {
@@ -139,26 +121,18 @@ export default async function Resume() {
   ).then((res) => res.json());
 
   const [
-    topics,
-    count,
     experience,
     awards,
     gems,
     packages,
     contributions,
   ] = await Promise.all([
-    fetchTopics<Record<string, TopicDataItem>>(),
-    fetchData<any>("topic-count"),
     fetchData<any>("experience"),
     fetchData<any>("awards"),
     fetchData<any>("gems"),
     fetchData<any>("packages"),
     fetchData<any>("contributions"),
   ]);
-
-  const filteredTopics = Object.fromEntries(
-    Object.keys(count).map((key) => [key, topics[key]])
-  );
 
   const formatFullDate = (date: Date) =>
     new Intl.DateTimeFormat("en-US", {
@@ -188,23 +162,7 @@ export default async function Resume() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          {Object.entries(filteredTopics).map(([topic, value]) => {
-            const { deviconClass, bg } = value as TopicDataItem;
-            return (
-              <div
-                key={topic}
-                className="text-white flex items-center gap-2 rounded px-3 py-1 text-xs font-medium uppercase"
-                style={{ backgroundColor: bg ?? "#D1D5DB" }}
-              >
-                <div>
-                  {deviconClass && (
-                    <i className={`${deviconClass} h-3 w-3`}></i>
-                  )}
-                </div>
-                <div>{topic}</div>
-              </div>
-            );
-          })}
+          <Molecule.Pills />
         </div>
       </div>
 
