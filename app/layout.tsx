@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "devicon/devicon.min.css";
 
 export const metadata: Metadata = {
   title: "boseriko.com — Bos Eriko's Portfolio",

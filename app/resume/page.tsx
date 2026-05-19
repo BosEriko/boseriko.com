@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import "devicon/devicon.min.css";
-
 const revalidate = 86400;
 
 const fetchData = async <T,>(name: string): Promise<T> => {
@@ -162,7 +160,7 @@ export default async function Resume() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Molecule.Pills />
+          <Molecule.Pills type="colored" />
         </div>
       </div>
 
