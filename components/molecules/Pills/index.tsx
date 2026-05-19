@@ -75,7 +75,7 @@ const Pills = async ({ type = "colored" }) => {
             </div>
             <span>{topic}</span>
             <Atom.Visibility state={type === "yellow"}>
-              <span className="w-5 h-5 rounded-full flex items-center justify-center bg-yellow-500 text-yellow-200 text-xs">
+              <span className="w-5 h-5 rounded-full flex items-center justify-center bg-yellow-600 text-yellow-200 text-xs">
                 {count[topic]}
               </span>
             </Atom.Visibility>
