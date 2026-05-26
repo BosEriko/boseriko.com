@@ -51,15 +51,14 @@ const Navigation = () => {
             </button>
           ))}
 
-          <button
+          <a
             className="px-8 py-3 rounded-full bg-[#f7b43d] text-white text-2xl hover:bg-white hover:text-gray-700 transition"
-            onClick={() => {
-              () => window.open("/resume", "_blank");
-              setOpen(false);
-            }}
+            href="/resume"
+            target="_blank"
+            onClick={() => setOpen(false)}
           >
             Resume
-          </button>
+          </a>
 
           <button
             className="absolute top-4 right-4 text-3xl"
