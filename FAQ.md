@@ -20,4 +20,4 @@ It comes from **dev.to**.
 It pulls my top 5 starred repositories with the `product` topic. A little confusing I know but it will be more weird if I add the word product on the resume page.
 
 ### Which topics are included in the pills?
-It checks an array of topics [here](https://github.com/BosEriko/gh-data/blob/main/topics.json).
+It checks an array of topics [here](https://github.com/BosEriko/BosEriko/blob/master/topics.json).

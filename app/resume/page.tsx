@@ -10,7 +10,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 const revalidate = 86400;
 
 const fetchData = async <T,>(name: string): Promise<T> => {
-  const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/${name}.json`, {
+  const res = await fetch(`https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/${name}.json`, {
     next: { revalidate },
   });
 

@@ -18,7 +18,7 @@ type Repo = {
   default_branch: string;
 };
 
-const TOPICS_URL = "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json";
+const TOPICS_URL = "https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topics.json";
 
 async function getTopics() {
   const res = await fetch(TOPICS_URL, {

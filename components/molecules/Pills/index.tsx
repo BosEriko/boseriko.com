@@ -11,7 +11,7 @@ type TopicDataItem = {
 };
 
 const fetchCount = async <T,>(): Promise<T> => {
-  const res = await fetch(`https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topic-count.json`, {
+  const res = await fetch(`https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topic-count.json`, {
     next: { revalidate },
   });
 
@@ -23,7 +23,7 @@ const fetchCount = async <T,>(): Promise<T> => {
 };
 
 const fetchTopics = async <T,>(): Promise<T> => {
-  const res = await fetch("https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/topics.json", {
+  const res = await fetch("https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topics.json", {
     next: { revalidate },
   });
 
@@ -67,7 +67,7 @@ const Pills = async ({ type = "colored" }) => {
           <a
             key={topic}
             className={pillClass}
-            style={{ backgroundColor: type === "colored" ? bg ?? "#D1D5DB" : "FEF08A"  }}
+            style={{ backgroundColor: type === "colored" ? bg ?? "#D1D5DB" : "FEF08A" }}
             href={`/topic/${topic}`}
           >
             <div>

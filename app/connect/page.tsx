@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const socialLinksData = await fetch(
-  "https://raw.githubusercontent.com/BosEriko/gh-data/refs/heads/main/links.json",
+  "https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/links.json",
   {
     next: { revalidate: 86400 },
   },
