@@ -1,6 +1,6 @@
 import Template from "@template";
 import Atom from "@atom";
-import Link from "next/link";
+import Molecule from "@molecule";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 
@@ -58,130 +58,90 @@ export default async function Blog({ searchParams }: PageProps) {
 
   return (
     <Template.Default>
-      <div className="text-center space-y-4 container mx-auto my-10 px-5">
-        <h1 className="font-bold text-4xl">Blog</h1>
-        <h4 className="text-gray-500">
-          <span>I write stuff on </span>
+      <header className="border-b border-line pb-10">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">
+          Writing
+        </p>
+        <h1 className="mt-4 font-serif text-6xl leading-none md:text-7xl">
+          Blog
+        </h1>
+        <p className="mt-5 text-lg text-ink-soft">
+          I write stuff on{" "}
           <a
             href="https://dev.to/boseriko"
             target="_blank"
-            className="bg-yellow-300 texty-gray-700 px-1"
+            className="underline decoration-brand decoration-2 underline-offset-4 hover:text-brand-deep"
           >
             dev.to
           </a>
-        </h4>
+          .
+        </p>
+      </header>
 
-        {posts.length === 0 ? (
-          <p>No blog posts found.</p>
-        ) : (
-          <>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-              {posts.map((post) => {
-                const cover = post.cover_image || post.social_image;
+      {posts.length === 0 ? (
+        <p className="py-20 text-center text-muted">No blog posts found.</p>
+      ) : (
+        <>
+          <ul className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => {
+              const cover = post.cover_image || post.social_image;
 
-                return (
-                  <li key={post.slug}>
-                    <Atom.Card url={`/blog/${post.slug}`} coverPhotoUrl={cover}>
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {(post.tag_list || []).map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs bg-gray-100 px-2 py-1 rounded"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
+              return (
+                <li key={post.slug}>
+                  <Atom.Card url={`/blog/${post.slug}`} coverPhotoUrl={cover}>
+                    <div className="flex items-center gap-2 font-mono text-xs text-muted">
+                      <span>
+                        {new Date(post.published_at).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          },
+                        )}
+                      </span>
+                      <span>&middot;</span>
+                      <span>{post.reading_time_minutes} min read</span>
+                    </div>
 
-                      <h2 className="text-xl font-semibold">
-                        {post.title}
-                      </h2>
+                    <h2 className="mt-3 font-serif text-2xl leading-tight break-words decoration-brand decoration-2 underline-offset-4 group-hover:underline">
+                      {post.title}
+                    </h2>
 
-                      <div className="text-sm text-gray-500 mb-3">
-                        <span>
-                          {new Date(post.published_at).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            },
-                          )}
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft">
+                      {post.description}
+                    </p>
+
+                    <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-5 font-mono text-xs text-muted">
+                      {(post.tag_list || []).map((tag) => (
+                        <span key={tag}>#{tag}</span>
+                      ))}
+                      <span className="ml-auto flex items-center gap-3">
+                        <span className="flex items-center gap-1">
+                          <FontAwesomeIcon icon={faHeart} />
+                          {post.public_reactions_count}
                         </span>
-                        <span className="font-bold"> &middot; </span>
-                        <span>{post.reading_time_minutes} min read</span>
-                      </div>
+                        <span className="flex items-center gap-1">
+                          <FontAwesomeIcon icon={faComment} />
+                          {post.comments_count}
+                        </span>
+                      </span>
+                    </div>
+                  </Atom.Card>
+                </li>
+              );
+            })}
+          </ul>
 
-                      <div className="text-gray-600">
-                        {post.description}
-                      </div>
-
-                      <div className="absolute left-5 bottom-5 right-5">
-                        <div className="flex gap-4 text-gray-700">
-                          <div className="flex gap-1 text-xs items-center">
-                            <FontAwesomeIcon icon={faHeart} />
-                            <span>{post.public_reactions_count}</span>
-                            <span>
-                              Reaction
-                              {post.public_reactions_count > 1 && "s"}
-                            </span>
-                          </div>
-                          <div className="flex gap-2 text-xs items-center">
-                            <FontAwesomeIcon icon={faComment} />
-                            <span>{post.comments_count}</span>
-                            <span>Comment{post.comments_count > 1 && "s"}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </Atom.Card>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* Pagination */}
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <Link href={`/blog?page=${Math.max(1, page - 1)}`}>
-                <button
-                  disabled={page === 1}
-                  className="
-                    border rounded-lg bg-white border-gray-200 cursor-pointer
-                    transition-all duration-300 ease-in-out
-                    px-3 py-2
-                    hover:border-[#f7b43d]
-                    disabled:cursor-not-allowed
-                    disabled:bg-gray-100
-                    disabled:border-gray-300
-                    disabled:text-gray-400
-                  "
-                >
-                  Previous
-                </button>
-              </Link>
-
-              <span>Page {page}</span>
-
-              <Link href={`/blog?page=${page + 1}`}>
-                <button
-                  disabled={!hasNext}
-                  className="
-                    border rounded-lg bg-white border-gray-200 cursor-pointer
-                    transition-all duration-300 ease-in-out
-                    px-3 py-2
-                    hover:border-[#f7b43d]
-                    disabled:cursor-not-allowed
-                    disabled:bg-gray-100
-                    disabled:border-gray-300
-                    disabled:text-gray-400
-                  "
-                >
-                  Next
-                </button>
-              </Link>
-            </div>
-          </>
-        )}
-      </div>
+          <Molecule.Pagination
+            page={page}
+            previousHref={`/blog?page=${Math.max(1, page - 1)}`}
+            nextHref={`/blog?page=${page + 1}`}
+            hasPrevious={page !== 1}
+            hasNext={hasNext}
+          />
+        </>
+      )}
     </Template.Default>
   );
 }

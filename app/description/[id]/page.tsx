@@ -57,97 +57,121 @@ export default async function Description({ params }: PageProps) {
   const full_name: string = repoJson.full_name;
   const default_branch: string = repoJson.default_branch;
 
+  const typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+
   return (
-    <Template.Default orientation="minimal" backgroundColor="white">
-      <div className="px-4 py-10">
-        <Atom.Visibility state={!!(topics.length > 0)}>
-          <ul className="flex flex-wrap gap-2 justify-center mb-3">
-            {topics.map((topic) => (
-              <li key={topic}>
-                <a
-                  href={`/topic/${topic}`}
-                  target="_blank"
-                  className="text-xs bg-gray-100 px-2 py-1 rounded"
-                >
-                  #{topic}
+    <Template.Default orientation="minimal">
+      <article className="px-5 md:px-8 pt-12 pb-20 md:pt-20">
+        <header className="mx-auto max-w-3xl">
+          <a
+            href={`/topic/${type}`}
+            className="font-mono text-xs uppercase tracking-widest text-muted hover:text-ink"
+          >
+            &larr; {typeLabel}s
+          </a>
+
+          <h1 className="mt-6 font-serif text-5xl leading-none break-words sm:text-6xl md:text-7xl">{name}</h1>
+
+          <p className="mt-6 text-xl leading-relaxed text-ink-soft">
+            {description}
+          </p>
+
+          <dl className="mt-10 grid grid-cols-2 gap-y-4 border-y border-line py-5 font-mono text-xs sm:grid-cols-3">
+            <div>
+              <dt className="uppercase tracking-widest text-muted">Updated</dt>
+              <dd className="mt-1">
+                {new Date(updated_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </dd>
+            </div>
+            <div>
+              <dt className="uppercase tracking-widest text-muted">Source</dt>
+              <dd className="mt-1">
+                <a href={html_url} target="_blank" className="hover:text-brand-deep hover:underline">
+                  {stargazers_count} star{stargazers_count > 1 && "s"} on GitHub
                 </a>
-              </li>
-            ))}
-          </ul>
-        </Atom.Visibility>
+              </dd>
+            </div>
+            <Atom.Visibility state={!!homepage}>
+              <div>
+                <dt className="uppercase tracking-widest text-muted">Live</dt>
+                <dd className="mt-1 truncate">
+                  <a href={homepage} target="_blank" className="hover:text-brand-deep hover:underline">
+                    {homepage?.replace(/^https?:\/\//, "")}
+                  </a>
+                </dd>
+              </div>
+            </Atom.Visibility>
+          </dl>
 
-        <div className="text-gray-500 text-sm text-center mb-3">
-          <span>
-            <span>Updated at </span>
-            {new Date(updated_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </span>
-          <Atom.Visibility state={!!homepage}>
-            <span className="font-bold"> &middot; </span>
-            <span>
-              <a href={homepage} target="_blank" className="hover:underline">
-                {homepage?.replace(/^https?:\/\//, "")}
-              </a>
-            </span>
+          <Atom.Visibility state={!!(topics.length > 0)}>
+            <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs">
+              {topics.map((topic) => (
+                <li key={topic}>
+                  <a
+                    href={`/topic/${topic}`}
+                    target="_blank"
+                    className="text-muted hover:text-ink"
+                  >
+                    #{topic}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </Atom.Visibility>
-          <span className="font-bold"> &middot; </span>
-          <span>
-            <a href={html_url} target="_blank" className="hover:underline">
-              {stargazers_count} star{stargazers_count > 1 && "s"}
-            </a>
-          </span>
-        </div>
+        </header>
 
-        <h1 className="text-3xl font-bold text-center mb-3">{name}</h1>
-
-        <h4 className="text-center mb-10 text-md text-gray-500 max-w-175 mx-auto">
-          {description}
-        </h4>
-
-        <div className="mx-auto max-w-300">
+        <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-sm border border-line bg-paper-deep">
           <Atom.Cover
             coverPhotoUrl={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`}
             fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${node_id}/${full_name}`}
-            className="w-full rounded-lg shadow-lg border-3 border-[#f7b43d] aspect-2/1 bg-cover bg-center repo-cover"
+            className="aspect-2/1 w-full bg-cover bg-center"
           />
         </div>
 
-        <div className="mx-auto max-w-250 p-5">
+        <div className="mx-auto mt-10 max-w-3xl">
           <Atom.Visibility state={!!content}>
             <Atom.Markdown content={content} />
           </Atom.Visibility>
           <Atom.Visibility state={!content}>
-            <div className="mt-5">Description unavailable.</div>
+            <p className="text-muted">Description unavailable.</p>
           </Atom.Visibility>
         </div>
+      </article>
 
-        <div className="mx-auto max-w-300 bg-[#f7b43d] rounded-md mt-5 p-10 text-center text-white flex flex-col gap-5 shadow-lg">
-          <h2 className="font-bold text-4xl">Like what you see?</h2>
-          <p className="font-bold text-xl">Let's work together and make your ideas come to life!<br />Or maybe view more of my {type.charAt(0).toUpperCase() + type.slice(1)}s?</p>
-          <div className="flex flex-row gap-5 justify-center">
+      <section className="bg-ink text-paper">
+        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 md:px-8 py-16 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-paper/50">
+              Like what you see?
+            </p>
+            <h2 className="mt-4 max-w-xl font-serif text-4xl leading-tight md:text-5xl">
+              Let&apos;s work together and make your ideas{" "}
+              <em className="text-brand">come to life.</em>
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-3">
             <a
               href={`/resume`}
               target="_blank"
-              className="px-6 py-2 rounded-md border-2 border-white bg-white text-[#f7b43d] font-bold transition-all duration-300 ease-out
-                      hover:-translate-y-1 flex gap-1 items-center"
+              className="inline-flex items-center gap-2 rounded-sm bg-brand px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-paper"
             >
               <FontAwesomeIcon icon={faFileLines} />
               <span>Check Resume</span>
             </a>
             <a
               href={`/topic/${type}`}
-              className="px-6 py-2 rounded-md border-2 border-white bg-[#f7b43d] text-white font-bold transition-all duration-300 ease-out
-                      hover:-translate-y-1 flex gap-1 items-center"
+              className="inline-flex items-center gap-2 rounded-sm border border-paper/30 px-5 py-3 text-sm font-medium transition-colors hover:border-paper hover:bg-paper hover:text-ink"
             >
+              <span>See More {typeLabel}s</span>
               <FontAwesomeIcon icon={faArrowRight} />
-              <span>See More {type.charAt(0).toUpperCase() + type.slice(1)}s</span>
             </a>
           </div>
         </div>
-      </div>
+      </section>
     </Template.Default>
   );
 }

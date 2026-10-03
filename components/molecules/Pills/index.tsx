@@ -48,11 +48,11 @@ const Pills = async ({ type = "colored" }) => {
   let pillClass;
   switch (type) {
     case 'colored':
-      pillClass = 'text-white flex items-center gap-2 rounded px-3 py-1 text-xs font-medium uppercase';
+      pillClass = 'flex items-center gap-1.5 rounded-sm border border-line px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide text-ink-soft';
       break;
 
     case 'yellow':
-      pillClass = 'rounded-full pl-3 pr-1 py-1 text-xs font-medium transition-all duration-300 ease-out uppercase flex gap-3 items-center cursor-pointer bg-yellow-200 border border-yellow-300 text-yellow-600 hover:-translate-y-1 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300';
+      pillClass = 'group flex items-center gap-2 rounded-sm border border-line bg-paper py-1.5 pl-2.5 pr-1.5 font-mono text-xs text-ink-soft transition-colors hover:border-ink hover:bg-ink hover:text-paper';
       break;
 
     default:
@@ -67,15 +67,20 @@ const Pills = async ({ type = "colored" }) => {
           <a
             key={topic}
             className={pillClass}
-            style={{ backgroundColor: type === "colored" ? bg ?? "#D1D5DB" : "FEF08A" }}
             href={`/topic/${topic}`}
           >
-            <div>
-              <Atom.Visibility state={!!deviconClass}><i className={`${deviconClass} h-3 w-3`}></i></Atom.Visibility>
-            </div>
+            <Atom.Visibility state={type === "colored"}>
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: bg ?? "#D1D5DB" }}
+              />
+            </Atom.Visibility>
+            <Atom.Visibility state={type === "yellow" && !!deviconClass}>
+              <i className={`${deviconClass} text-sm`}></i>
+            </Atom.Visibility>
             <span>{topic}</span>
             <Atom.Visibility state={type === "yellow"}>
-              <span className="w-5 h-5 rounded-full flex items-center justify-center bg-yellow-600 text-yellow-200 text-xs">
+              <span className="rounded-sm bg-paper-deep px-1.5 py-0.5 text-[10px] text-muted transition-colors group-hover:bg-brand group-hover:text-ink">
                 {count[topic]}
               </span>
             </Atom.Visibility>

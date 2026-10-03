@@ -56,95 +56,84 @@ export default async function BlogPost({ params }: PageProps) {
           <meta name="twitter:image" content={cover || ""} />
         </Head>
 
-        <div className="p-8 font-sans max-w-3xl mx-auto">
-          <div className="flex flex-wrap gap-2 justify-center mb-3">
-            {(post.tags || []).map((tag) => (
-              <span key={tag} className="text-xs bg-gray-100 px-2 py-1 rounded">
-                #{tag}
-              </span>
-            ))}
-          </div>
+        <article className="mx-auto max-w-3xl">
+          <a
+            href="/blog"
+            className="font-mono text-xs uppercase tracking-widest text-muted hover:text-ink"
+          >
+            &larr; Blog
+          </a>
 
-          <div className="text-gray-500 text-sm text-center mb-2">
-            <span>
+          <h1 className="mt-6 font-serif text-4xl leading-[1.05] break-words sm:text-5xl md:text-6xl">{post.title}</h1>
+
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-line py-4 font-mono text-xs text-muted">
+            <span className="text-ink">
               {new Date(post.published_at).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </span>
-            <span className="font-bold"> &middot; </span>
             <span>{post.reading_time_minutes} min read</span>
+            {(post.tags || []).map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
           </div>
 
-          <h1 className="text-3xl font-bold text-center mb-10">{post.title}</h1>
-
-          <div className="rounded-t-lg bg-white border-t border-x border-gray-200 overflow-hidden -mb-5">
-            {cover && (
+          {cover && (
+            <div className="mt-10 overflow-hidden rounded-sm border border-line bg-paper-deep">
               <img
                 src={cover}
                 alt={post.title}
-                className="w-full h-64 object-cover align-baseline"
+                className="aspect-2/1 w-full object-cover"
               />
-            )}
+            </div>
+          )}
+
+          <div className="mt-6">
+            <Atom.Markdown content={post.body_html} />
           </div>
 
-          <div className="border-b border-x rounded-b-lg rounded-x-lg bg-white border-gray-200">
-            <Atom.Markdown content={post.body_html} />
-            <div className="pb-5 px-5 flex gap-4">
+          <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+            <div className="flex gap-2">
               <a
                 href={`${post.url}`}
                 target="_blank"
-                className="flex gap-2 text-gray-700 text-sm items-center bg-gray-100 px-3 py-2 rounded cursor-pointer hover:bg-[#f7b43d] transition-all group"
+                className="flex items-center gap-2 rounded-sm border border-line px-3 py-2 font-mono text-xs transition-colors hover:border-ink hover:bg-ink hover:text-paper"
               >
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  className="text-[#f7b43d] group-hover:text-gray-700"
-                />
+                <FontAwesomeIcon icon={faHeart} className="text-brand-deep" />
                 <span>{post.public_reactions_count}</span>
                 <span>Reaction{post.public_reactions_count > 1 && "s"}</span>
               </a>
               <a
                 href={`${post.url}#comments`}
                 target="_blank"
-                className="flex gap-2 text-gray-700 text-sm items-center bg-gray-100 px-3 py-2 rounded cursor-pointer hover:bg-[#f7b43d] transition-all group"
+                className="flex items-center gap-2 rounded-sm border border-line px-3 py-2 font-mono text-xs transition-colors hover:border-ink hover:bg-ink hover:text-paper"
               >
-                <FontAwesomeIcon
-                  icon={faComment}
-                  className="text-[#f7b43d] group-hover:text-gray-700"
-                />
+                <FontAwesomeIcon icon={faComment} className="text-brand-deep" />
                 <span>{post.comments_count}</span>
                 <span>Comment{post.comments_count > 1 && "s"}</span>
               </a>
             </div>
+            <div className="flex gap-5 font-mono text-xs uppercase tracking-wider">
+              <a href="#" className="text-muted hover:text-ink">
+                Back to Top &uarr;
+              </a>
+              <a href="/blog" className="hover:text-brand-deep">
+                Back to Blogs &rarr;
+              </a>
+            </div>
           </div>
-
-          <div className="mt-5 flex justify-between">
-            <a
-              href="#"
-              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-transparent text-[#f7b43d] font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Back to Top
-            </a>
-            <a
-              href="/blog"
-              className="px-6 py-2 rounded-md border-2 border-[#f7b43d] bg-[#f7b43d] text-gray-700 font-bold transition-all duration-300 ease-out
-                       hover:-translate-y-1 shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Back to Blogs
-            </a>
-          </div>
-        </div>
+        </article>
       </Template.Default>
     );
   } catch (err) {
     console.error(err);
     return (
       <Template.Default>
-        <div className="p-8 font-sans">
-          <p>No content found or an error occurred.</p>
-        </div>
+        <p className="py-20 text-center text-muted">
+          No content found or an error occurred.
+        </p>
       </Template.Default>
     );
   }

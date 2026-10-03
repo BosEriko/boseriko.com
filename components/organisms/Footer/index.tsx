@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import {
   faSteam,
   faFacebook,
@@ -35,23 +37,43 @@ const socialLinks = socialLinksData.map((link: any) => ({
 
 const Footer = () => {
   return (
-    <footer className="py-6 border-t border-gray-200 bg-white">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
-        <div className="text-sm text-gray-600 text-center md:text-left">
-          Bos Eriko &copy; {new Date().getFullYear()}
-        </div>
-        <div className="flex flex-wrap justify-center gap-3">
-          {socialLinks.map((social: any) => (
-            <a
-              key={social.name}
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-[#f7b43d] transition-colors"
+    <footer className="border-t border-line">
+      <div className="mx-auto max-w-6xl px-5 md:px-8 py-14">
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">
+              Say hello
+            </p>
+            <Link
+              href="/connect"
+              className="group mt-3 inline-flex items-center gap-4 font-serif text-4xl md:text-5xl"
             >
-              <FontAwesomeIcon icon={social.icon} size="sm" />
-            </a>
-          ))}
+              Let&apos;s build something
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className="text-2xl text-brand-deep transition-transform duration-300 group-hover:translate-x-2"
+              />
+            </Link>
+          </div>
+          <ul className="flex flex-wrap gap-1">
+            {socialLinks.map((social: any) => (
+              <li key={social.name}>
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="flex h-10 w-10 items-center justify-center rounded-sm text-muted transition-colors hover:bg-ink hover:text-paper"
+                >
+                  <FontAwesomeIcon icon={social.icon} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="mt-12 flex justify-between border-t border-line pt-6 font-mono text-xs text-muted">
+          <span>Bos Eriko &copy; {new Date().getFullYear()}</span>
+          <span>boseriko.com</span>
         </div>
       </div>
     </footer>

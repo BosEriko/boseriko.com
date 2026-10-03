@@ -57,16 +57,31 @@ interface Project {
   updated_at: string | Date;
 }
 
+const ResumeHeading: React.FC<{ title: string }> = ({ title }) => (
+  <h2 className="font-mono text-[11px] uppercase tracking-widest text-brand-deep">
+    {title}
+  </h2>
+);
+
+const ResumeBlock: React.FC<{ title: string; children: React.ReactNode }> = ({
+  title,
+  children,
+}) => (
+  <section className="grid gap-4 border-t border-line py-8 break-inside-avoid sm:grid-cols-[8.5rem_1fr] sm:gap-8">
+    <ResumeHeading title={title} />
+    <div>{children}</div>
+  </section>
+);
+
 const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
   return (
-    <div className="mb-20">
-      <ul className="space-y-6">
+    <ResumeBlock title={title}>
+      <ul className="space-y-7">
         {data.filter((entry) => entry.hidden !== true).map((entry, index) => (
-          <li key={index} className="inline-table w-full">
-            {index < 1 && <h4 className="text-3xl font-bold mb-5">{title}</h4>}
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-xl font-semibold">{entry.position}</h3>
-              <span className="text-xs text-gray-500">
+          <li key={index} className="break-inside-avoid">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3 className="text-base font-semibold">{entry.position}</h3>
+              <span className="font-mono text-[11px] text-muted">
                 <Atom.Visibility state={!!entry.date?.start}>
                   {new Intl.DateTimeFormat("en-US", {
                     month: "short",
@@ -74,7 +89,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
                   }).format(new Date(entry.date.start))}
                 </Atom.Visibility>
                 <Atom.Visibility state={!!(entry.date?.end || entry.active)}>
-                  <span> - </span>
+                  <span> &ndash; </span>
                   <Atom.Visibility state={entry.active}>
                     Present
                   </Atom.Visibility>
@@ -87,18 +102,18 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
                 </Atom.Visibility>
               </span>
             </div>
-            <p className="text-gray-600 mb-2 flex gap-1">
-              <span className="font-bold">{entry.company}</span>
+            <p className="mt-0.5 flex gap-1 text-sm text-muted">
+              <span className="font-medium text-ink-soft">{entry.company}</span>
               {entry.location && (
                 <>
-                  <span>at</span>
+                  <span>&middot;</span>
                   <span>{entry.location}</span>
                 </>
               )}
             </p>
-            <ul className="list-disc list-outside space-y-1 ml-5">
+            <ul className="mt-2 ml-4 list-outside list-disc space-y-1 text-sm leading-relaxed text-ink-soft marker:text-line">
               {entry.responsibilities.map((task, i) => (
-                <li key={i} className="text-gray-700">
+                <li key={i}>
                   {task}
                 </li>
               ))}
@@ -106,7 +121,7 @@ const ResumeSection: React.FC<EntryProps> = ({ data, title }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </ResumeBlock>
   );
 };
 
@@ -141,57 +156,47 @@ export default async function Resume() {
 
   return (
     <Template.Resume>
-      {/* Header */}
-      <div className="inline-table w-full mb-15">
-        <h1 className="text-5xl font-bold mb-2">Bos Eriko Reyes</h1>
-        <p className="text-gray-600 mb-3">Software Engineer</p>
-        <div className="flex items-center text-sm text-gray-700 mb-4 gap-5">
+      <header className="pb-8">
+        <h1 className="font-serif text-5xl leading-none sm:text-6xl">Bos Eriko Reyes</h1>
+        <p className="mt-2 font-mono text-xs uppercase tracking-widest text-muted">Software Engineer</p>
+        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-soft">
           <div className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faGlobe} className="h-4 w-4" />
+            <FontAwesomeIcon icon={faGlobe} className="h-3.5 w-3.5 text-muted" />
             <span>boseriko.com</span>
           </div>
           <div className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
+            <FontAwesomeIcon icon={faEnvelope} className="h-3.5 w-3.5 text-muted" />
             <span>resume@boseriko.com</span>
           </div>
           <div className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faGithub} className="h-4 w-4" />
+            <FontAwesomeIcon icon={faGithub} className="h-3.5 w-3.5 text-muted" />
             <span>github.com/BosEriko</span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-1.5">
           <Molecule.Pills type="colored" />
         </div>
-      </div>
+      </header>
 
-      {/* Objective */}
-      <div className="inline-table w-full mb-20">
-        <h4 className="text-3xl font-bold mb-5">🏁 Objective</h4>
-        <p className="text-justify">
+      <ResumeBlock title="Objective">
+        <p className="text-sm leading-relaxed text-ink-soft">
           I am seeking employment with a company where I can use my skills and
           also grow as a person. I want to work in an environment where I can
           learn more knowledge related to my skill set. I want to excel and be
           the best that I can be at programming and also be crucial to any team
           that I can be a part of.
         </p>
-      </div>
+      </ResumeBlock>
 
-      {/* Experience */}
-      <ResumeSection data={experience} title="🔥 Experience" />
+      <ResumeSection data={experience} title="Experience" />
 
-      {/* Personal Projects */}
-      <div className="mb-20">
-        <ul className="space-y-6">
+      <ResumeBlock title="Personal Projects">
+        <ul className="space-y-7">
           {projects.items.map((project: Project, index: number) => (
-            <li key={index} className="inline-table w-full">
-              {index < 1 && (
-                <h4 className="text-3xl font-bold mb-5">
-                  🗂️ Personal Projects
-                </h4>
-              )}
-              <div className="flex justify-between items-center mb-2">
-                <h3 className="text-xl font-semibold">{project.name}</h3>
-                <span className="text-xs text-gray-500">
+            <li key={index} className="break-inside-avoid">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h3 className="text-base font-semibold">{project.name}</h3>
+                <span className="font-mono text-[11px] text-muted">
                   <Atom.Visibility state={!!project.updated_at}>
                     {new Intl.DateTimeFormat("en-US", {
                       month: "short",
@@ -200,15 +205,15 @@ export default async function Resume() {
                   </Atom.Visibility>
                 </span>
               </div>
-              <p className="text-gray-600 mb-2 flex gap-1">
-                <a href={project.html_url} className="font-bold" target="_blank">
+              <p className="mt-0.5 flex gap-1 text-sm text-muted">
+                <a href={project.html_url} className="font-medium text-ink-soft hover:underline" target="_blank">
                   {project.full_name}
                 </a>
-                <span>at</span>
+                <span>&middot;</span>
                 <span>github.com</span>
               </p>
-              <ul className="list-disc list-outside space-y-1 ml-5">
-                <li className="text-gray-700">
+              <ul className="mt-2 ml-4 list-outside list-disc space-y-1 text-sm leading-relaxed text-ink-soft marker:text-line">
+                <li>
                   <Atom.Visibility state={!!project.language}>
                     <span>Built with {project.language}. </span>
                   </Atom.Visibility>
@@ -216,7 +221,7 @@ export default async function Resume() {
                   <span>star{project.stargazers_count > 1 && "s"}.</span>
                   <Atom.Visibility state={!!project.homepage}>
                     <span> Live at </span>
-                    <a href={project.homepage} target="_blank">
+                    <a href={project.homepage} target="_blank" className="underline decoration-line underline-offset-2">
                       {project.homepage?.replace(/^https?:\/\//, "")}
                     </a>
                     <span>.</span>
@@ -224,7 +229,7 @@ export default async function Resume() {
                 </li>
                 <Atom.Visibility state={!!project.description}>
                   {project.description.split(". ").map((item, index) => (
-                    <li className="text-gray-700" key={index}>
+                    <li key={index}>
                       <span>{item.endsWith(".") ? item : item + "."}</span>
                     </li>
                   ))}
@@ -233,24 +238,21 @@ export default async function Resume() {
             </li>
           ))}
         </ul>
-      </div>
+      </ResumeBlock>
 
-      {/* Awards & Special Mentions */}
-      <ResumeSection data={awards} title="🥇 Awards & Special Mentions" />
+      <ResumeSection data={awards} title="Awards & Mentions" />
 
-      {/* Community Contributions */}
-      <div className="inline-table w-full mb-20">
-        <h4 className="text-3xl font-bold mb-5">📜 Community Contributions</h4>
-        <div className="flex gap-3">
-          <div className="flex-1 flex gap-5 flex-col">
+      <ResumeBlock title="Community">
+        <div className="grid gap-6 text-sm sm:grid-cols-2">
+          <div className="flex flex-col gap-6">
             <div>
-              <h4 className="text-xl font-bold mb-2">NPM Packages</h4>
-              <ul className="list-disc ml-5">
+              <h3 className="mb-2 font-semibold">NPM Packages</h3>
+              <ul className="space-y-1">
                 {packages.map((npm: any, index: number) => (
                   <li key={index}>
                     <a
                       href={npm.link}
-                      className="font-bold text-blue-800"
+                      className="text-ink-soft underline decoration-line underline-offset-2 hover:decoration-brand"
                       target="_blank"
                     >
                       {npm.name}
@@ -260,13 +262,13 @@ export default async function Resume() {
               </ul>
             </div>
             <div>
-              <h4 className="text-xl font-bold mb-2">Ruby Gems</h4>
-              <ul className="list-disc ml-5">
+              <h3 className="mb-2 font-semibold">Ruby Gems</h3>
+              <ul className="space-y-1">
                 {gems.map((gem: any, index: number) => (
                   <li key={index}>
                     <a
                       href={gem.link}
-                      className="font-bold text-blue-800"
+                      className="text-ink-soft underline decoration-line underline-offset-2 hover:decoration-brand"
                       target="_blank"
                     >
                       {gem.name}
@@ -276,16 +278,14 @@ export default async function Resume() {
               </ul>
             </div>
           </div>
-          <div className="flex-1">
-            <h4 className="text-xl font-bold mb-2">
-              Open Source Contributions
-            </h4>
-            <ul className="list-disc ml-5">
+          <div>
+            <h3 className="mb-2 font-semibold">Open Source Contributions</h3>
+            <ul className="space-y-1">
               {contributions.map((contribution: any, index: number) => (
-                <li key={index}>
+                <li key={index} className="text-muted">
                   <a
                     href={contribution.link}
-                    className="font-bold text-blue-800"
+                    className="text-ink-soft underline decoration-line underline-offset-2 hover:decoration-brand"
                     target="_blank"
                   >
                     {contribution.name}
@@ -293,7 +293,7 @@ export default async function Resume() {
                   <span className="mx-1">by</span>
                   <a
                     href={contribution.author.link}
-                    className="text-blue-800"
+                    className="hover:underline"
                     target="_blank"
                   >
                     {contribution.author.name}
@@ -303,9 +303,9 @@ export default async function Resume() {
             </ul>
           </div>
         </div>
-      </div>
+      </ResumeBlock>
 
-      <div className="text-xs text-center text-gray-400 italic">
+      <div className="border-t border-line pt-6 text-center font-mono text-[10px] text-muted">
         Last Update: {formatFullDate(new Date())}
       </div>
     </Template.Resume>

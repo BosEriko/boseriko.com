@@ -1,30 +1,18 @@
-"use client";
-
+import Link from "next/link";
+import Atom from "@atom";
 import Navigation from "../Navigation";
-import { useRouter } from "next/navigation";
-import { Pixelify_Sans } from "next/font/google";
-
-const pixelify = Pixelify_Sans({
-  subsets: ["latin"],
-  weight: ["700"],
-});
 
 const Header = () => {
-  const router = useRouter();
-
   return (
-    <header className="text-black border-b border-gray-200 bg-white">
-      <div className="container mx-auto flex justify-between items-center px-4">
-        <button onClick={() => router.push("/")}>
-          <h2
-            className={`${pixelify.className} text-3xl md:text-4xl font-bold text-[#f7b43d] cursor-pointer`}
-          >
-            BE
-          </h2>
-        </button>
-        <div>
-          <Navigation />
-        </div>
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
+        <Link href="/" className="group flex items-center gap-3">
+          <Atom.Logo className="h-9 w-9 transition-transform duration-300 group-hover:-rotate-6" />
+          <span className="hidden text-sm font-medium tracking-tight sm:block">
+            Bos Eriko
+          </span>
+        </Link>
+        <Navigation />
       </div>
     </header>
   );

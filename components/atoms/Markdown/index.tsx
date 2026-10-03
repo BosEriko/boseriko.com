@@ -14,35 +14,42 @@ interface MarkdownProps {
 
 const components: Components = {
   img: ({ ...props }) => (
-    <div className="relative flex items-center justify-center aspect-video w-full group my-25 scale-110">
-      <div className="absolute rounded-md rotate-10 bg-[#f7b43d] w-full aspect-video opacity-70 transition-all duration-500 group-hover:rotate-3 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md"></div>
-      <div className="absolute rounded-md -rotate-6 bg-[#f7b43d] w-full aspect-video opacity-80 transition-all duration-500 group-hover:-rotate-2 scale-105 group-hover:scale-100 shadow-lg group-hover:shadow-md"></div>
-      <div className="absolute rounded-md rotate-3 border-10 border-[#f7b43d] bg-cover bg-center w-full aspect-video overflow-hidden transition-all duration-500 group-hover:rotate-1 scale-110 group-hover:scale-100 shadow-lg group-hover:shadow-md">
-        <img
-          {...props}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-    </div>
+    <span className="my-10 block overflow-hidden rounded-sm border border-line bg-paper-deep">
+      <img {...props} className="w-full" />
+    </span>
   ),
   p: ({ children }) => (
-    <div className="my-4 text-base leading-7 text-gray-800">{children}</div>
+    <div className="my-5 text-[17px] leading-8 text-ink-soft">{children}</div>
+  ),
+  a: ({ children, ...props }) => (
+    <a
+      {...props}
+      className="text-ink underline decoration-brand decoration-2 underline-offset-4 hover:text-brand-deep"
+    >
+      {children}
+    </a>
   ),
   h1: ({ children }) => (
-    <h1 className="text-4xl font-bold my-4 text-gray-900">{children}</h1>
+    <h1 className="mt-14 mb-4 font-serif text-5xl leading-tight">{children}</h1>
   ),
   h2: ({ children }) => (
-    <h2 className="text-3xl font-semibold my-3 text-gray-800">{children}</h2>
+    <h2 className="mt-12 mb-3 font-serif text-4xl leading-tight">{children}</h2>
   ),
   h3: ({ children }) => (
-    <h3 className="text-2xl font-medium my-2 text-gray-700">{children}</h3>
+    <h3 className="mt-10 mb-2 font-serif text-3xl leading-snug">{children}</h3>
   ),
   h4: ({ children }) => (
-    <h4 className="text-xl font-medium my-1 text-gray-600">{children}</h4>
+    <h4 className="mt-8 mb-2 text-lg font-semibold">{children}</h4>
   ),
   h5: ({ children }) => (
-    <h5 className="text-xl font-medium my-1 text-gray-600">{children}</h5>
+    <h5 className="mt-6 mb-2 font-mono text-sm uppercase tracking-wider text-muted">{children}</h5>
   ),
+  blockquote: ({ children }) => (
+    <blockquote className="my-8 border-l-2 border-brand pl-6 font-serif text-2xl italic leading-snug text-ink">
+      {children}
+    </blockquote>
+  ),
+  hr: () => <hr className="my-12 border-line" />,
   div: ({ className, children, ...props }) => {
     if (className?.includes("highlight__panel")) return null;
     return (
@@ -63,12 +70,12 @@ const components: Components = {
         style={oneDark}
         language={match[1]}
         PreTag="div"
-        className="my-4 rounded-lg overflow-x-auto"
+        className="my-8 overflow-x-auto rounded-sm text-sm"
       >
         {String(codeElement.props.children).replace(/\n$/, "")}
       </SyntaxHighlighter>
     ) : (
-      <pre className="bg-gray-100 text-red-500 px-3 py-2 rounded my-4 overflow-x-auto">
+      <pre className="my-8 overflow-x-auto rounded-sm bg-ink px-5 py-4 font-mono text-sm text-paper">
         {codeElement.props.children}
       </pre>
     );
@@ -77,7 +84,7 @@ const components: Components = {
     return (
       <code
         {...props}
-        className="bg-gray-100 text-red-500 px-1 py-0.5 rounded text-sm font-mono"
+        className="rounded-sm bg-paper-deep px-1.5 py-0.5 font-mono text-[0.85em] text-ink"
       >
         {children}
       </code>
@@ -85,9 +92,16 @@ const components: Components = {
   },
   ul: ({ children, className, ...props }) => {
     return (
-      <ul {...props} className="list-disc list-outside space-y-1 ml-5">
+      <ul {...props} className="my-5 ml-5 list-outside list-disc space-y-2 text-[17px] leading-8 text-ink-soft marker:text-brand-deep">
         {children}
       </ul>
+    );
+  },
+  ol: ({ children, className, ...props }) => {
+    return (
+      <ol {...props} className="my-5 ml-5 list-outside list-decimal space-y-2 text-[17px] leading-8 text-ink-soft marker:font-mono marker:text-sm marker:text-muted">
+        {children}
+      </ol>
     );
   },
 };
@@ -95,7 +109,7 @@ const components: Components = {
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
   return (
     <Fragment>
-      <div className="p-5">
+      <div>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

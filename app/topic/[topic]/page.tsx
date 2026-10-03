@@ -1,6 +1,6 @@
 import Template from "@template";
 import Atom from "@atom";
-import Link from "next/link";
+import Molecule from "@molecule";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -59,104 +59,78 @@ export default async function Topic({ params, searchParams }: PageProps) {
 
   return (
     <Template.Default>
-      <div className="text-center space-y-4 container mx-auto my-10 px-5">
-        <h1 className="font-bold text-4xl">
-          {topicInfo?.title ?? "Unknown Topic"}
-        </h1>
-
-        <h4 className="text-gray-500">
-          <span>
-            {topicInfo?.description ?? "Unknown Description"}
-          </span>
-          <span> Find more at my </span>
-          <a
-            href="https://github.com/BosEriko"
-            target="_blank"
-            className="bg-yellow-300 texty-gray-700 px-1"
-          >
-            GitHub
-          </a>
-        </h4>
-
-        {repos.length === 0 ? (
-          <p>No Repository found.</p>
-        ) : (
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-            {repos.map((repo) => (
-              <li key={repo.id}>
-                <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/COVER.png`} fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
-                  <h2 className="font-bold text-lg">{repo.name}</h2>
-
-                  <p className="line-clamp-2">{repo.description}</p>
-
-                  <div className="absolute left-5 bottom-5 right-5">
-                    <div className="flex justify-between items-center">
-                      <div className="text-xs bg-gray-100 rounded-full py-1 px-2">
-                        {repo.language}
-                      </div>
-
-                      <div className="text-xs flex items-center gap-2 text-gray-400">
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faEye} />
-                          <span>{repo.watchers_count}</span>
-                        </div>
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faCodeBranch} />
-                          <span>{repo.forks_count}</span>
-                        </div>
-                        <div className="flex gap-1 items-center">
-                          <FontAwesomeIcon icon={faStar} />
-                          <span>{repo.stargazers_count}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Atom.Card>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="mt-8 flex items-center justify-center gap-4">
-          <Link href={`/topic/${topic}?page=${Math.max(1, page - 1)}`}>
-            <button
-              disabled={page === 1}
-              className="
-                border rounded-lg bg-white border-gray-200 cursor-pointer
-                transition-all duration-300 ease-in-out
-                px-3 py-2
-                hover:border-[#f7b43d]
-                disabled:cursor-not-allowed
-                disabled:bg-gray-100
-                disabled:border-gray-300
-                disabled:text-gray-400
-              "
+      <header className="grid gap-6 border-b border-line pb-10 md:grid-cols-[1fr_auto] md:items-end">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-widest text-muted">
+            Index &mdash; #{topic}
+          </p>
+          <h1 className="mt-4 font-serif text-6xl leading-none md:text-7xl">
+            {topicInfo?.title ?? "Unknown Topic"}
+          </h1>
+          <p className="mt-5 max-w-xl text-lg text-ink-soft">
+            {topicInfo?.description ?? "Unknown Description"}{" "}
+            Find more at my{" "}
+            <a
+              href="https://github.com/BosEriko"
+              target="_blank"
+              className="underline decoration-brand decoration-2 underline-offset-4 hover:text-brand-deep"
             >
-              Previous
-            </button>
-          </Link>
-
-          <span>Page {page}</span>
-
-          <Link href={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}>
-            <button
-              disabled={page === totalPages}
-              className="
-                border rounded-lg bg-white border-gray-200 cursor-pointer
-                transition-all duration-300 ease-in-out
-                px-3 py-2
-                hover:border-[#f7b43d]
-                disabled:cursor-not-allowed
-                disabled:bg-gray-100
-                disabled:border-gray-300
-                disabled:text-gray-400
-              "
-            >
-              Next
-            </button>
-          </Link>
+              GitHub
+            </a>
+            .
+          </p>
         </div>
-      </div>
+        <p className="font-mono text-xs text-muted">
+          {totalCount} {totalCount === 1 ? "repository" : "repositories"}
+        </p>
+      </header>
+
+      {repos.length === 0 ? (
+        <p className="py-20 text-center text-muted">No Repository found.</p>
+      ) : (
+        <ul className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {repos.map((repo) => (
+            <li key={repo.id}>
+              <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/COVER.png`} fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
+                <h2 className="font-serif text-2xl leading-tight break-words decoration-brand decoration-2 underline-offset-4 group-hover:underline">
+                  {repo.name}
+                </h2>
+
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-soft">
+                  {repo.description}
+                </p>
+
+                <div className="mt-auto flex items-center justify-between pt-5 font-mono text-xs text-muted">
+                  <span>{repo.language}</span>
+
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-1">
+                      <FontAwesomeIcon icon={faEye} />
+                      {repo.watchers_count}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FontAwesomeIcon icon={faCodeBranch} />
+                      {repo.forks_count}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FontAwesomeIcon icon={faStar} />
+                      {repo.stargazers_count}
+                    </span>
+                  </div>
+                </div>
+              </Atom.Card>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <Molecule.Pagination
+        page={page}
+        previousHref={`/topic/${topic}?page=${Math.max(1, page - 1)}`}
+        nextHref={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}
+        hasPrevious={page !== 1}
+        hasNext={page !== totalPages}
+      />
     </Template.Default>
   );
 }
