@@ -21,7 +21,9 @@ const Card: React.FunctionComponent<ICardProps> = ({
         <Cover
           coverPhotoUrl={coverPhotoUrl}
           fallbackCoverPhotoUrl={fallbackCoverPhotoUrl}
-          className="aspect-2/1 bg-cover bg-center transition-transform duration-500 group-hover:scale-[1.03]"
+          className="aspect-2/1"
+          imageClassName="transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
         />
       </div>
       <div className="flex flex-1 flex-col pt-5">{children}</div>

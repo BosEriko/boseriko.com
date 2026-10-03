@@ -5,7 +5,14 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    minimumCacheTTL: 86400,
+    remotePatterns: [
+      new URL("https://raw.githubusercontent.com/**"),
+      new URL("https://opengraph.githubassets.com/**"),
+      new URL("https://media2.dev.to/**"),
+    ],
+  },
 };
 
 export default nextConfig;

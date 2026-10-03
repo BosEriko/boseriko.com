@@ -128,7 +128,9 @@ export default async function Description({ params }: PageProps) {
           <Atom.Cover
             coverPhotoUrl={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`}
             fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${node_id}/${full_name}`}
-            className="aspect-2/1 w-full bg-cover bg-center"
+            className="aspect-2/1 w-full"
+            sizes="(min-width: 1024px) 1024px, 100vw"
+            alt={name}
           />
         </div>
 

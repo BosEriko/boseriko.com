@@ -82,10 +82,11 @@ export default async function BlogPost({ params }: PageProps) {
 
           {cover && (
             <div className="mt-10 overflow-hidden rounded-sm border border-line bg-paper-deep">
-              <img
-                src={cover}
+              <Atom.Cover
+                coverPhotoUrl={cover}
                 alt={post.title}
-                className="aspect-2/1 w-full object-cover"
+                className="aspect-2/1 w-full"
+                sizes="(min-width: 768px) 768px, 100vw"
               />
             </div>
           )}

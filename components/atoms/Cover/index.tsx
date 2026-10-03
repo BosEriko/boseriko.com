@@ -1,35 +1,50 @@
-"use client";
-import { ReactNode, Fragment, useEffect, useState } from "react";
-import Link from "next/link";
+import Image from "next/image";
 
 interface ICoverProps {
   coverPhotoUrl: string;
   fallbackCoverPhotoUrl?: string | null;
   className?: string;
+  imageClassName?: string;
+  sizes?: string;
+  alt?: string;
 }
 
-const Cover: React.FunctionComponent<ICoverProps> = ({
+const revalidate = 86400;
+
+const resolveCoverUrl = async (
+  coverPhotoUrl: string,
+  fallbackCoverPhotoUrl: string | null,
+) => {
+  if (!fallbackCoverPhotoUrl) return coverPhotoUrl;
+
+  try {
+    const res = await fetch(coverPhotoUrl, { next: { revalidate } });
+    return res.ok ? coverPhotoUrl : fallbackCoverPhotoUrl;
+  } catch {
+    return fallbackCoverPhotoUrl;
+  }
+};
+
+const Cover = async ({
   coverPhotoUrl,
   fallbackCoverPhotoUrl = null,
   className,
-}) => {
-  const [coverUrl, setCoverUrl] = useState(fallbackCoverPhotoUrl);
-
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = coverPhotoUrl;
-
-    img.onload = () => {
-      setCoverUrl(coverPhotoUrl);
-    };
-
-    img.onerror = () => {
-      setCoverUrl(fallbackCoverPhotoUrl);
-    };
-  }, [coverPhotoUrl, fallbackCoverPhotoUrl]);
+  imageClassName,
+  sizes = "100vw",
+  alt = "",
+}: ICoverProps) => {
+  const coverUrl = await resolveCoverUrl(coverPhotoUrl, fallbackCoverPhotoUrl);
 
   return (
-    <div style={{ backgroundImage: `url('${coverUrl}')` }} className={className} />
+    <div className={`relative overflow-hidden ${className ?? ""}`}>
+      <Image
+        src={coverUrl}
+        alt={alt}
+        fill
+        sizes={sizes}
+        className={`object-cover ${imageClassName ?? ""}`}
+      />
+    </div>
   );
 };
 
