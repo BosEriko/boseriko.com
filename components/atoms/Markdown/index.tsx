@@ -14,14 +14,18 @@ interface MarkdownProps {
 
 const components: Components = {
   img: ({ ...props }) => (
-    <span className="my-10 block overflow-hidden rounded-sm border border-line bg-paper-deep">
-      <img {...props} className="w-full" />
-    </span>
+    <Atom.Window label={typeof props.alt === "string" && props.alt ? props.alt : "image"} className="my-10">
+      <img {...props} className="w-full bg-paper-deep" />
+    </Atom.Window>
   ),
   p: ({ children }) => (
     <div className="my-5 text-[17px] leading-8 text-ink-soft">{children}</div>
   ),
-  a: ({ children, ...props }) => (
+  a: ({ children, className, ...props }) => className?.includes("article-body-image-wrapper") ? (
+    <a {...props} className="block">
+      {children}
+    </a>
+  ) : (
     <a
       {...props}
       className="text-ink underline decoration-brand decoration-2 underline-offset-4 hover:text-brand-deep"

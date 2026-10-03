@@ -124,15 +124,18 @@ export default async function Description({ params }: PageProps) {
           </Atom.Visibility>
         </header>
 
-        <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-sm border border-line bg-paper-deep">
+        <Atom.Window
+          label={full_name}
+          className="mx-auto mt-12 max-w-5xl shadow-[10px_10px_0_var(--color-brand)]"
+        >
           <Atom.Cover
             coverPhotoUrl={`https://raw.githubusercontent.com/${full_name}/${default_branch}/COVER.png`}
             fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${node_id}/${full_name}`}
-            className="aspect-2/1 w-full"
+            className="aspect-2/1 w-full bg-paper-deep"
             sizes="(min-width: 1024px) 1024px, 100vw"
             alt={name}
           />
-        </div>
+        </Atom.Window>
 
         <div className="mx-auto mt-10 max-w-3xl">
           <Atom.Visibility state={!!content}>

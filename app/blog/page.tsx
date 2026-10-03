@@ -88,7 +88,7 @@ export default async function Blog({ searchParams }: PageProps) {
 
               return (
                 <li key={post.slug}>
-                  <Atom.Card url={`/blog/${post.slug}`} coverPhotoUrl={cover}>
+                  <Atom.Card url={`/blog/${post.slug}`} coverPhotoUrl={cover} label={`dev.to/boseriko`}>
                     <div className="flex items-center gap-2 font-mono text-xs text-muted">
                       <span>
                         {new Date(post.published_at).toLocaleDateString(

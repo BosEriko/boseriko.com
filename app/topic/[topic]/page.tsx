@@ -91,7 +91,7 @@ export default async function Topic({ params, searchParams }: PageProps) {
         <ul className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {repos.map((repo) => (
             <li key={repo.id}>
-              <Atom.Card url={`/description/${repo.name}`} coverPhotoUrl={`https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/COVER.png`} fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
+              <Atom.Card url={`/description/${repo.name}`} label={repo.full_name} coverPhotoUrl={`https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/COVER.png`} fallbackCoverPhotoUrl={`https://opengraph.githubassets.com/${repo.node_id}/${repo.full_name}`}>
                 <h2 className="font-serif text-2xl leading-tight break-words decoration-brand decoration-2 underline-offset-4 group-hover:underline">
                   {repo.name}
                 </h2>
