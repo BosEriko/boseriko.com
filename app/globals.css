@@ -40,6 +40,23 @@ body {
   padding: 0 0.1em;
 }
 
+@page resume {
+  size: A4;
+  margin: 0;
+}
+
+.resume-sheet {
+  page: resume;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  html {
+    background: white;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

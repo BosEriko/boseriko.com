@@ -5,6 +5,10 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
+  outputFileTracingIncludes: {
+    "/resume/pdf": ["./node_modules/@sparticuz/chromium/bin/**"],
+  },
   images: {
     minimumCacheTTL: 86400,
     remotePatterns: [
