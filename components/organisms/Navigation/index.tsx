@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -37,46 +38,51 @@ const Navigation = () => {
         <FontAwesomeIcon icon={faBars} />
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-ink text-paper md:hidden">
-          <div className="flex h-16 items-center justify-end px-5">
-            <button
-              className="flex h-10 w-10 items-center justify-center rounded-sm border border-paper/20"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
-          </div>
-          <ul className="flex flex-1 flex-col justify-center gap-2 px-8">
-            {items.map((item, index) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  onClick={() => setOpen(false)}
-                  className={`flex items-baseline gap-4 py-2 font-serif text-5xl transition-colors hover:text-brand ${isActive(item.path) ? "text-brand" : ""}`}
-                >
-                  <span className="font-mono text-xs text-paper/40">
-                    0{index + 1}
-                  </span>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li className="mt-6">
-              <a
-                href="/resume"
-                target="_blank"
+      {open &&
+        createPortal(
+          <div className="fixed inset-0 z-50 flex flex-col bg-ink text-paper md:hidden">
+            <div className="flex h-16 items-center justify-end px-5">
+              <button
+                className="flex h-10 w-10 items-center justify-center rounded-sm border border-paper/20"
+                aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center gap-3 rounded-sm bg-brand px-5 py-3 font-mono text-sm uppercase tracking-wider text-ink"
               >
-                Resume
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+            <ul className="flex flex-1 flex-col justify-center gap-2 px-8">
+              {items.map((item, index) => (
+                <li key={item.path}>
+                  <Link
+                    href={item.path}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-baseline gap-4 py-2 font-serif text-5xl transition-colors hover:text-brand ${isActive(item.path) ? "text-brand" : ""}`}
+                  >
+                    <span className="font-mono text-xs text-paper/40">
+                      0{index + 1}
+                    </span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-6">
+                <a
+                  href="/resume"
+                  target="_blank"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-3 rounded-sm bg-brand px-5 py-3 font-mono text-sm uppercase tracking-wider text-ink"
+                >
+                  Resume
+                  <FontAwesomeIcon
+                    icon={faArrowUpRightFromSquare}
+                    className="text-xs"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>,
+          document.body,
+        )}
 
       <ul className="hidden items-center gap-1 md:flex">
         {items.map((item) => (
