@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -125,42 +126,63 @@ export default function ContributionCalendar({
               role="region"
               aria-label={`Contribution calendar ${period}; scroll horizontally to explore`}
             >
-              <svg
-                viewBox={`0 0 ${weeks * 15 + 35} 128`}
-                className="w-full min-w-[760px]"
-                role="img"
-                aria-labelledby="contributions-title contributions-description"
-              >
-                <title id="contributions-title">GitHub contributions {period}</title>
-                <desc id="contributions-description">
-                  {total.toLocaleString("en-US")} contribution{total === 1 ? "" : "s"}. Each square represents a day;
-                  darker amber indicates more contributions. Hover over a square for its date and count.
-                </desc>
-                {days.filter((day) => day.dateObject.getUTCDate() === 1 && day.week < weeks - 1).map((day) => (
-                  <text key={day.date} x={35 + day.week * 15} y={10} className="fill-muted font-mono text-[9px]">
-                    {monthFormat.format(day.dateObject)}
-                  </text>
-                ))}
-                {["Mon", "Wed", "Fri"].map((label, index) => (
-                  <text key={label} x={0} y={44 + index * 30} className="fill-muted font-mono text-[9px]">
-                    {label}
-                  </text>
-                ))}
-                {days.map((day) => (
-                  <rect
-                    key={day.date}
-                    x={35 + day.week * 15}
-                    y={20 + day.weekday * 15}
-                    width={11}
-                    height={11}
-                    rx={2}
-                    fill={colors[day.level]}
-                    className="stroke-ink/5 hover:stroke-ink"
-                  >
-                    <title>{day.label}</title>
-                  </rect>
-                ))}
-              </svg>
+              <Tooltip.Provider delayDuration={150}>
+                <svg
+                  viewBox={`0 0 ${weeks * 15 + 35} 128`}
+                  className="w-full min-w-[760px]"
+                  role="group"
+                  aria-labelledby="contributions-title contributions-description"
+                >
+                  <title id="contributions-title">GitHub contributions {period}</title>
+                  <desc id="contributions-description">
+                    {total.toLocaleString("en-US")} contribution{total === 1 ? "" : "s"}. Each square represents a day;
+                    darker amber indicates more contributions. Hover over or focus a square for its date and count.
+                  </desc>
+                  {days.filter((day) => day.dateObject.getUTCDate() === 1 && day.week < weeks - 1).map((day) => (
+                    <text key={day.date} x={35 + day.week * 15} y={10} className="fill-muted font-mono text-[9px]">
+                      {monthFormat.format(day.dateObject)}
+                    </text>
+                  ))}
+                  {["Mon", "Wed", "Fri"].map((label, index) => (
+                    <text key={label} x={0} y={44 + index * 30} className="fill-muted font-mono text-[9px]">
+                      {label}
+                    </text>
+                  ))}
+                  {days.map((day) => (
+                    <Tooltip.Root key={day.date}>
+                      <Tooltip.Trigger asChild>
+                        <rect
+                          x={35 + day.week * 15}
+                          y={20 + day.weekday * 15}
+                          width={11}
+                          height={11}
+                          rx={2}
+                          fill={colors[day.level]}
+                          tabIndex={0}
+                          role="img"
+                          aria-label={day.label}
+                          className="stroke-ink/5 hover:stroke-ink focus:stroke-ink"
+                        />
+                      </Tooltip.Trigger>
+                      <Tooltip.Portal>
+                        <Tooltip.Content
+                          sideOffset={8}
+                          collisionPadding={12}
+                          className="z-50 max-w-[calc(100vw-24px)] rounded-sm bg-ink px-3 py-2 text-center text-xs text-paper shadow-md"
+                        >
+                          <p className="font-medium">
+                            {day.count.toLocaleString("en-US")} contribution{day.count === 1 ? "" : "s"}
+                          </p>
+                          <p className="mt-1 font-mono text-[10px] text-paper/70">
+                            {dateFormat.format(day.dateObject)}
+                          </p>
+                          <Tooltip.Arrow className="fill-ink" />
+                        </Tooltip.Content>
+                      </Tooltip.Portal>
+                    </Tooltip.Root>
+                  ))}
+                </svg>
+              </Tooltip.Provider>
             </div>
             <div className="mt-4 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
               <p>
