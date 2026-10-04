@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import Atom from "@atom";
 import Head from "next/head";
@@ -29,7 +30,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   try {
     const res = await fetch(`https://dev.to/api/articles/boseriko/${slug}`, {
-      next: { revalidate: 86400 },
+      next: { revalidate: CACHE_TTL_SECONDS },
     });
 
     if (!res.ok) {

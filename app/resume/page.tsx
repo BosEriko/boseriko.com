@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import Atom from "@atom";
 import Molecule from "@molecule";
@@ -7,11 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const revalidate = 86400;
-
 const fetchData = async <T,>(name: string): Promise<T> => {
   const res = await fetch(`https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/${name}.json`, {
-    next: { revalidate },
+    next: { revalidate: CACHE_TTL_SECONDS },
   });
 
   if (!res.ok) {
@@ -180,7 +179,7 @@ export default async function Resume() {
   const projects = await fetch(
     "https://api.github.com/search/repositories?q=user:boseriko+topic:product&sort=stars&order=desc&page=1&per_page=5",
     {
-      next: { revalidate },
+      next: { revalidate: CACHE_TTL_SECONDS },
     },
   ).then((res) => res.json());
 

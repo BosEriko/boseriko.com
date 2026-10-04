@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import Atom from "@atom";
 import Molecule from "@molecule";
@@ -32,12 +33,12 @@ export default async function Blog({ searchParams }: PageProps) {
 
   const res = await fetch(
     `https://dev.to/api/articles?username=boseriko&page=${page}&per_page=${perPage}`,
-    { next: { revalidate: 86400 } },
+    { next: { revalidate: CACHE_TTL_SECONDS } },
   );
 
   const nextRes = await fetch(
     `https://dev.to/api/articles?username=boseriko&page=${page + 1}&per_page=${perPage}`,
-    { next: { revalidate: 86400 } },
+    { next: { revalidate: CACHE_TTL_SECONDS } },
   );
   const nextData = nextRes.ok ? await nextRes.json() : [];
 

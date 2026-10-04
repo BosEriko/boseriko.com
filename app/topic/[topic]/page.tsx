@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import Atom from "@atom";
 import Molecule from "@molecule";
@@ -6,8 +7,8 @@ import { faEye, faCodeBranch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 type Repo = {
   id: number;
+  topics: string[];
   name: string;
-  html_url: string;
   description: string | null;
   stargazers_count: number;
   watchers_count: number;
@@ -18,11 +19,63 @@ type Repo = {
   default_branch: string;
 };
 
+type RepositorySearch = {
+  items: Repo[];
+  total_count: number;
+};
+
+async function getTopicRepositories(
+  topic: string,
+  page = 1,
+  perPage = 12,
+): Promise<RepositorySearch | null> {
+  try {
+    const repositories: Repo[] = [];
+    let searchPage = 1;
+    let totalCount = 0;
+
+    do {
+      const response = await fetch(
+        `https://api.github.com/search/repositories?q=user:boseriko+topic:${encodeURIComponent(topic)}&sort=updated&order=desc&page=${searchPage}&per_page=100`,
+        { next: { revalidate: CACHE_TTL_SECONDS } },
+      );
+
+      if (!response.ok) return null;
+
+      const data = await response.json();
+      if (
+        !Array.isArray(data.items) ||
+        !Number.isInteger(data.total_count) ||
+        data.total_count < 0 ||
+        data.incomplete_results
+      ) return null;
+
+      totalCount = data.total_count;
+      if (data.items.length === 0 && repositories.length < totalCount) return null;
+      repositories.push(...data.items);
+      searchPage += 1;
+    } while (repositories.length < totalCount);
+
+    const filteredRepositories = topic === "product" || topic === "project"
+      ? repositories
+      : repositories.filter((repo) =>
+          repo.topics?.some((tag) => tag === "product" || tag === "project"),
+        );
+
+    return {
+      items: filteredRepositories.slice((page - 1) * perPage, page * perPage),
+      total_count: filteredRepositories.length,
+    };
+  } catch {
+    return null;
+  }
+}
+
 const TOPICS_URL = "https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topics.json";
 
 async function getTopics() {
   const res = await fetch(TOPICS_URL, {
-    next: { revalidate: 86400 },
+    next: { revalidate: CACHE_TTL_SECONDS },
   });
 
   if (!res.ok) return {};
@@ -44,17 +97,9 @@ export default async function Topic({ params, searchParams }: PageProps) {
   const topics = await getTopics();
   const topicInfo = topics[topic];
 
-  const res = await fetch(
-    `https://api.github.com/search/repositories?q=user:boseriko+topic:${topic}&sort=updated&order=desc&page=${page}&per_page=${perPage}`,
-    {
-      next: { revalidate: 86400 },
-    },
-  );
-
-  const data = await res.json();
-
-  const repos: Repo[] = data.items ?? [];
-  const totalCount: number = data.total_count ?? 0;
+  const data = await getTopicRepositories(topic, page, perPage);
+  const repos = data?.items ?? [];
+  const totalCount = data?.total_count ?? 0;
   const totalPages = Math.ceil(totalCount / perPage);
 
   return (
@@ -128,8 +173,8 @@ export default async function Topic({ params, searchParams }: PageProps) {
         page={page}
         previousHref={`/topic/${topic}?page=${Math.max(1, page - 1)}`}
         nextHref={`/topic/${topic}?page=${Math.min(totalPages, page + 1)}`}
-        hasPrevious={page !== 1}
-        hasNext={page !== totalPages}
+        hasPrevious={page > 1}
+        hasNext={page < totalPages}
       />
     </Template.Default>
   );

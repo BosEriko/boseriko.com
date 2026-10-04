@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 
@@ -40,7 +41,7 @@ export async function GET(request: Request) {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${PDF_FILENAME}"`,
-        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
+        "Cache-Control": `public, s-maxage=${CACHE_TTL_SECONDS}, stale-while-revalidate=${CACHE_TTL_SECONDS}`,
       },
     });
   } finally {

@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +16,7 @@ import {
 const socialLinksData = await fetch(
   "https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/links.json",
   {
-    next: { revalidate: 86400 },
+    next: { revalidate: CACHE_TTL_SECONDS },
   },
 ).then((res) => res.json());
 

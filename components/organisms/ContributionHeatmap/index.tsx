@@ -1,10 +1,11 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import ContributionCalendar, { type Contribution } from "./ContributionCalendar";
 
 async function fetchContributions(period: "last" | "all"): Promise<Contribution[] | null> {
   try {
     const response = await fetch(
       `https://github-contributions-api.jogruber.de/v4/BosEriko?y=${period}`,
-      { next: { revalidate: 86400 }, signal: AbortSignal.timeout(8000) },
+      { next: { revalidate: CACHE_TTL_SECONDS }, signal: AbortSignal.timeout(8000) },
     );
 
     if (!response.ok) return null;

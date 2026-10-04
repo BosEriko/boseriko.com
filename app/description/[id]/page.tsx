@@ -1,10 +1,9 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Template from "@template";
 import Atom from "@atom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileLines, faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
-const revalidate = 86400;
 
 interface Repo {
   node_id: string;
@@ -28,9 +27,9 @@ export default async function Description({ params }: PageProps) {
   let content = null;
 
   const [contentRes, readmeRes, repoRes] = await Promise.all([
-    fetch(`https://api.github.com/repos/boseriko/${id}/contents/PORTFOLIO.md`, { next: { revalidate } }),
-    fetch(`https://api.github.com/repos/boseriko/${id}/contents/README.md`, { next: { revalidate } }),
-    fetch(`https://api.github.com/repos/boseriko/${id}`, { next: { revalidate } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}/contents/PORTFOLIO.md`, { next: { revalidate: CACHE_TTL_SECONDS } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}/contents/README.md`, { next: { revalidate: CACHE_TTL_SECONDS } }),
+    fetch(`https://api.github.com/repos/boseriko/${id}`, { next: { revalidate: CACHE_TTL_SECONDS } }),
   ]);
 
   if (readmeRes.ok) {

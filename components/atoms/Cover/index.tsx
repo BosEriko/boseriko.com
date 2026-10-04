@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import Image from "next/image";
 
 interface ICoverProps {
@@ -9,8 +10,6 @@ interface ICoverProps {
   alt?: string;
 }
 
-const revalidate = 86400;
-
 const resolveCoverUrl = async (
   coverPhotoUrl: string,
   fallbackCoverPhotoUrl: string | null,
@@ -18,7 +17,7 @@ const resolveCoverUrl = async (
   if (!fallbackCoverPhotoUrl) return coverPhotoUrl;
 
   try {
-    const res = await fetch(coverPhotoUrl, { next: { revalidate } });
+    const res = await fetch(coverPhotoUrl, { next: { revalidate: CACHE_TTL_SECONDS } });
     return res.ok ? coverPhotoUrl : fallbackCoverPhotoUrl;
   } catch {
     return fallbackCoverPhotoUrl;

@@ -1,7 +1,6 @@
+import { CACHE_TTL_SECONDS } from "@/config/cache";
 import { Fragment } from "react";
 import Atom from "@atom";
-
-const revalidate = 86400;
 
 type TopicDataItem = {
   title: string;
@@ -12,7 +11,7 @@ type TopicDataItem = {
 
 const fetchCount = async <T,>(): Promise<T> => {
   const res = await fetch(`https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topic-count.json`, {
-    next: { revalidate },
+    next: { revalidate: CACHE_TTL_SECONDS },
   });
 
   if (!res.ok) {
@@ -24,7 +23,7 @@ const fetchCount = async <T,>(): Promise<T> => {
 
 const fetchTopics = async <T,>(): Promise<T> => {
   const res = await fetch("https://raw.githubusercontent.com/BosEriko/BosEriko/refs/heads/master/topics.json", {
-    next: { revalidate },
+    next: { revalidate: CACHE_TTL_SECONDS },
   });
 
   if (!res.ok) {

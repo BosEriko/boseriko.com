@@ -1,3 +1,4 @@
+import { CACHE_TTL_SECONDS } from "./config/cache";
 import type { NextConfig } from "next";
 
 if (process.env.NODE_ENV === "development") {
@@ -10,7 +11,7 @@ const nextConfig: NextConfig = {
     "/resume/pdf": ["./node_modules/@sparticuz/chromium/bin/**"],
   },
   images: {
-    minimumCacheTTL: 86400,
+    minimumCacheTTL: CACHE_TTL_SECONDS,
     remotePatterns: [
       new URL("https://raw.githubusercontent.com/**"),
       new URL("https://opengraph.githubassets.com/**"),
