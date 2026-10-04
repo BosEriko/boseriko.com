@@ -1,8 +1,8 @@
 # boseriko.com
 
 The personal website and portfolio of Bos Eriko. It keeps itself up to date by
-pulling products, projects, blog posts, and resume details straight from GitHub
-and dev.to, so nothing ever has to be edited on the site itself.
+pulling products, projects, topics, and resume details straight from GitHub,
+so nothing ever has to be edited on the site itself.
 
 ---
 
@@ -15,11 +15,14 @@ and dev.to, so nothing ever has to be edited on the site itself.
 - Browse by technology — topics like React or TypeScript each have a page
   listing everything built with them
 
-## Blog
+## Stats
 
-- Articles written on dev.to appear on the site with their cover image, reading
-  time, reactions, and comments
-- Posts can be read in full right on the site
+- A Stats page shows live GitHub numbers: repositories, stars, forks,
+  followers, and how long I've been on GitHub
+- Includes the contribution heatmap, the languages I use most, my most starred
+  and most recently updated repositories
+- Lists every technology I work with, along with how many repositories use it,
+  each linking to its own page of related products and projects
 
 ## Resume
 

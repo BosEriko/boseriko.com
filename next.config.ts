@@ -15,7 +15,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://raw.githubusercontent.com/**"),
       new URL("https://opengraph.githubassets.com/**"),
-      new URL("https://media2.dev.to/**"),
     ],
   },
 };

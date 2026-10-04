@@ -13,7 +13,7 @@ interface PortraitProps {
 const sections = [
   { label: "Products", description: "Things I keep building.", path: "/topic/product" },
   { label: "Projects", description: "Things I build every now and then.", path: "/topic/project" },
-  { label: "Blog", description: "Notes I write on dev.to.", path: "/blog" },
+  { label: "Stats", description: "My GitHub, by the numbers.", path: "/stats" },
   { label: "Connect", description: "Find me around the internet.", path: "/connect" },
 ];
 

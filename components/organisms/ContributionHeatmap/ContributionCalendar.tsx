@@ -133,7 +133,7 @@ export default function ContributionCalendar({
                   role="group"
                   aria-labelledby="contributions-title contributions-description"
                 >
-                  <title id="contributions-title">GitHub contributions {period}</title>
+                  <title id="contributions-title">{`GitHub contributions ${period}`}</title>
                   <desc id="contributions-description">
                     {total.toLocaleString("en-US")} contribution{total === 1 ? "" : "s"}. Each square represents a day;
                     darker amber indicates more contributions. Hover over or focus a square for its date and count.

@@ -13,9 +13,6 @@ It comes from **COVER.png** on the root of a repository. If no **COVER.png** is 
 ### What's the difference between a product repository and a project repository?
 Product repositories are repositories that I work on constantly while project repositories are repositories that I work on every now and then.
 
-### Where does the blogs come from?
-It comes from **dev.to**.
-
 ### Where does Personal Projects on the Resume page come from?
 It pulls my top 5 starred repositories with the `product` topic. A little confusing I know but it will be more weird if I add the word product on the resume page.
 

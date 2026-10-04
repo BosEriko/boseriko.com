@@ -16,7 +16,7 @@ const items = [
   { label: "Home", path: "/" },
   { label: "Products", path: "/topic/product" },
   { label: "Projects", path: "/topic/project" },
-  { label: "Blog", path: "/blog" },
+  { label: "Stats", path: "/stats" },
   { label: "Connect", path: "/connect" },
 ];
 
