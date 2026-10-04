@@ -1,6 +1,7 @@
 import Template from "@template";
 import Atom from "@atom";
 import Molecule from "@molecule";
+import ContributionHeatmap from "@/components/organisms/ContributionHeatmap";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -117,6 +118,8 @@ export default async function Home() {
           <Portrait url="https://avatars.githubusercontent.com/BosEriko" />
         </div>
       </section>
+
+      <ContributionHeatmap />
 
       <section className="border-t border-line">
         <ul className="mx-auto grid max-w-6xl sm:grid-cols-2 lg:grid-cols-4">
