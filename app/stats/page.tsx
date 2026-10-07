@@ -135,6 +135,7 @@ export default async function Stats() {
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 5);
   const recentlyUpdated = [...sources]
+    .filter((repo) => repo.name !== "BosEriko")
     .sort((a, b) => b.pushed_at.localeCompare(a.pushed_at))
     .slice(0, 5);
 
