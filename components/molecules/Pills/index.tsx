@@ -68,7 +68,13 @@ const Pills = async ({ type = "colored" }) => {
             className={pillClass}
             href={`/topic/${topic}`}
           >
-            <Atom.Visibility state={type === "colored"}>
+            <Atom.Visibility state={type === "colored" && !!deviconClass}>
+              <i
+                className={`${deviconClass} text-xs`}
+                style={{ color: bg ?? undefined }}
+              ></i>
+            </Atom.Visibility>
+            <Atom.Visibility state={type === "colored" && !deviconClass}>
               <span
                 className="h-2 w-2 rounded-full"
                 style={{ backgroundColor: bg ?? "#D1D5DB" }}
