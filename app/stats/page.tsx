@@ -92,7 +92,7 @@ const RepoList: React.FC<{ repos: GitHubRepo[]; meta: (repo: GitHubRepo) => Reac
 }) => (
   <ul className="border-t border-line">
     {repos.map((repo) => (
-      <li key={repo.id} className="border-b border-line">
+      <li key={repo.id} className="border-b border-line last:border-b-0">
         <Link href={repoHref(repo)} className="group block py-4">
           <span className="flex items-center justify-between gap-3">
             <span className="truncate font-serif text-xl decoration-brand decoration-2 underline-offset-4 group-hover:underline">
