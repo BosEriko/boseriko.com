@@ -17,6 +17,13 @@ const sections = [
   { label: "Connect", description: "Find me around the internet.", path: "/connect" },
 ];
 
+const edgeHover = (index: number) => {
+  const bleed = "lg:before:absolute lg:before:inset-y-0 lg:before:w-screen lg:before:transition-colors lg:hover:before:bg-paper-deep";
+  if (index === 0) return `${bleed} lg:before:right-full`;
+  if (index === sections.length - 1) return `${bleed} lg:before:left-full`;
+  return "";
+};
+
 const viewfinderCorners = [
   "top-3 left-3 border-t-2 border-l-2 group-hover:top-5 group-hover:left-5",
   "top-3 right-3 border-t-2 border-r-2 group-hover:top-5 group-hover:right-5",
@@ -126,11 +133,11 @@ export default async function Home() {
           {sections.map((section, index) => (
             <li
               key={section.path}
-              className="relative border-line border-b sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 lg:before:pointer-events-none lg:before:absolute lg:before:inset-y-0 lg:before:w-screen lg:before:transition-colors lg:hover:before:bg-paper-deep lg:first:before:right-full lg:last:before:left-full lg:not-first:not-last:before:hidden"
+              className="border-line border-b sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
             >
               <Link
                 href={section.path}
-                className="group flex h-full flex-col gap-10 px-5 md:px-8 py-8 transition-colors hover:bg-paper-deep"
+                className={`group relative flex h-full flex-col gap-10 px-5 md:px-8 py-8 transition-colors hover:bg-paper-deep ${edgeHover(index)}`}
               >
                 <span className="font-mono text-xs text-muted">0{index + 1}</span>
                 <div>
