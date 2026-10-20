@@ -121,12 +121,12 @@ export default async function Home() {
 
       <ContributionHeatmap />
 
-      <section className="border-t border-line">
+      <section className="overflow-x-clip border-t border-line">
         <ul className="mx-auto grid max-w-6xl sm:grid-cols-2 lg:grid-cols-4">
           {sections.map((section, index) => (
             <li
               key={section.path}
-              className="border-line border-b sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+              className="relative border-line border-b sm:odd:border-r lg:border-b-0 lg:border-r lg:last:border-r-0 lg:before:pointer-events-none lg:before:absolute lg:before:inset-y-0 lg:before:w-screen lg:before:transition-colors lg:hover:before:bg-paper-deep lg:first:before:right-full lg:last:before:left-full lg:not-first:not-last:before:hidden"
             >
               <Link
                 href={section.path}
