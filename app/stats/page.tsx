@@ -270,7 +270,10 @@ export default async function Stats() {
                     <div className="h-2 rounded-sm bg-paper-deep" aria-hidden="true">
                       <div
                         className="h-full rounded-sm bg-brand"
-                        style={{ width: `${(total / maxLanguageCount) * 100}%` }}
+                        style={{
+                          width: `${(total / maxLanguageCount) * 100}%`,
+                          backgroundColor: topics[language.toLowerCase()]?.bg ?? undefined,
+                        }}
                       />
                     </div>
                   </li>
