@@ -81,7 +81,10 @@ const Pills = async ({ type = "colored" }) => {
               />
             </Atom.Visibility>
             <Atom.Visibility state={type === "yellow" && !!deviconClass}>
-              <i className={`${deviconClass} text-sm`}></i>
+              <i
+                className={`${deviconClass} text-sm`}
+                style={{ color: bg ?? undefined }}
+              ></i>
             </Atom.Visibility>
             <span>{topic}</span>
             <Atom.Visibility state={type === "yellow"}>
