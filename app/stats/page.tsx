@@ -73,10 +73,11 @@ async function getRepositories(): Promise<GitHubRepo[] | null> {
   return repositories;
 }
 
+const isPortfolioRepo = (repo: GitHubRepo) =>
+  repo.topics?.some((topic) => topic === "product" || topic === "project") ?? false;
+
 const repoHref = (repo: GitHubRepo) =>
-  repo.topics?.some((topic) => topic === "product" || topic === "project")
-    ? `/description/${repo.name}`
-    : repo.html_url;
+  isPortfolioRepo(repo) ? `/description/${repo.name}` : repo.html_url;
 
 const SectionHeading: React.FC<{ eyebrow: string; title: string }> = ({ eyebrow, title }) => (
   <div className="mb-7">
@@ -130,12 +131,13 @@ export default async function Stats() {
     .slice(0, 8);
   const maxLanguageCount = languages[0]?.[1] ?? 0;
 
-  const mostStarred = [...sources]
+  const portfolio = sources.filter(isPortfolioRepo);
+
+  const mostStarred = [...portfolio]
     .filter((repo) => repo.stargazers_count > 0)
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 5);
-  const recentlyUpdated = [...sources]
-    .filter((repo) => repo.name !== "BosEriko")
+  const recentlyUpdated = [...portfolio]
     .sort((a, b) => b.pushed_at.localeCompare(a.pushed_at))
     .slice(0, 5);
 
